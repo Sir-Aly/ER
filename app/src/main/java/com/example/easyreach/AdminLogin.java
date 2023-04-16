@@ -1,5 +1,5 @@
 package com.example.easyreach;
-
+//Manga
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
