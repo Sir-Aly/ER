@@ -1,7 +1,7 @@
 package com.example.easyreach;
 //Manga
 //ana 3mlt update
-
+//Manga gedan
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
