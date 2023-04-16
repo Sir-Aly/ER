@@ -6,127 +6,118 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
-        <ScrollView
+
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:paddingLeft="25dp"
-                android:paddingTop="55dp"
-                android:paddingRight="25dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_horizontal">
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/ProfileImage"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:scaleType="centerCrop"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/cv"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:riv_oval="true"
-                        />
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/mohammed_hesham"
-                        android:textColor="@color/black"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_horizontal"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="1dp"
-                        android:text="@string/verified"
-                        android:textColor="@color/color_bubble"
-                        android:textSize="20sp"
-                        android:layout_gravity="center_horizontal"/>
-                    
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
-                        android:text="@string/address"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_gravity="start" />
-
-                </LinearLayout>                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/age"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
-                        android:text="@string/age"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_gravity="start" />
-
-                </LinearLayout>                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/field"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
-                        android:text="Experience Field"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_gravity="start" />
-
-                </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-11dp"
+            android:src="@drawable/asset_1" />
 
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/forgetPasswordButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:padding="12dp"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:background="@drawable/custom_edittext"
-                    android:backgroundTint="@color/blue_200"
-                    android:text="@string/forgot_password"/>
-            </LinearLayout>
 
-        </ScrollView>
+
+        <!-- PROFILE PICTURE -->
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ProfileImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="103dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/ali"
+            app:riv_border_color="@color/white"
+            app:riv_border_width="@dimen/_10dp"
+            app:riv_oval="true" />
+
+
+
+
+
+        <!-- Full Name -->
+
+
+
+        <!-- Age -->
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="350dp"
+            android:paddingStart="30dp"
+            android:text="@string/full_name"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Address -->
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="400dp"
+            android:paddingLeft="30dp"
+            android:text="@string/age"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="450dp"
+            android:paddingLeft="30dp"
+            android:text="@string/address"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_gravity="start" />
+        <!-- EXP Field -->
+        <TextView
+            android:id="@+id/field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="500dp"
+            android:paddingLeft="30dp"
+            android:text="Experience Field"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_gravity="start" />
+        <!-- EDIT BUTTON -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/forgetPasswordButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/custom_edittext"
+            android:backgroundTint="@color/blue_200"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/forgot_password"
+
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-1dp"
+            app:srcCompat="@drawable/blackbottom" />
+
+
+
+
+
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
