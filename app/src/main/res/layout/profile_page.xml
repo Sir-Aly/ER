@@ -36,24 +36,28 @@
 
 
 
+
+
+
+
         <!-- Full Name -->
-
-
 
         <!-- Age -->
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="350dp"
-            android:paddingStart="30dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="370dp"
+            android:paddingTop="50dp"
+            android:shadowColor="@android:color/black"
+            android:shadowRadius="6"
             android:text="@string/full_name"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
-        <!-- Address -->
         <TextView
             android:id="@+id/age"
             android:layout_width="wrap_content"
@@ -65,7 +69,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
-
+        <!-- Address -->
         <TextView
             android:id="@+id/address"
             android:layout_width="wrap_content"

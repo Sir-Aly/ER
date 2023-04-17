@@ -107,6 +107,7 @@
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
         android:paddingBottom="10dp"
-        android:text="Register" />
+        android:text="Register"
+        />
 
 </RelativeLayout>
