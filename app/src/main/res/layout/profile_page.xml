@@ -4,60 +4,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-11dp"
-            android:src="@drawable/asset_1" />
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-11dp"
+                android:src="@drawable/asset_1" />
 
 
 
 
-        <!-- PROFILE PICTURE -->
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/ProfileImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="103dp"
-            android:layout_marginTop="70dp"
-            android:src="@drawable/ali"
-            app:riv_border_color="@color/white"
-            app:riv_border_width="@dimen/_10dp"
-            app:riv_oval="true" />
-
-
-
-
-
-
-
-
-
-        <!-- Full Name -->
-
-        <!-- Age -->
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
+        </LinearLayout>
+        <!-- back arrow-->
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:src="@drawable/baseline_arrow_back_24" />
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="370dp"
-            android:paddingTop="50dp"
-            android:shadowColor="@android:color/black"
-            android:shadowRadius="6"
-            android:text="@string/full_name"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:foregroundGravity="center_horizontal"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp"
+            >
+            <!-- PROFILE PICTURE -->
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ProfileImage"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ali"
+                app:riv_border_color="@color/white"
+                app:riv_border_width="@dimen/_10dp"
+                app:riv_oval="true" />
+            <!-- Full Name -->
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/full_name"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
+
+
+
+
+        <!-- Address -->
         <TextView
             android:id="@+id/age"
             android:layout_width="wrap_content"
@@ -69,7 +80,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
-        <!-- Address -->
+
         <TextView
             android:id="@+id/address"
             android:layout_width="wrap_content"
@@ -93,31 +104,46 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_gravity="start" />
-        <!-- EDIT BUTTON -->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/forgetPasswordButton"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/custom_edittext"
-            android:backgroundTint="@color/blue_200"
-            android:gravity="center"
-            android:padding="12dp"
-            android:text="@string/forgot_password"
+            >
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="-1dp"
+                app:srcCompat="@drawable/blackbottom" />
+        </LinearLayout>
 
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="-1dp"
-            app:srcCompat="@drawable/blackbottom" />
+            >
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/forgetPasswordButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/custom_edittext"
+                android:backgroundTint="@color/blue_200"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="@string/forgot_password"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+    </LinearLayout>
 
+
+
+
+        <!-- EDIT BUTTON -->
 
 
 

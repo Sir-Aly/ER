@@ -8,7 +8,9 @@ import android.location.Address;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -71,6 +73,19 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
+
+
+        ImageView arrowback = findViewById(R.id.arrow);
+        arrowback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfilePage.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
         final String TAG = "problem";
         mForgetPassword = (Button) findViewById(R.id.forgetPasswordButton);
         mForgetPassword.setOnClickListener(new View.OnClickListener() {
@@ -123,4 +138,10 @@ public class ProfilePage extends AppCompatActivity {
 
 
 
-    }
+
+}
+
+
+
+
+
