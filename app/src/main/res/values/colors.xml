@@ -19,6 +19,8 @@
         <color name="colorPrimaryDark">#d13135</color>
         <color name="colorAccent">#e100ff</color>
         <color name="colorPrimaryLight">#FFD700</color>
+        <color name="MainColor">#FFF49F1C</color>
+        <color name="ALI">#000000</color>
 
 
         <color name="transparentPink">#99FF4081</color>
