@@ -82,9 +82,12 @@ public class ProfilePage extends AppCompatActivity {
         });
 
         TextView theTextView= (TextView) findViewById(R.id.name);
+        TextView theTextView1= (TextView) findViewById(R.id.uname);
         TextView theTextView2= (TextView) findViewById(R.id.address);
         TextView theTextView3= (TextView) findViewById(R.id.age);
         TextView theTextView4= (TextView) findViewById(R.id.field);
+        TextView theTextView5= (TextView) findViewById(R.id.email);
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("user")
                 .get()
@@ -100,10 +103,13 @@ public class ProfilePage extends AppCompatActivity {
                                 String uaddress = document.get("Address").toString();
                                 String uage = document.get("Age").toString();
                                 String ufield = document.get("Field").toString();
+                                String umail = document.get("Semail").toString();
                                 theTextView.setText(problem);
-                                theTextView2.setText("Address: " + uaddress);
-                                theTextView3.setText("Age: " + uage);
-                                theTextView4.setText("Field: " + ufield);
+                                theTextView1.setText(problem);
+                                theTextView2.setText(uaddress);
+                                theTextView3.setText(uage);
+                                theTextView4.setText(ufield);
+                                theTextView5.setText(umail);
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
@@ -118,9 +124,9 @@ public class ProfilePage extends AppCompatActivity {
         startActivity(btnClick);
         super.onBackPressed();
         finish();
-}
-
-
-
-
     }
+
+
+
+
+}
