@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
@@ -63,6 +64,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class ProfilePage extends AppCompatActivity {
+    TextView pNameTv, nameTv, addressTv, ageTv, fieldTv, emailTv;
     private Button mForgetPassword;
     private boolean loginBtnClicked;
     private FirebaseAuth mAuth;
@@ -72,6 +74,14 @@ public class ProfilePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
         final String TAG = "problem";
+//
+
+        pNameTv= (TextView) findViewById(R.id.name);
+        nameTv= (TextView) findViewById(R.id.uname);
+        addressTv= (TextView) findViewById(R.id.address);
+        ageTv= (TextView) findViewById(R.id.age);
+        fieldTv= (TextView) findViewById(R.id.field);
+        emailTv= (TextView) findViewById(R.id.email);
         mForgetPassword = (Button) findViewById(R.id.forgetPasswordButton);
         mForgetPassword.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -80,43 +90,41 @@ public class ProfilePage extends AppCompatActivity {
                 finish();
             }
         });
-
-        TextView theTextView= (TextView) findViewById(R.id.name);
-        TextView theTextView1= (TextView) findViewById(R.id.uname);
-        TextView theTextView2= (TextView) findViewById(R.id.address);
-        TextView theTextView3= (TextView) findViewById(R.id.age);
-        TextView theTextView4= (TextView) findViewById(R.id.field);
-        TextView theTextView5= (TextView) findViewById(R.id.email);
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("user")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-
-                                String problem = document.get("Fname").toString();
-                                String uaddress = document.get("Address").toString();
-                                String uage = document.get("Age").toString();
-                                String ufield = document.get("Field").toString();
-                                String umail = document.get("Semail").toString();
-                                theTextView.setText(problem);
-                                theTextView1.setText(problem);
-                                theTextView2.setText(uaddress);
-                                theTextView3.setText(uage);
-                                theTextView4.setText(ufield);
-                                theTextView5.setText(umail);
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentid = user.getUid();
+        DocumentReference reference;
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        reference = firestore.collection("user").document(currentid);
+        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                final String TAG = "problem";
+                if (task.getResult().exists()){
+                    String fullName= task.getResult().getString("Fname");
+                    String uaddress = task.getResult().getString("Address");
+                    String uage = task.getResult().getString("Age");
+                    String ufield = task.getResult().getString("Field");
+                    String umail = task.getResult().getString("Semail");
+
+                    pNameTv.setText(fullName);
+                    nameTv.setText(fullName);
+                    addressTv.setText(uaddress);
+                    ageTv.setText(uage);
+                    fieldTv.setText(ufield);
+                    emailTv.setText(umail);
+                }
+                else {
+                    Log.w(TAG, "Error getting documents.", task.getException());
+                }
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -125,8 +133,6 @@ public class ProfilePage extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
-
-
 
 
 }

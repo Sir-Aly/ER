@@ -49,7 +49,7 @@ import java.util.Map;
 
 public class AdminLogin extends AppCompatActivity {
 
-    EditText firstName, lastName, age, eAddress, eField;
+    EditText firstName, age, eAddress, eField, userMail;
     MaterialButton Registerbtn;
     FirebaseFirestore db;
 private FirebaseAuth mAuth;
@@ -61,7 +61,7 @@ private FirebaseAuth mAuth;
 
         db = FirebaseFirestore.getInstance();
         firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
+        userMail = findViewById(R.id.userMail);
         age = findViewById(R.id.age);
         eAddress = findViewById(R.id.address);
         eField = findViewById(R.id.field);
@@ -70,24 +70,24 @@ private FirebaseAuth mAuth;
         Registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             String userID =    mAuth.getCurrentUser().getUid();
+             String userID =  mAuth.getCurrentUser().getUid();
                 String Firstname = firstName.getText().toString();
-                String Lastname = lastName.getText().toString();
+                String Email = userMail.getText().toString();
                 String Age = age.getText().toString();
                 String Address = eAddress.getText().toString();
                 String Field = eField.getText().toString();
                 Map<String,Object> user = new HashMap<>();
-                user.put("First Name",Firstname);
-                user.put("Last Name",Lastname);
+                user.put("Fname",Firstname);
+                user.put("Semail", Email);
                 user.put("Age",Age);
                 user.put("Address", Address);
                 user.put("Field", Field);
 
-                db.collection("user")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                db.collection("user").document(userID)
+                        .set(user)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
+                            public void onSuccess(Void aVoid) {
                                 Toast.makeText(AdminLogin.this,"Successful",Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -103,5 +103,14 @@ private FirebaseAuth mAuth;
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent btnClick = new Intent(AdminLogin.this, MainActivity.class);
+        startActivity(btnClick);
+        super.onBackPressed();
+        finish();
     }
 }

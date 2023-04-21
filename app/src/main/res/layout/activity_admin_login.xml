@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:hint="First name">
+        android:hint="Full name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/firstName"
@@ -34,15 +34,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lastnamelayout"
+        android:id="@+id/emaillayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/firstnamelayout"
         android:layout_marginTop="20dp"
-        android:hint="Last name">
+        android:hint="Email Address">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/lastName"
+            android:id="@+id/userMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -54,7 +54,7 @@
         android:id="@+id/agelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lastnamelayout"
+        android:layout_below="@+id/emaillayout"
         android:layout_marginTop="20dp"
         android:hint="Age">
 
