@@ -26,7 +26,6 @@
             android:layout_below="@+id/image_preview"
             app:layout_constraintTop_toBottomOf="@id/image_preview"
             >
->
 
             <!--Button for choosing image from gallery-->
             <Button

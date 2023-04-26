@@ -1,10 +1,12 @@
 package com.example.easyreach;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,10 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -30,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     Koloda koloda;
 
 private DrawerLayout drawerLayout;
+ImageView profileView;
 private NavigationView navigationView;
 
 
@@ -49,7 +56,7 @@ private NavigationView navigationView;
 
 
 //        mSignOut = (TextView) findViewById(R.id.signOut);
-
+        profileView = findViewById(R.id.profile_image);
         navigationView=findViewById(R.id.navigationView);
         mAuth = FirebaseAuth.getInstance();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -110,6 +117,7 @@ private NavigationView navigationView;
                         String age = document.getString("age");
 
 
+
                         // Update the card view with the job seeker's data
                         TextView nameText = findViewById(R.id.name_text);
                         TextView skillsText = findViewById(R.id.skills_text);
@@ -129,6 +137,38 @@ private NavigationView navigationView;
                 }
             }
         });
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentid = user.getUid();
+        String uMail = user.getEmail();
+        DocumentReference reference;
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        reference = firestore.collection("job_seeker").document(currentid);
+        reference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    // Get the image URL from the document
+                    String imageUrl = documentSnapshot.getString("profilePictureUrl");
+                    Context context = getApplicationContext();
+
+                    if (imageUrl != null) {
+                        // Here's an example of how to use Glide:
+                        Glide.with(context)
+                                .load(imageUrl)
+                                .into(profileView);
+                    } else {
+                        // Handle the case where the image URL is null
+                    }
+                } else {
+                    // Handle the case where the document does not exist
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
 
 //        mSignOut.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -144,15 +184,7 @@ private NavigationView navigationView;
     NavigationView navigationView = findViewById(R.id.navigationView);
     navigationView.setItemIconTintList(null);
 
-//        NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
-//        NavigationUI.setupWithNavController(navigationView, navController);
-//        TextView textTitle = findViewById(R.id.textTitle);
-//        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-//            @Override
-//            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-//                textTitle.setText(navDestination.getLabel());
-//            }
-//        });
+
     }
 
 }

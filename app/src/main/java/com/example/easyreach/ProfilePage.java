@@ -63,7 +63,7 @@ public class ProfilePage extends AppCompatActivity {
         String uMail = user.getEmail();
         DocumentReference reference;
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        reference = firestore.collection("user").document(currentid);
+        reference = firestore.collection("job_seeker").document(currentid);
         Query dbref = firestore.collection("user").whereEqualTo("Semail", uMail);
         dbref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

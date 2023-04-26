@@ -71,6 +71,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:backgroundTint="#FFFFFF"
+            android:autoLink="web"
+            android:linksClickable="true"
             android:src="@drawable/facebook"
             android:layout_below="@+id/social_media_text"
             android:layout_marginTop="16dp"

@@ -60,13 +60,13 @@ private FirebaseAuth mAuth;
                 String Address = eAddress.getText().toString();
                 String Field = eField.getText().toString();
                 Map<String,Object> user = new HashMap<>();
-                user.put("Fname",Firstname);
-                user.put("Semail", Email);
-                user.put("Age",Age);
-                user.put("Address", Address);
-                user.put("Field", Field);
+                user.put("name",Firstname);
+                user.put("email", Email);
+                user.put("age",Age);
+                user.put("location", Address);
+                user.put("skills", Field);
 
-                db.collection("user").document(userID)
+                db.collection("job_seeker").document(userID)
                         .set(user)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
