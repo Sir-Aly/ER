@@ -45,4 +45,12 @@
     <string name="read_terms_and_conditions_here">Read Terms and Conditions Here</string>
     <string name="register">Register</string>
     <string name="existing_user_login_here">Existing User? Login Here</string>
+    <string name="app_info">Easy Reach recruitment application</string>
+    <string name="version_info">Beta Version</string>
+    <string name="social_media_accounts">Social Media Accounts</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="instagram">Instagram</string>
+    <string name="easyreach_logo">EasyReach Logo</string>
+    <string name="tag">\@easyreach</string>
 </resources>

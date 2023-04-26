@@ -100,8 +100,19 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnRegisterPic"
         android:layout_below="@+id/addresslayout"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="10dp"
+        android:text="Upload your Profile Picture"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        android:layout_below="@+id/btnRegisterPic"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -109,5 +120,4 @@
         android:paddingBottom="10dp"
         android:text="Register"
         />
-
 </RelativeLayout>
