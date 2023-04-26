@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFFFF">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:backgroundTint="#FFFFFF">
+
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/registeration"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:contentDescription="@string/easyreach_logo"/>
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/logo_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/version_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/version_info"
+            android:textSize="16sp"
+            android:layout_below="@+id/app_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/about_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_info"
+            android:textSize="16sp"
+            android:layout_below="@+id/version_info"
+            android:layout_marginTop="32dp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/social_media_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/social_media_accounts"
+            android:textSize="16sp"
+            android:layout_below="@+id/about_text"
+            android:layout_marginTop="32dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <ImageButton
+            android:id="@+id/facebook_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:backgroundTint="#FFFFFF"
+            android:src="@drawable/facebook"
+            android:layout_below="@+id/social_media_text"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageButton
+            android:id="@+id/twitter_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/twitter"
+            android:drawablePadding="8dp"
+            android:backgroundTint="#FFFFFF"
+            android:layout_below="@+id/facebook_text"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageButton
+            android:id="@+id/instagram_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:drawablePadding="8dp"
+            android:layout_below="@+id/twitter_text"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/instagram"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

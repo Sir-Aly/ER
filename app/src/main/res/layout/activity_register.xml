@@ -42,7 +42,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/registration_page"
                         android:textColor="@color/MainColor"
-                        android:shadowColor="@color/ALI"
+                        android:shadowColor="@color/black"
                         android:shadowRadius="3"
                         android:shadowDy="1"
                         android:textSize="23sp"

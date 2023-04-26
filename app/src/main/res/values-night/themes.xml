@@ -86,6 +86,9 @@
     <style name="AppCard" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">8dp</item>
     </style>
+    <style name="ScreenBackground">
+        <item name="android:background">@color/black</item>
+    </style>
 
     <style name="AppBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView.Colored" />
 
