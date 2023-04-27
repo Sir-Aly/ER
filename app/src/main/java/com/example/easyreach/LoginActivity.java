@@ -30,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
 
+    Button Test_Test;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         loginBtnClicked = false;
         spinner = (ProgressBar) findViewById(R.id.pBar);
         spinner.setVisibility(View.GONE);
+
+        Test_Test = findViewById(R.id.test_test);
 
         mAuth = FirebaseAuth.getInstance();
         mLogin = (Button) findViewById(R.id.login);
@@ -92,6 +96,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+
+
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -136,4 +142,12 @@ public class LoginActivity extends AppCompatActivity {
         return;
 
     }
+
+
+    public void go(View view){
+        Intent intent = new Intent(this,DesignMain.class);
+        startActivity(intent);
+    }
+
+
 }
