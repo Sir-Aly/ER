@@ -38,6 +38,7 @@
             />
 
             <androidx.cardview.widget.CardView
+                android:onClick="href_to_job_seeker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="20dp"
@@ -81,6 +82,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:onClick="href_to_job_offerer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="20dp"
