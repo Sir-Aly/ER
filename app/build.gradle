@@ -66,5 +66,7 @@ dependencies {
 
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.25'
 
+    implementation 'com.github.AtifSayings:Animatoo:1.0.1'
+
 
 }
