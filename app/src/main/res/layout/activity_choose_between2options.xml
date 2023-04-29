@@ -46,15 +46,14 @@
                 android:layout_marginTop="10dp"
                 >
 
+
                 <ImageView
                     android:layout_width="400dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/employees"
                     android:layout_gravity="center"
                     android:paddingBottom="50dp"
                     android:scaleType="centerCrop"
-                    />
-
+                    android:src="@drawable/vudu" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -93,7 +92,7 @@
         <ImageView
             android:layout_width="400dp"
             android:layout_height="200dp"
-            android:src="@drawable/building_photo"
+            android:src="@drawable/vudu"
             android:scaleType="centerCrop"
             />
 

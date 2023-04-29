@@ -7,37 +7,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".MainActivity"
+    tools:context=".SeekerMainActivity"
     >
-    <!--    <com.yalantis.library.Koloda-->
-    <!--        android:id="@+id/koloda"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="500dp"-->
-    <!--        app:koloda_card_layout="@layout/item_koloda" />-->
+
     <androidx.drawerlayout.widget.DrawerLayout
 
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".SeekerMainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
-
-            <!--        <fragment-->
-            <!--            android:id="@+id/navHostFragment"-->
-            <!--            android:name="androidx.navigation.fragment.NavHostFragment"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="0dp"-->
-            <!--            app:defaultNavHost="true"-->
-            <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--            app:layout_constraintTop_toBottomOf="@id/layoutToolBar"-->
-            <!--            app:navGraph="@navigation/main"-->
-
-            <!--            />-->
 
             <RelativeLayout
                 android:id="@+id/relativeLayout"
@@ -105,10 +89,10 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/name_text"
+                        android:id="@+id/org_name_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
+                        android:layout_marginTop="90dp"
                         android:fontFamily="@font/anton_regular"
                         android:shadowColor="@color/black"
                         android:shadowDy="20"
@@ -119,26 +103,7 @@
                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/age_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="120dp"
-                        android:fontFamily="@font/anton_regular"
-                        android:shadowColor="@color/black"
-                        android:shadowDy="20"
-                        android:shadowRadius="15"
-                        android:text="22"
-                        android:textColor="@color/white"
-                        android:textSize="30dp" />
-                </LinearLayout>
 
 
                 <LinearLayout
@@ -201,7 +166,7 @@
                     tools:ignore="NotSibling">
 
                     <TextView
-                        android:id="@+id/location_text"
+                        android:id="@+id/org_location_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Giza-Egypt"
@@ -213,7 +178,7 @@
                         />
 
                     <TextView
-                        android:id="@+id/skills_text"
+                        android:id="@+id/job_title_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Angular"
@@ -279,15 +244,16 @@
                     >
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:paddingRight="20dp"
-                    android:paddingLeft="20dp"
-                    android:textColor="@color/MainColor"
-                    android:layout_height="wrap_content"
-                    android:text="Lorem ipsum dolor sit amet. At eligendi fuga aut voluptatem delectus sit harum voluptate. A explicabo voluptates eum nemo commodi in molestiae animi. Sit    "
-                    android:textStyle="bold"
-                    />
+                    <TextView
+                        android:id="@+id/job_description"
+                        android:layout_width="match_parent"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="20dp"
+                        android:textColor="@color/MainColor"
+                        android:layout_height="wrap_content"
+                        android:text="Lorem ipsum dolor sit amet. At eligendi fuga aut voluptatem delectus sit harum voluptate. A explicabo voluptates eum nemo commodi in molestiae animi. Sit    "
+                        android:textStyle="bold"
+                        />
                 </LinearLayout>
 
 
@@ -296,12 +262,12 @@
 
 
         <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigationView"
+            android:id="@+id/navigationSeekerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:headerLayout="@layout/layout_navigation_header"
-            app:menu="@menu/org_navigation_menu" >
+            app:menu="@menu/seeker_navigation_menu" >
 
         </com.google.android.material.navigation.NavigationView>
 
@@ -311,19 +277,3 @@
 </LinearLayout>
 
 
-    <!--<FrameLayout-->
-    <!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--    xmlns:tools="http://schemas.android.com/tools"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    tools:context=".SplashScreenActivity">-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/image_splash_screen"-->
-    <!--        android:layout_width="424dp"-->
-    <!--        android:layout_height="860dp"-->
-    <!--        android:layout_gravity="center"-->
-    <!--        android:src="@drawable/registeration" />-->
-
-    <!--</FrameLayout>-->

@@ -1,15 +1,15 @@
 package com.example.easyreach;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.SwitchCompat;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -61,7 +61,7 @@ SharedPreferences.Editor editor;
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Choose_Login_And_Reg.this, LoginActivity.class);
+                Intent i = new Intent(Choose_Login_And_Reg.this, Choose_between_2options.class);
                 startActivity(i);
                 finish();
                 return;

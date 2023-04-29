@@ -23,7 +23,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UploadActivity extends AppCompatActivity {
+public class SeekerUploadActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Button btnUpload;
     private Button selectImageButton;
@@ -33,10 +33,10 @@ public class UploadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload);
-        selectImageButton = findViewById(R.id.select_image_button);
-        imagePreview = findViewById(R.id.image_preview);
-        btnUpload = findViewById(R.id.btnUpload);
+        setContentView(R.layout.activity_seeker_upload);
+        selectImageButton = findViewById(R.id.seeker_select_image_button);
+        imagePreview = findViewById(R.id.seeker_image_preview);
+        btnUpload = findViewById(R.id.seeker_btn_Upload);
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +59,7 @@ public class UploadActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-             imageUri = data.getData();
+            imageUri = data.getData();
             imagePreview.setImageURI(imageUri);
         }
     }
@@ -87,7 +87,7 @@ public class UploadActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast
-                                .makeText(UploadActivity.this,
+                                .makeText(SeekerUploadActivity.this,
                                         "Failed " + e.getMessage(),
                                         Toast.LENGTH_SHORT)
                                 .show();
@@ -101,13 +101,13 @@ public class UploadActivity extends AppCompatActivity {
         Map<String, Object> data = new HashMap<>();
         data.put("profilePictureUrl", imageUrl);
 
-        db.collection("job_offerer").document(userId)
+        db.collection("job_seeker").document(userId)
                 .set(data, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast
-                                .makeText(UploadActivity.this,
+                                .makeText(SeekerUploadActivity.this,
                                         "Image Uploaded!!",
                                         Toast.LENGTH_SHORT)
                                 .show();
@@ -117,7 +117,7 @@ public class UploadActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast
-                                .makeText(UploadActivity.this,
+                                .makeText(SeekerUploadActivity.this,
                                         "Failed " + e.getMessage(),
                                         Toast.LENGTH_SHORT)
                                 .show();
@@ -128,7 +128,7 @@ public class UploadActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent b = new Intent(this, OrgFillActivity.class);
+        Intent b = new Intent(this, SeekerFillActivity.class);
         startActivity(b);
         finish();
     }

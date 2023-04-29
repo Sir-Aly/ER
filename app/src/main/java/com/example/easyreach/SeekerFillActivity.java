@@ -21,17 +21,17 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AdminLogin extends AppCompatActivity {
+public class SeekerFillActivity extends AppCompatActivity {
 
     EditText firstName, age, eAddress, eField, userMail;
-    MaterialButton Registerbtn, Uploadbtn;
+    MaterialButton Registerbtn, SeekerUploadbtn;
     FirebaseFirestore db;
-private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_login);
+        setContentView(R.layout.activity_seeker_fill);
 
         db = FirebaseFirestore.getInstance();
         firstName = findViewById(R.id.firstName);
@@ -40,12 +40,12 @@ private FirebaseAuth mAuth;
         eAddress = findViewById(R.id.address);
         eField = findViewById(R.id.field);
         Registerbtn = findViewById(R.id.btnRegister);
-        Uploadbtn = findViewById(R.id.btnRegisterPic);
+        SeekerUploadbtn = findViewById(R.id.seekerBtnRegisterPic);
         mAuth = FirebaseAuth.getInstance();
-        Uploadbtn.setOnClickListener(new View.OnClickListener() {
+        SeekerUploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AdminLogin.this, UploadActivity.class);
+                Intent i = new Intent(SeekerFillActivity.this, SeekerUploadActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -53,7 +53,7 @@ private FirebaseAuth mAuth;
         Registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             String userID =  mAuth.getCurrentUser().getUid();
+                String userID =  mAuth.getCurrentUser().getUid();
                 String Firstname = firstName.getText().toString();
                 String Email = userMail.getText().toString();
                 String Age = age.getText().toString();
@@ -71,13 +71,13 @@ private FirebaseAuth mAuth;
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(AdminLogin.this,"Successful",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SeekerFillActivity.this,"Successful",Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull @NotNull Exception e) {
 
-                                Toast.makeText(AdminLogin.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SeekerFillActivity.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
 
 
                             }
@@ -91,7 +91,7 @@ private FirebaseAuth mAuth;
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent btnClick = new Intent(AdminLogin.this, MainActivity.class);
+        Intent btnClick = new Intent(SeekerFillActivity.this, SeekerMainActivity.class);
         startActivity(btnClick);
         super.onBackPressed();
         finish();

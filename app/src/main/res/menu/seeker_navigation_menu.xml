@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuSeekerProfile"
+        android:icon="@drawable/baseline_person_24"
+        android:title="@string/profile"
+        />
+    <item
+        android:id="@+id/menuSeekerLanguage"
+        android:icon="@drawable/baseline_language_24"
+        android:title="@string/language"
+        />
+    <item
+        android:id="@+id/menuSeekerCountry"
+        android:icon="@drawable/baseline_other_houses_24"
+        android:title="@string/country"
+        />
+    <item
+        android:id="@+id/menuSeekerNotifications"
+        android:icon="@drawable/baseline_circle_notifications_24"
+        android:title="@string/notifications"
+        />
+    <item
+        android:id="@+id/menuSeekerInbox"
+        android:icon="@drawable/baseline_all_inbox_24"
+        android:title="@string/inbox"
+        />
+    <item
+        android:id="@+id/menuSeekerSettings"
+        android:icon="@drawable/baseline_settings_24"
+        android:title="@string/Settings"
+        />
+    <item
+        android:id="@+id/menuJobMatches"
+        android:icon="@drawable/baseline_newspaper_24"
+        android:title="@string/job_matches"
+        />
+    <item
+        android:id="@+id/menuSeekerSupport"
+        android:icon="@drawable/baseline_support_agent_24"
+        android:title="@string/customer_support"
+        />
+    <item
+        android:id="@+id/menuSeekerAboutUs"
+        android:icon="@drawable/baseline_info_24"
+        android:title="@string/about_us"
+        />
+
+    <item
+        android:id="@+id/menuSeekerSignOut"
+        android:icon="@drawable/baseline_logout_24"
+        android:title="@string/sign_out"
+        />
+
+</menu>

@@ -26,63 +26,56 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.yalantis.library.Koloda;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class SeekerMainActivity extends AppCompatActivity {
     private SwipeAdapter adapter;
     private List<Integer> list;
-    Koloda koloda;
 
-private DrawerLayout drawerLayout;
-ImageView profileView;
-private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
+    ImageView profileView;
+    private NavigationView navigationView;
 
 
-//    private TextView mSignOut;
+    //    private TextView mSignOut;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_seeker_main);
 
-
-//            koloda = findViewById(R.id.koloda);
-//            list = new ArrayList<>();
-//            adapter = new SwipeAdapter(this, list);
-//            koloda.setAdapter(adapter);
 
 
 //        mSignOut = (TextView) findViewById(R.id.signOut);
         profileView = findViewById(R.id.profile_image);
-        navigationView=findViewById(R.id.navigationView);
+        navigationView=findViewById(R.id.navigationSeekerView);
         mAuth = FirebaseAuth.getInstance();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId())
                 {
-                    case R.id.menuSignOut:
+                    case R.id.menuSeekerSignOut:
                         mAuth.signOut();
-                        Intent i = new Intent(MainActivity.this, Choose_Login_And_Reg.class);
+                        Intent i = new Intent(SeekerMainActivity.this, Choose_Login_And_Reg.class);
                         startActivity(i);
                         finish();
                         return false;
-                    case R.id.menuProfile:
+                    case R.id.menuSeekerProfile:
 //                        mAuth.signOut();
-                        Intent r = new Intent(MainActivity.this, ProfilePage.class);
+                        Intent r = new Intent(SeekerMainActivity.this, SeekerProfileActivity.class);
                         startActivity(r);
                         finish();
                         return false;
-                    case R.id.menuSettings:
-                        Intent s = new Intent(MainActivity.this, OrgFillActivity.class);
+                    case R.id.menuSeekerSettings:
+                        Intent s = new Intent(SeekerMainActivity.this, SeekerFillActivity.class);
                         startActivity(s);
                         finish();
                         return false;
-                    case R.id.menuAboutUs:
-                        Intent a = new Intent(MainActivity.this, AboutUsActivity.class);
+                    case R.id.menuSeekerAboutUs:
+                        Intent a = new Intent(SeekerMainActivity.this, SeekerAboutUsActivity.class);
                         startActivity(a);
                         finish();
                         return false;
@@ -101,8 +94,8 @@ private NavigationView navigationView;
         });
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference jobSeekersRef = db.collection("job_seeker");
-        DocumentReference jobSeekerDocRef = jobSeekersRef.document("mUKZqUB1Izebx3xflBkdgTxKe173");
+        CollectionReference jobSeekersRef = db.collection("job_offerer");
+        DocumentReference jobSeekerDocRef = jobSeekersRef.document("YsPMkdQqwgcWd2jOkYLYGOgwZPu1");
         final String TAG = "problem";
         jobSeekerDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -112,22 +105,22 @@ private NavigationView navigationView;
                     if (document.exists()) {
                         // Get the job seeker's data from the document snapshot
                         String name = document.getString("name");
-                        String skills = document.getString("skills");
-                        String location = document.getString("location");
-                        String age = document.getString("age");
+                        String title = document.getString("job_title");
+                        String location = document.getString("Location");
+                        String description = document.getString("job_description");
 
 
 
                         // Update the card view with the job seeker's data
-                        TextView nameText = findViewById(R.id.name_text);
-                        TextView skillsText = findViewById(R.id.skills_text);
-                        TextView locationText = findViewById(R.id.location_text);
-                        TextView ageText = findViewById(R.id.age_text);
+                        TextView nameText = findViewById(R.id.org_name_text);
+                        TextView titleText = findViewById(R.id.job_title_text);
+                        TextView locationText = findViewById(R.id.org_location_text);
+                        TextView descriptionText = findViewById(R.id.job_description);
 
                         nameText.setText(name);
-                        skillsText.setText(skills);
+                        titleText.setText(title);
                         locationText.setText(location);
-                        ageText.setText(age);
+                        descriptionText.setText(description);
 
                     } else {
                         Log.d(TAG, "No such document");
@@ -142,7 +135,7 @@ private NavigationView navigationView;
         String uMail = user.getEmail();
         DocumentReference reference;
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        reference = firestore.collection("job_seeker").document("mUKZqUB1Izebx3xflBkdgTxKe173");
+        reference = firestore.collection("job_offerer").document("YsPMkdQqwgcWd2jOkYLYGOgwZPu1");
         reference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -181,8 +174,8 @@ private NavigationView navigationView;
 //            }
 //        });
 
-    NavigationView navigationView = findViewById(R.id.navigationView);
-    navigationView.setItemIconTintList(null);
+        NavigationView navigationView = findViewById(R.id.navigationSeekerView);
+        navigationView.setItemIconTintList(null);
 
 
     }

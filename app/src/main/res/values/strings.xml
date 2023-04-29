@@ -55,4 +55,5 @@
     <string name="easyreach_logo">EasyReach Logo</string>
     <string name="tag">\@easyreach</string>
     <string name="ChooseTitle"> CHOOSE IF YOU WANT TO OFFER JOBS OR TO BE HIRED.</string>
+    <string name="org_version_info">Organanization Version info</string>
 </resources>

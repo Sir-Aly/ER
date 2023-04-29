@@ -8,12 +8,12 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AboutUsActivity extends AppCompatActivity {
+public class SeekerAboutUsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.about_us);
+        setContentView(R.layout.activity_seeker_about_us);
         ImageButton facebookButton = findViewById(R.id.facebook_text);
         ImageButton instagramButton = findViewById(R.id.instagram_text);
         ImageButton twitterButton = findViewById(R.id.twitter_text);
@@ -53,7 +53,7 @@ public class AboutUsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent b = new Intent(this, MainActivity.class);
+        Intent b = new Intent(this, SeekerMainActivity.class);
         startActivity(b);
         finish();
     }

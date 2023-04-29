@@ -26,9 +26,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-public class ProfilePage extends AppCompatActivity {
+public class SeekerProfileActivity extends AppCompatActivity {
     TextView pNameTv, nameTv, addressTv, ageTv, fieldTv, emailTv;
-   RoundedImageView profilePictureImageView;
+    RoundedImageView profilePictureImageView;
     private Button mForgetPassword;
     private boolean loginBtnClicked;
     private FirebaseAuth mAuth;
@@ -50,7 +50,7 @@ public class ProfilePage extends AppCompatActivity {
         mForgetPassword = (Button) findViewById(R.id.forgetPasswordButton);
         mForgetPassword.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent i = new Intent(ProfilePage.this, ForgetPasswordActivity.class  );
+                Intent i = new Intent(SeekerProfileActivity.this, ForgetPasswordActivity.class  );
                 startActivity(i);
                 finish();
             }
@@ -64,7 +64,7 @@ public class ProfilePage extends AppCompatActivity {
         String uMail = user.getEmail();
         DocumentReference reference;
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        reference = firestore.collection("job_offerer").document(currentid);
+        reference = firestore.collection("job_seeker").document(currentid);
         Query dbref = firestore.collection("user").whereEqualTo("Semail", uMail);
         dbref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -145,7 +145,7 @@ public class ProfilePage extends AppCompatActivity {
             }
         });
     }
-//    Context context = getApplicationContext();
+    //    Context context = getApplicationContext();
 //    // Get the image URL from the document
 //    String imageUrl = document.get("profileImageUrl").toString();
 //
@@ -157,7 +157,7 @@ public class ProfilePage extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent btnClick = new Intent(ProfilePage.this, MainActivity.class);
+        Intent btnClick = new Intent(SeekerProfileActivity.this, SeekerMainActivity.class);
         startActivity(btnClick);
         super.onBackPressed();
         finish();

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".AdminLogin">
+    tools:context=".OrgFillActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:hint="Full name">
+        android:hint="Organization Name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/firstName"
@@ -56,13 +56,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/emaillayout"
         android:layout_marginTop="20dp"
-        android:hint="Age">
+        android:hint="Description">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="text"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,7 +89,7 @@
         android:layout_below="@+id/fieldlayout"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:hint="Address">
+        android:hint="Location">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/address"
