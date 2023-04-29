@@ -26,14 +26,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.yalantis.library.Koloda;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private SwipeAdapter adapter;
-    private List<Integer> list;
-    Koloda koloda;
 
 private DrawerLayout drawerLayout;
 ImageView profileView;
@@ -49,10 +43,6 @@ private NavigationView navigationView;
         setContentView(R.layout.activity_main);
 
 
-//            koloda = findViewById(R.id.koloda);
-//            list = new ArrayList<>();
-//            adapter = new SwipeAdapter(this, list);
-//            koloda.setAdapter(adapter);
 
 
 //        mSignOut = (TextView) findViewById(R.id.signOut);
