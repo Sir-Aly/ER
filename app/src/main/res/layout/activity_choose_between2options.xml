@@ -53,7 +53,7 @@
                     android:layout_gravity="center"
                     android:paddingBottom="50dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/vudu" />
+                    android:src="@drawable/employees_small_size" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -92,7 +92,7 @@
         <ImageView
             android:layout_width="400dp"
             android:layout_height="200dp"
-            android:src="@drawable/vudu"
+            android:src="@drawable/manager_small_size"
             android:scaleType="centerCrop"
             />
 

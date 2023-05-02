@@ -4,18 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PictureUploadActivity">
+    tools:context=".PictureUploadActivity"
+    android:background="@drawable/background2"
+    >
 
 
     <!--Linear Layout with horizontal orientation
         and other properties-->
 
     <!--Image View for showing image chosen from gallery-->
+
+
     <ImageView
         android:id="@+id/imgView"
         android:layout_width="400dp"
-        android:layout_height="600dp"
-
+        android:layout_height="500dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,20 +35,26 @@
         app:layout_constraintTop_toBottomOf="@+id/imgView">
 
         <!--Button for choosing image from gallery-->
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnChoose"
             android:text="Choose"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/grad_main"
+            />
 
         <!--Button for uploading image-->
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnUpload"
             android:text="Upload"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:background="@drawable/grad_main"/>
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

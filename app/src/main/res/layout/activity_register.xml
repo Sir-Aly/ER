@@ -5,11 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ScrollView
             android:layout_width="match_parent"
@@ -171,11 +173,10 @@
                         style="@android:style/Widget.Material.Button.Borderless.Colored"
                         android:layout_marginTop="25dp"
                         android:layout_marginBottom="25dp"
-                        android:background="@drawable/custom_edittext"
+                        android:background="@drawable/grad_main"
                         android:padding="12dp"
                         android:text="@string/register"
                         android:textColor="@color/white"
-                        android:backgroundTint="@color/MainColor"
                         />
 
 
