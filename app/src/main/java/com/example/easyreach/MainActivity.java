@@ -3,10 +3,12 @@ package com.example.easyreach;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,6 +54,8 @@ TextView nameTextView, skillsTextView, locationTextView;
 //    private TextView mSignOut;
     private FirebaseAuth mAuth;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +67,7 @@ TextView nameTextView, skillsTextView, locationTextView;
         mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference jobSeekersRef = db.collection("Job Seekers");
+        CollectionReference Usersref = db.collection("user");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String jobProviderUid = user.getUid();
 // Get the job seeker's document reference
@@ -77,6 +82,24 @@ TextView nameTextView, skillsTextView, locationTextView;
         skillsTextView = findViewById(R.id.skills_text);
         locationTextView = findViewById(R.id.location_text);
         photoImageView = findViewById(R.id.profile_image);
+
+        Button add_to_int = findViewById(R.id.add_to_int);
+        String userID =  mAuth.getCurrentUser().getUid();
+
+        add_to_int.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Name = nameTextView.getText().toString();
+                String Skills= skillsTextView.getText().toString();
+                String Location = locationTextView.getText().toString();
+                Add add = new Add(Name,Skills,Location);
+                Usersref.document(userID).collection("Likes").add(add);
+
+
+            }
+        });
+
+
 
 // Retrieve the job seeker's data using the document reference
         jobSeekerDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -105,6 +128,12 @@ TextView nameTextView, skillsTextView, locationTextView;
                         }
                     });
 
+
+
+
+
+
+
                     // Assign the function to the right button's click event
                     rightArrow.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -120,6 +149,8 @@ TextView nameTextView, skillsTextView, locationTextView;
                 }
             }
         });
+
+
 
 
         // Listen for changes to the job seeker's document and update the UI accordingly
@@ -176,6 +207,8 @@ TextView nameTextView, skillsTextView, locationTextView;
         });
         drawerLayout=findViewById(R.id.drawerLayout);
 
+
+
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,6 +221,10 @@ TextView nameTextView, skillsTextView, locationTextView;
 
 
     }
+
+
+
+
     private void addSwipeDocument(DocumentReference jobSeekerDocRef, String jobProviderUid, String direction) {
         // Create a new swipe document
         Map<String, Object> swipeData = new HashMap<>();
@@ -299,6 +336,12 @@ TextView nameTextView, skillsTextView, locationTextView;
                 Log.w(TAG, "getNextJobSeeker:onFailure", e);
             }
         });
+
+    }
+
+    public void hi2(View view){
+        Intent intent = new Intent(this,interested_list.class);
+        startActivity(intent);
     }
 
 }
