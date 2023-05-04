@@ -50,7 +50,7 @@ String jobSeekerId;
 private NavigationView navigationView;
 ImageView leftArrow, rightArrow;
 
-TextView nameTextView, skillsTextView, locationTextView,emailTextView;
+TextView nameTextView, skillsTextView, locationTextView,emailTextView,ImageUrlTextview;
 //    private TextView mSignOut;
     private FirebaseAuth mAuth;
 
@@ -82,6 +82,7 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView;
         skillsTextView = findViewById(R.id.skills_text);
         locationTextView = findViewById(R.id.location_text);
         emailTextView = findViewById(R.id.email_text);
+        ImageUrlTextview = findViewById(R.id.Image_url);
         photoImageView = findViewById(R.id.profile_image);
 
         Button add_to_int = findViewById(R.id.add_to_int);
@@ -94,7 +95,8 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView;
                 String Skills= skillsTextView.getText().toString();
                 String Location = locationTextView.getText().toString();
                 String email = emailTextView.getText().toString();
-                Add add = new Add(Name,Skills,Location,email);
+                String Imageurl = ImageUrlTextview.getText().toString();
+                Add add = new Add(Name,Skills,Location,email,Imageurl);
                 Usersref.document(userID).collection("Likes").add(add);
 
 
@@ -119,6 +121,7 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView;
                     skillsTextView.setText(skills);
                     Glide.with(photoImageView.getContext()).load(photoUrl).into(photoImageView);
                     emailTextView.setText(email);
+                    ImageUrlTextview.setText(photoUrl);
 
                     // Assign the function to the left button's click event
                     leftArrow.setOnClickListener(new View.OnClickListener() {
@@ -126,9 +129,17 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView;
                         public void onClick(View v) {
                             addSwipeDocument(jobSeekerDocRef, jobProviderUid, "left");
                             // Update the UI with the next job seeker's data
-                            index--;
+                            index++;
                             System.out.println(index);
                             getNextJobSeeker();
+
+                            String Name = nameTextView.getText().toString();
+                            String Skills= skillsTextView.getText().toString();
+                            String Location = locationTextView.getText().toString();
+                            String email = emailTextView.getText().toString();
+                            String Imageurl = ImageUrlTextview.getText().toString();
+                            Add add = new Add(Name,Skills,Location,email,Imageurl);
+                            Usersref.document(userID).collection("Likes").add(add);
                         }
                     });
 
@@ -277,6 +288,7 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView;
                     locationTextView.setText(location);
                     Glide.with(photoImageView.getContext()).load(photoUrl).into(photoImageView);
                     emailTextView.setText(email);
+                    ImageUrlTextview.setText(photoUrl);
 
                     // Assign the function to the left button's click event
 

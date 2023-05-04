@@ -1,11 +1,6 @@
 package com.example.easyreach;
 
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
-
 import com.google.firebase.firestore.Exclude;
-
-import java.util.Map;
 
 public class Add {
     private String documentId;
@@ -13,6 +8,7 @@ public class Add {
     private String Skills;
     private String email;
     private String Location;
+    private String photoUrl;
 
 
     public Add() {
@@ -28,16 +24,21 @@ public class Add {
         this.documentId = documentId;
     }
 
-    public Add(String Name, String Skills, String Location,String email) {
+    public Add(String Name, String Skills, String Location,String email,String photoUrl) {
         this.Name = Name;
         this.Skills = Skills;
         this.Location = Location;
         this.email=email;
+        this.photoUrl = photoUrl;
 
     }
 
     public String getSkills() {
         return Skills;
+    }
+    public String getPhotoUrl(){
+
+        return photoUrl;
     }
 
 
