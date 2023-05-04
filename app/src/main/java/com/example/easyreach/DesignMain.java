@@ -34,7 +34,7 @@ import java.util.Map;
 public class DesignMain extends AppCompatActivity {
     String jobSeekerId;
     Button leftButton, rightButton;
-    // 1 / 5/
+    // 1 / 5/ 2023
     TextView nameTextView, skillsTextView;
     ImageView photoImageView;
     int index = 1;
