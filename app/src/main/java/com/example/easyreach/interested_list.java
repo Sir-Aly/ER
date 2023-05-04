@@ -1,55 +1,103 @@
 package com.example.easyreach;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class interested_list extends AppCompatActivity {
+
+    RecyclerView recview;
+    ArrayList<model> datalist;
+    FirebaseFirestore db;
+    myadapter adapter;
     private FirebaseAuth mAuth;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    String userID =  mAuth.getCurrentUser().getUid();
-    CollectionReference Usersref = db.collection("user");
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interested_list);
         mAuth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        recview=(RecyclerView)findViewById(R.id.recview);
+        recview.setLayoutManager(new LinearLayoutManager(this));
+        datalist=new ArrayList<>();
+        adapter=new myadapter(datalist);
+        recview.setAdapter(adapter);
+        //collections
+
+        db=FirebaseFirestore.getInstance();
+        CollectionReference users = db.collection("user");
         String userID =  mAuth.getCurrentUser().getUid();
-    }
-    public void loadNotes(View v) {
-        Usersref.document(userID).collection("Likes").get()
+        users.document(userID).collection("Likes").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        String data = "";
-
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            Add add = documentSnapshot.toObject(Add.class);
-
-                            String FirstName = add.getName();
-
-                            data = "FirstName: " + FirstName;
+                        List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
+                        for(DocumentSnapshot d:list)
+                        {
+                            model obj=d.toObject(model.class);
+                            datalist.add(obj);
                         }
-                        TextView text1 = findViewById(R.id.text1);
-                        text1.setText(data);
+                        adapter.notifyDataSetChanged();
                     }
                 });
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    public void loadNote(View v) {
+//        Likes.document("1IPH1gf15GddrBImlub2").get()
+//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+//
+//                        if (documentSnapshot.exists()) {
+//                            String title = documentSnapshot.getString(KEY_TITLE);
+//                            String description = documentSnapshot.getString(KEY_DESCRIPTION);
+//                            TextView text1 = findViewById(R.id.text1);
+//                            text1.setText("Title: " + title + "\n" + "Description: " + description);
+//                        }
+//                    }
+//                });
+//    }
+//}
+
