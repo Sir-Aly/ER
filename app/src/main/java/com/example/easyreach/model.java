@@ -2,16 +2,16 @@ package com.example.easyreach;
 
 public class model
 {
-    String name, email,skills, photoUrl;
+    String name, email,skills,photoUrl;
 
     public model() {
     }
 
-    public model(String name, String email, String skills, String photoUrl) {
+    public model(String name, String email, String skills,String photoUrl) {
         this.name = name;
         this.email = email;
         this.skills = skills;
-        this.photoUrl = photoUrl;
+        this.photoUrl=photoUrl;
     }
 
     public String getName() {
@@ -32,7 +32,11 @@ public class model
     public String getSkills(){
         return skills;
     }
-    public  String getImage(){
-        return  photoUrl;
+    public String getPhotoUrl(){
+        return photoUrl;
     }
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
 }

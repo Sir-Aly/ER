@@ -15,13 +15,11 @@ import java.util.ArrayList;
 
 public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
 {
-    ImageView profileImg;
     ArrayList<model> datalist;
 
     public myadapter(ArrayList<model> datalist) {
         this.datalist = datalist;
     }
-
 
     @NonNull
     @Override
@@ -32,13 +30,10 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
 
     @Override
     public void onBindViewHolder(@NonNull myviewholder holder, int position) {
-
         holder.t1.setText(datalist.get(position).getName());
         holder.t2.setText(datalist.get(position).getEmail());
         holder.t3.setText(datalist.get(position).getSkills());
-
-        Glide.with(profileImg.getContext()).load(datalist.get(position).getImage()).into(profileImg);
-
+        Glide.with(holder.getIvImage()).load(datalist.get(position).getPhotoUrl()).into(holder.t5);
 
     }
 
@@ -50,17 +45,17 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
     class myviewholder extends RecyclerView.ViewHolder
     {
         TextView t1,t2,t3;
-        ImageView t4;
-
+        private ImageView t5;
         public myviewholder(@NonNull View itemView) {
             super(itemView);
             t1=itemView.findViewById(R.id.t1);
             t2=itemView.findViewById(R.id.t2);
             t3=itemView.findViewById(R.id.t3);
 
+            t5=itemView.findViewById(R.id.thumbimage);
         }
-        public ImageView getImage(){
-            return profileImg;
+        public ImageView getIvImage() {
+            return t5;
         }
     }
 }
