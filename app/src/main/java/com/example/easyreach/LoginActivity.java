@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void go(View view){
-        Intent intent = new Intent(this,Choose_between_2options.class);
+        Intent intent = new Intent(this,Choose_Login_And_Reg.class);
         startActivity(intent);
     }
 

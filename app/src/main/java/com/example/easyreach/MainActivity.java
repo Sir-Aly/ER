@@ -3,10 +3,12 @@ package com.example.easyreach;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,9 +50,11 @@ String jobSeekerId;
 private NavigationView navigationView;
 ImageView leftArrow, rightArrow;
 
-TextView nameTextView, skillsTextView, locationTextView;
+TextView nameTextView, skillsTextView, locationTextView,emailTextView;
 //    private TextView mSignOut;
     private FirebaseAuth mAuth;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,7 @@ TextView nameTextView, skillsTextView, locationTextView;
         mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference jobSeekersRef = db.collection("Job Seekers");
+        CollectionReference Usersref = db.collection("user");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String jobProviderUid = user.getUid();
 // Get the job seeker's document reference
@@ -76,7 +81,27 @@ TextView nameTextView, skillsTextView, locationTextView;
         nameTextView = findViewById(R.id.name_text);
         skillsTextView = findViewById(R.id.skills_text);
         locationTextView = findViewById(R.id.location_text);
+        emailTextView = findViewById(R.id.email_text);
         photoImageView = findViewById(R.id.profile_image);
+
+        Button add_to_int = findViewById(R.id.add_to_int);
+        String userID =  mAuth.getCurrentUser().getUid();
+
+        add_to_int.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Name = nameTextView.getText().toString();
+                String Skills= skillsTextView.getText().toString();
+                String Location = locationTextView.getText().toString();
+                String email = emailTextView.getText().toString();
+                Add add = new Add(Name,Skills,Location,email);
+                Usersref.document(userID).collection("Likes").add(add);
+
+
+            }
+        });
+
+
 
 // Retrieve the job seeker's data using the document reference
         jobSeekerDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -87,11 +112,13 @@ TextView nameTextView, skillsTextView, locationTextView;
                     String name = documentSnapshot.getString("name");
                     String skills = documentSnapshot.getString("skills");
                     String photoUrl = documentSnapshot.getString("photoUrl");
+                    String email = documentSnapshot.getString("email");
 
                     // Update the UI with the job seeker's data
                     nameTextView.setText(name);
                     skillsTextView.setText(skills);
                     Glide.with(photoImageView.getContext()).load(photoUrl).into(photoImageView);
+                    emailTextView.setText(email);
 
                     // Assign the function to the left button's click event
                     leftArrow.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +131,12 @@ TextView nameTextView, skillsTextView, locationTextView;
                             getNextJobSeeker();
                         }
                     });
+
+
+
+
+
+
 
                     // Assign the function to the right button's click event
                     rightArrow.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +155,8 @@ TextView nameTextView, skillsTextView, locationTextView;
         });
 
 
+
+
         // Listen for changes to the job seeker's document and update the UI accordingly
         jobSeekerDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -132,12 +167,14 @@ TextView nameTextView, skillsTextView, locationTextView;
                     String skills = documentSnapshot.getString("skills");
                     String location = documentSnapshot.getString("location");
                     String photoUrl = documentSnapshot.getString("photoUrl");
+                    String email = documentSnapshot.getString("email");
 
                     // Update the UI with the job seeker's data
                     nameTextView.setText(name);
                     skillsTextView.setText(skills);
                     locationTextView.setText(location);
                     Glide.with(photoImageView.getContext()).load(photoUrl).into(photoImageView);
+                    emailTextView.setText(email);
                 }
             }
         });
@@ -176,6 +213,8 @@ TextView nameTextView, skillsTextView, locationTextView;
         });
         drawerLayout=findViewById(R.id.drawerLayout);
 
+
+
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,6 +227,10 @@ TextView nameTextView, skillsTextView, locationTextView;
 
 
     }
+
+
+
+
     private void addSwipeDocument(DocumentReference jobSeekerDocRef, String jobProviderUid, String direction) {
         // Create a new swipe document
         Map<String, Object> swipeData = new HashMap<>();
@@ -225,14 +268,15 @@ TextView nameTextView, skillsTextView, locationTextView;
                     String name = documentSnapshot.getString("name");
                     String skills = documentSnapshot.getString("skills");
                     String location = documentSnapshot.getString("location");
-
                     String photoUrl = documentSnapshot.getString("photoUrl");
+                    String email = documentSnapshot.getString("email");
 
                     // Update the UI with the job seeker's data
                     nameTextView.setText(name);
                     skillsTextView.setText(skills);
                     locationTextView.setText(location);
                     Glide.with(photoImageView.getContext()).load(photoUrl).into(photoImageView);
+                    emailTextView.setText(email);
 
                     // Assign the function to the left button's click event
 
@@ -251,11 +295,14 @@ TextView nameTextView, skillsTextView, locationTextView;
                     String skills = documentSnapshot.getString("skills");
                     String location = documentSnapshot.getString("location");
                     String photoUrl = documentSnapshot.getString("photoUrl");
+                    String email = documentSnapshot.getString("email");
+
 
                     // Update the UI with the job seeker's data
                     nameTextView.setText(name);
                     skillsTextView.setText(skills);
                     locationTextView.setText(location);
+                    emailTextView.setText(email);
                     Glide.with(photoImageView.getContext()).load(photoUrl).into(photoImageView);
                 }
             }
@@ -299,6 +346,12 @@ TextView nameTextView, skillsTextView, locationTextView;
                 Log.w(TAG, "getNextJobSeeker:onFailure", e);
             }
         });
+
+    }
+
+    public void hi2(View view){
+        Intent intent = new Intent(this,interested_list.class);
+        startActivity(intent);
     }
 
 }
