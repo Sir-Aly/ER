@@ -4,7 +4,11 @@ package com.example.easyreach;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,22 +27,48 @@ import java.util.Map;
 
 public class OrgFillActivity extends AppCompatActivity {
 
-    EditText firstName, pDescription, eAddress, eField, userMail;
+    TextView anis;
+    String skills;
+    EditText firstName, age, eAddress, eField, userMail;
     MaterialButton Registerbtn, Uploadbtn;
     FirebaseFirestore db;
 private FirebaseAuth mAuth;
+
+    String[] item = {"Web Developer", "AI Developer", "Data Scientist", "Accountant"};
+
+    AutoCompleteTextView autoCompleteTextView;
+
+    ArrayAdapter<String> adapterItems;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_org_fill);
 
+
+        autoCompleteTextView = findViewById(R.id.auto_complete_textview);
+
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, item);
+
+        autoCompleteTextView.setAdapter(adapterItems);
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                anis = findViewById(R.id.anis);
+                anis.setText(item);
+                skills = anis.getText().toString();
+            }
+        });
+
         db = FirebaseFirestore.getInstance();
         firstName = findViewById(R.id.firstName);
         userMail = findViewById(R.id.userMail);
-        pDescription = findViewById(R.id.provider_description);
+        age = findViewById(R.id.age);
         eAddress = findViewById(R.id.address);
-        eField = findViewById(R.id.field);
+//        eField = findViewById(R.id.field);
         Registerbtn = findViewById(R.id.btnRegister);
         Uploadbtn = findViewById(R.id.btnRegisterPic);
         mAuth = FirebaseAuth.getInstance();
@@ -56,17 +86,17 @@ private FirebaseAuth mAuth;
              String userID =  mAuth.getCurrentUser().getUid();
                 String Firstname = firstName.getText().toString();
                 String Email = userMail.getText().toString();
-                String Description = pDescription.getText().toString();
+                String Age = age.getText().toString();
                 String Address = eAddress.getText().toString();
-                String Field = eField.getText().toString();
+//                String Field = eField.getText().toString();
                 Map<String,Object> user = new HashMap<>();
-                user.put("pName",Firstname);
-                user.put("pEmail", Email);
-                user.put("pDescription",Description);
-                user.put("pLocation", Address);
-                user.put("pField", Field);
+                user.put("name",Firstname);
+                user.put("email", Email);
+                user.put("age",Age);
+                user.put("location", Address);
+                user.put("skills", skills);
 
-                db.collection("Job Providers").document(userID)
+                db.collection("job_seeker").document(userID)
                         .set(user)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
