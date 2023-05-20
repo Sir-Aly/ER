@@ -26,7 +26,6 @@
         android:layout_below="@+id/seeker_image_preview"
         app:layout_constraintTop_toBottomOf="@id/seeker_image_preview"
         >
-
         <!--Button for choosing image from gallery-->
         <Button
             android:id="@+id/seeker_select_image_button"
@@ -34,7 +33,6 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
-
         <!--Button for uploading image-->
         <Button
             android:id="@+id/seeker_btn_Upload"
@@ -42,8 +40,5 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
-
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

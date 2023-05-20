@@ -2,14 +2,18 @@ package com.example.easyreach;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,10 +25,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +43,11 @@ public class SeekerFillActivity extends AppCompatActivity {
 
     EditText firstName, age, eAddress, eField, userMail;
     TextView field;
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private Button btnUpload;
+    private Button selectImageButton;
+    private ImageView imagePreview;
+    private Uri imageUri;
     String skills;
     MaterialButton RegisterBtn, SeekerUploadBtn;
     FirebaseFirestore db;
@@ -69,18 +84,105 @@ public class SeekerFillActivity extends AppCompatActivity {
         eAddress = findViewById(R.id.address);
 //        eField = findViewById(R.id.field);
         RegisterBtn = findViewById(R.id.btnRegister);
-        SeekerUploadBtn = findViewById(R.id.seekerBtnRegisterPic);
+
         mAuth = FirebaseAuth.getInstance();
 
-
-        SeekerUploadBtn.setOnClickListener(new View.OnClickListener() {
+        selectImageButton = findViewById(R.id.seeker_select_image_button);
+        imagePreview = findViewById(R.id.seeker_image_preview);
+        btnUpload = findViewById(R.id.seeker_btn_Upload);
+        selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent i = new Intent(SeekerFillActivity.this, SeekerUploadActivity.class);
-                startActivity(i);
-                finish();
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, PICK_IMAGE_REQUEST);
             }
         });
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                uploadImage();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+            imagePreview.setImageURI(imageUri);
+        }
+    }
+    private void uploadImage() {
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        StorageReference imagesRef = storageRef.child( userId + "/profile_picture");
+
+        imagesRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        imagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri downloadUrl) {
+                                String imageUrl = downloadUrl.toString();
+                                // Save the image URL to Firestore
+                                saveImageUrlToFirestore(imageUrl);
+                            }
+                        });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast
+                                .makeText(SeekerFillActivity.this,
+                                        "Failed " + e.getMessage(),
+                                        Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                });
+    }
+    private void saveImageUrlToFirestore(String imageUrl) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
+        CollectionReference jobSeekersRef = db.collection("JS").document("Field").collection(skills);
+        Query query = jobSeekersRef.whereEqualTo("UID", userId);
+
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        DocumentReference currentUserRef = jobSeekersRef.document(document.getId());
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("profileUrl", imageUrl);
+                        currentUserRef.set(data, SetOptions.merge())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(SeekerFillActivity.this, "Profile URL added successfully!", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error adding profile URL", e);
+                                    }
+                                });
+                    }
+                } else {
+                    Log.w(TAG, "Error getting documents.", task.getException());
+                }
+            }
+        });
+
         RegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

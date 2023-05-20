@@ -9,22 +9,23 @@
     android:background="@drawable/background2"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/seeker_image_preview"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:textStyle="bold"
-        android:textSize="35dp"
-        android:textColor="@color/black"
-        android:fontFamily="cursive"
-        android:text="Fill your data here"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"/>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/firstnamelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_below="@+id/seeker_image_preview"
+        android:layout_marginTop="15dp"
         android:hint="Full name">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -40,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/firstnamelayout"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="7dp"
         android:hint="Email Address">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -57,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/emaillayout"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="7dp"
         android:hint="Age">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -73,14 +74,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/agelayout"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="7dp"
         android:hint="Experience Field">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/droplist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+
             android:layout_below="@+id/agelayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             >
@@ -106,7 +107,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fieldlayout"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="7dp"
         android:layout_marginBottom="20dp"
         android:hint="Address">
 
@@ -117,23 +118,29 @@
             android:inputType="textPersonName"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/seekerBtnRegisterPic"
+    <Button
+        android:id="@+id/seeker_select_image_button"
+        android:text="Choose"
         android:layout_below="@+id/addresslayout"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="10dp"
-        android:text="Upload your Profile Picture"
-        android:background="@drawable/grad_main"
-        app:backgroundTint="@color/black"
-        />
+
+        android:layout_width="140dp"
+
+        android:layout_height="wrap_content" />
+    <!--Button for uploading image-->
+    <Button
+        android:id="@+id/seeker_btn_Upload"
+        android:text="Upload"
+        android:layout_width="140dp"
+        android:layout_toEndOf="@id/seeker_select_image_button"
+        android:layout_marginStart="97dp"
+        android:layout_below="@+id/addresslayout"
+        android:layout_height="wrap_content" />
+
+=
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_below="@+id/seekerBtnRegisterPic"
+        android:layout_below="@+id/seeker_btn_Upload"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -141,6 +148,7 @@
         android:background="@drawable/grad_main"
         app:backgroundTint="@color/MainColor"
         android:textColor="@color/white"
+
         android:text="REGISTER"
         android:textSize="15dp"
         />
