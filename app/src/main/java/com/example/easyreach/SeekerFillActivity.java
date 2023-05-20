@@ -182,7 +182,7 @@ public class SeekerFillActivity extends AppCompatActivity {
                 }
             }
         });
-
+        //Up
         RegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
