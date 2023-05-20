@@ -76,12 +76,29 @@
         android:layout_marginTop="20dp"
         android:hint="Experience Field">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/field"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/droplist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:maxLines="1" />
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/agelayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            >
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:hint="Expirence Field"
+                android:layout_height="wrap_content"
+                android:id="@+id/auto_complete_textview"
+                android:inputType="none"
+                />
+            <TextView
+                android:id="@+id/field"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                android:text="Test"
+                android:textSize="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

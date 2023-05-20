@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,24 +32,46 @@ import java.util.Map;
 public class SeekerFillActivity extends AppCompatActivity {
 
     EditText firstName, age, eAddress, eField, userMail;
+    TextView field;
+    String skills;
     MaterialButton RegisterBtn, SeekerUploadBtn;
     FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    String[] item = {"Web Developer", "AI Developer", "Data Scientist", "Accountant", "Graphic Designer"};
+
+    AutoCompleteTextView autoCompleteTextView;
+
+    ArrayAdapter<String> adapterItems;
     private static final String TAG = "SeekerFillActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seeker_fill);
+        autoCompleteTextView = findViewById(R.id.auto_complete_textview);
+
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, item);
+
+        autoCompleteTextView.setAdapter(adapterItems);
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                field = findViewById(R.id.field);
+                field.setText(item);
+                skills = field.getText().toString();
+            }
+        });
         db = FirebaseFirestore.getInstance();
         firstName = findViewById(R.id.firstName);
         userMail = findViewById(R.id.userMail);
         age = findViewById(R.id.age);
         eAddress = findViewById(R.id.address);
-        eField = findViewById(R.id.field);
+//        eField = findViewById(R.id.field);
         RegisterBtn = findViewById(R.id.btnRegister);
         SeekerUploadBtn = findViewById(R.id.seekerBtnRegisterPic);
         mAuth = FirebaseAuth.getInstance();
-        CollectionReference graphicDesignerRef = db.collection("JS").document("Field").collection("Graphic Designer");
+
 
         SeekerUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,14 +89,15 @@ public class SeekerFillActivity extends AppCompatActivity {
                 String Email = userMail.getText().toString();
                 String Age = age.getText().toString();
                 String Address = eAddress.getText().toString();
-                String Field = eField.getText().toString();
+//                String Field = eField.getText().toString();
                 Map<String,Object> user = new HashMap<>();
                 user.put("name",Firstname);
                 user.put("email", Email);
                 user.put("age",Age);
                 user.put("location", Address);
-                user.put("skills", Field);
+                user.put("skills", skills);
                 user.put("UID", userID);
+                CollectionReference graphicDesignerRef = db.collection("JS").document("Field").collection(skills);
 
                 graphicDesignerRef.whereEqualTo("UID", userID)
                         .get()
@@ -81,11 +108,11 @@ public class SeekerFillActivity extends AppCompatActivity {
                                     QuerySnapshot querySnapshot = task.getResult();
                                     if (querySnapshot.isEmpty()) {
 
-                                        graphicDesignerRef.document("GD_ID").get().addOnCompleteListener(tasks -> {
+                                        graphicDesignerRef.document("Field_Id").get().addOnCompleteListener(tasks -> {
                                             if (tasks.isSuccessful()) {
                                                 DocumentSnapshot document = tasks.getResult();
                                                 if (document.exists()) {
-                                                    long lastSeekerId = document.getLong("gd_last_id");
+                                                    long lastSeekerId = document.getLong("last_id");
                                                     long newSeekerId = lastSeekerId + 1;
 
                                                     Map<String, Object> Seeker = new HashMap<>();
@@ -95,9 +122,9 @@ public class SeekerFillActivity extends AppCompatActivity {
                                                     Seeker.put("email", Email);
                                                     Seeker.put("age",Age);
                                                     Seeker.put("location", Address);
-                                                    Seeker.put("skills", Field);
+                                                    Seeker.put("skills", skills);
                                                     graphicDesignerRef.document(String.valueOf(newSeekerId)).set(Seeker);
-                                                    graphicDesignerRef.document("GD_ID").update("gd_last_id", newSeekerId);
+                                                    graphicDesignerRef.document("Field_Id").update("last_id", newSeekerId);
                                                 }
                                             }
                                         });

@@ -30,7 +30,7 @@ public class OrgFillActivity extends AppCompatActivity {
     TextView anis;
     String skills;
     EditText firstName, age, eAddress, eField, userMail;
-    MaterialButton Registerbtn, Uploadbtn;
+    MaterialButton RegisterBtn, UploadBtn;
     FirebaseFirestore db;
 private FirebaseAuth mAuth;
 
@@ -69,10 +69,10 @@ private FirebaseAuth mAuth;
         age = findViewById(R.id.age);
         eAddress = findViewById(R.id.address);
 //        eField = findViewById(R.id.field);
-        Registerbtn = findViewById(R.id.btnRegister);
-        Uploadbtn = findViewById(R.id.btnRegisterPic);
+        RegisterBtn = findViewById(R.id.btnRegister);
+        UploadBtn = findViewById(R.id.btnRegisterPic);
         mAuth = FirebaseAuth.getInstance();
-        Uploadbtn.setOnClickListener(new View.OnClickListener() {
+        UploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(OrgFillActivity.this, UploadActivity.class);
@@ -80,7 +80,7 @@ private FirebaseAuth mAuth;
                 finish();
             }
         });
-        Registerbtn.setOnClickListener(new View.OnClickListener() {
+        RegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
              String userID =  mAuth.getCurrentUser().getUid();
