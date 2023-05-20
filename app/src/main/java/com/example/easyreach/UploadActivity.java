@@ -101,7 +101,7 @@ public class UploadActivity extends AppCompatActivity {
         Map<String, Object> data = new HashMap<>();
         data.put("profilePictureUrl", imageUrl);
 
-        db.collection("job_offerer").document(userId)
+        db.collection("Job Providers").document(userId)
                 .set(data, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

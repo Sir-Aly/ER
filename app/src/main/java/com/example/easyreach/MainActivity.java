@@ -3,7 +3,6 @@ package com.example.easyreach;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -133,6 +132,7 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView,ImageUrlTe
                             System.out.println(index);
                             getNextJobSeeker();
 
+
                             String Name = nameTextView.getText().toString();
                             String Skills= skillsTextView.getText().toString();
                             String Location = locationTextView.getText().toString();
@@ -215,6 +215,11 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView,ImageUrlTe
                     case R.id.menuAboutUs:
                         Intent a = new Intent(MainActivity.this, AboutUsActivity.class);
                         startActivity(a);
+                        finish();
+                        return false;
+                    case R.id.jobAdding:
+                        Intent add = new Intent(MainActivity.this, JobPostingActivity.class);
+                        startActivity(add);
                         finish();
                         return false;
                 }
@@ -323,7 +328,7 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView,ImageUrlTe
         // Get a reference to the current job seeker's document
         DocumentReference currentJobSeekerDocRef = jobSeekersRef.document("jobSeeker" +index);
         // Query for the next job seeker based on the current job seeker's "swipes" subcollection
-        Query nextJobSeekerQuery = jobSeekersRef.whereNotEqualTo("uid", "jobSeeker" + index)
+        Query nextJobSeekerQuery = jobSeekersRef.whereNotEqualTo("uid", "+index"  )
                 .whereEqualTo("swipes" + jobProviderUid, null)
                 .orderBy("uid")
                 .limit(1);

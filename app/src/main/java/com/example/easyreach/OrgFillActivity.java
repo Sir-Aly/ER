@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class OrgFillActivity extends AppCompatActivity {
 
-    EditText firstName, age, eAddress, eField, userMail;
+    EditText firstName, pDescription, eAddress, eField, userMail;
     MaterialButton Registerbtn, Uploadbtn;
     FirebaseFirestore db;
 private FirebaseAuth mAuth;
@@ -36,7 +36,7 @@ private FirebaseAuth mAuth;
         db = FirebaseFirestore.getInstance();
         firstName = findViewById(R.id.firstName);
         userMail = findViewById(R.id.userMail);
-        age = findViewById(R.id.age);
+        pDescription = findViewById(R.id.provider_description);
         eAddress = findViewById(R.id.address);
         eField = findViewById(R.id.field);
         Registerbtn = findViewById(R.id.btnRegister);
@@ -56,17 +56,17 @@ private FirebaseAuth mAuth;
              String userID =  mAuth.getCurrentUser().getUid();
                 String Firstname = firstName.getText().toString();
                 String Email = userMail.getText().toString();
-                String Age = age.getText().toString();
+                String Description = pDescription.getText().toString();
                 String Address = eAddress.getText().toString();
                 String Field = eField.getText().toString();
                 Map<String,Object> user = new HashMap<>();
-                user.put("name",Firstname);
-                user.put("email", Email);
-                user.put("age",Age);
-                user.put("location", Address);
-                user.put("skills", Field);
+                user.put("pName",Firstname);
+                user.put("pEmail", Email);
+                user.put("pDescription",Description);
+                user.put("pLocation", Address);
+                user.put("pField", Field);
 
-                db.collection("job_seeker").document(userID)
+                db.collection("Job Providers").document(userID)
                         .set(user)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

@@ -33,7 +33,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
         holder.t1.setText(datalist.get(position).getName());
         holder.t2.setText(datalist.get(position).getEmail());
         holder.t3.setText(datalist.get(position).getSkills());
-        Glide.with(holder.getIvImage()).load(datalist.get(position).getPhotoUrl()).into(holder.t5);
+        Glide.with(holder.getImage()).load(datalist.get(position).getPhotoUrl()).into(holder.t4);
 
     }
 
@@ -45,17 +45,16 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
     class myviewholder extends RecyclerView.ViewHolder
     {
         TextView t1,t2,t3;
-        private ImageView t5;
+        private ImageView t4;
         public myviewholder(@NonNull View itemView) {
             super(itemView);
             t1=itemView.findViewById(R.id.t1);
             t2=itemView.findViewById(R.id.t2);
             t3=itemView.findViewById(R.id.t3);
-
-            t5=itemView.findViewById(R.id.thumbimage);
+            t4=itemView.findViewById(R.id.holderImage);
         }
-        public ImageView getIvImage() {
-            return t5;
+        public ImageView getImage() {
+            return t4;
         }
     }
 }
