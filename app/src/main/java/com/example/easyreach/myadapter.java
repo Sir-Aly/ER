@@ -42,7 +42,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
             @Override
             public void onClick(View view) {
             String name = holder.t6.getText().toString();
-                Intent intent = new Intent(view.getContext(),Massage_Field.class);
+                Intent intent = new Intent(view.getContext(), Message_Field.class);
                 intent.putExtra(EXTRA_NAME,name);
                 view.getContext().startActivity(intent);
             }

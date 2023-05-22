@@ -2,17 +2,17 @@ package com.example.easyreach;
 
 import com.google.firebase.firestore.Exclude;
 
-public class ADD_Massage {
+public class ADD_Message {
     private String documentId;
     private String massage;
     private String from;
 
 
-    public ADD_Massage() {
+    public ADD_Message() {
         //public no-arg constructor needed
     }
 
-    public ADD_Massage(String massage, String from) {
+    public ADD_Message(String massage, String from) {
         this.massage = massage;
         this.from = from;
     }

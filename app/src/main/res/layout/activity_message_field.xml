@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Massage_Field"
+    tools:context=".Message_Field"
     android:background="@drawable/background_without_logo"
     android:orientation="vertical">
 
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:textSize="50dp"
         android:gravity="center"
-        android:text="Massage"
+        android:text="Message"
         android:textColor="@color/black"
         />
     <EditText
@@ -37,7 +37,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/grad_main"
         android:backgroundTint="@color/white"
-        android:id="@+id/massage"
+        android:id="@+id/message"
         android:hint="Write Your Massage Here"
         />
     <Button
@@ -46,7 +46,7 @@
         android:layout_marginTop="20dp"
         android:text="send"
         android:textSize="30dp"
-        android:onClick="sendmassage"
+        android:onClick="sendmessage"
         />
 
 

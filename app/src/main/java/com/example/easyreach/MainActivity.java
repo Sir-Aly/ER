@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private DocumentSnapshot currentJobSeeker;
 
 
-    TextView nameTextView, skillsTextView, locationTextView, emailTextView, ImageUrlTextview;
+    TextView nameTextView, skillsTextView, locationTextView, emailTextView, ImageUrlTextview,IDTEXT;
     //    private TextView mSignOut;
     private FirebaseAuth mAuth;
 
@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         emailTextView = findViewById(R.id.email_text);
         ImageUrlTextview = findViewById(R.id.Image_url);
         photoImageView = findViewById(R.id.profile_image);
+        IDTEXT = findViewById(R.id.Text_id);
 
         Button add_to_int = findViewById(R.id.add_to_int);
         String userID = mAuth.getCurrentUser().getUid();
@@ -105,7 +106,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 String Location = locationTextView.getText().toString();
                 String email = emailTextView.getText().toString();
                 String Imageurl = ImageUrlTextview.getText().toString();
-                Add add = new Add(Name, Skills, Location, email, Imageurl);
+                String UID = IDTEXT.getText().toString();
+                Add add = new Add(Name, Skills, Location, email, Imageurl,UID);
                 Usersref.document(userID).collection("Likes").add(add);
 
 
@@ -266,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String location = jobSeekerDoc.getString("location");
         String photoUrl = jobSeekerDoc.getString("profileUrl");
         String email = jobSeekerDoc.getString("email");
+        String ID = jobSeekerDoc.getString("UID");
 
         // Update the UI with the job seeker's data
         nameTextView.setText(name);
@@ -274,6 +277,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Glide.with(photoImageView.getContext()).load(photoUrl).into(photoImageView);
         emailTextView.setText(email);
         ImageUrlTextview.setText(photoUrl);
+        IDTEXT.setText(ID);
     }
 
 

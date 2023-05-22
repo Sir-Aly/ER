@@ -1,24 +1,15 @@
 package com.example.easyreach;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class TestMassage extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -49,7 +40,7 @@ public class TestMassage extends AppCompatActivity {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
 
-        ADD_Massage add = new ADD_Massage(title,description);
+        ADD_Message add = new ADD_Message(title,description);
 
         Usersref.document("YsPMkdQqwgcWd2jOkYLYGOgwZPu1").collection("Massages").add(add);
     }
