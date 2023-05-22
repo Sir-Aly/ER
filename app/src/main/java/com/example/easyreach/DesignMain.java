@@ -191,11 +191,11 @@ public class DesignMain extends AppCompatActivity {
             });
 
             // Get a reference to the current job seeker's document
-            DocumentReference currentJobSeekerDocRef = jobSeekersRef.document("jobSeeker" +index);
+            DocumentReference currentJobSeekerDocRef = jobSeekersRef.document("1" );
 
 
             // Query for the next job seeker based on the current job seeker's "swipes" subcollection
-            Query nextJobSeekerQuery = jobSeekersRef.whereNotEqualTo("uid", "jobSeeker" + index)
+            Query nextJobSeekerQuery = jobSeekersRef.whereNotEqualTo("seeker_id", "1")
                     .whereEqualTo("swipes" + jobProviderUid, null)
                     .orderBy("uid")
                     .limit(1);
