@@ -54,6 +54,26 @@
             android:src="@drawable/shebl"
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/t5"
+            android:text="testo"
+            android:textSize="23dp"
+            android:layout_below="@+id/t3"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/t6"
+            android:text="USER ID"
+            android:textSize="23dp"
+            android:layout_below="@+id/t5"
+            />
+
+
 
 <!--        <ImageView-->
 <!--            android:id="@+id/t4"-->

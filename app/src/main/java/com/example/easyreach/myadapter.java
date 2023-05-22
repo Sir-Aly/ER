@@ -1,5 +1,6 @@
 package com.example.easyreach;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 
 public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
 {
+
+    public static final String EXTRA_NAME ="name";
     ArrayList<model> datalist;
 
     public myadapter(ArrayList<model> datalist) {
@@ -34,6 +37,16 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
         holder.t2.setText(datalist.get(position).getEmail());
         holder.t3.setText(datalist.get(position).getSkills());
         Glide.with(holder.getImage()).load(datalist.get(position).getPhotoUrl()).into(holder.t4);
+        holder.t6.setText(datalist.get(position).getUid());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            String name = holder.t6.getText().toString();
+                Intent intent = new Intent(view.getContext(),Massage_Field.class);
+                intent.putExtra(EXTRA_NAME,name);
+                view.getContext().startActivity(intent);
+            }
+        });
 
     }
 
@@ -44,7 +57,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
 
     class myviewholder extends RecyclerView.ViewHolder
     {
-        TextView t1,t2,t3;
+        TextView t1,t2,t3,t5,t6;
         private ImageView t4;
         public myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -52,6 +65,8 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
             t2=itemView.findViewById(R.id.t2);
             t3=itemView.findViewById(R.id.t3);
             t4=itemView.findViewById(R.id.holderImage);
+            t5=itemView.findViewById(R.id.t5);
+            t6=itemView.findViewById(R.id.t6);
         }
         public ImageView getImage() {
             return t4;

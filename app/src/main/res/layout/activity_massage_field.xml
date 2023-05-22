@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Massage_Field"
+    android:background="@drawable/background_without_logo"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="30dp"
+        android:text="TEST"
+        android:id="@+id/id_view"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/testo"
+        android:text="HELLO"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:gravity="center"
+        android:text="Massage"
+        android:textColor="@color/black"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/grad_main"
+        android:backgroundTint="@color/white"
+        android:id="@+id/massage"
+        android:hint="Write Your Massage Here"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="send"
+        android:textSize="30dp"
+        android:onClick="sendmassage"
+        />
+
+
+
+</LinearLayout>

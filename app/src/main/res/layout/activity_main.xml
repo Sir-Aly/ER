@@ -256,6 +256,13 @@
                         android:textColor="@color/white"
                         android:id="@+id/Image_url"
                         />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:text="Test"
+                        android:textColor="@color/white"
+                        android:id="@+id/Text_id"
+                        />
                 </LinearLayout>
 
                 <LinearLayout

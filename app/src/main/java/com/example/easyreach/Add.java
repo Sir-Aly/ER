@@ -9,6 +9,7 @@ public class Add {
     private String email;
     private String Location;
     private String photoUrl;
+    private String UID;
 
 
     public Add() {
@@ -24,12 +25,13 @@ public class Add {
         this.documentId = documentId;
     }
 
-    public Add(String Name, String Skills, String Location,String email,String photoUrl) {
+    public Add(String Name, String Skills, String Location,String email,String photoUrl,String UID) {
         this.Name = Name;
         this.Skills = Skills;
         this.Location = Location;
         this.email=email;
         this.photoUrl = photoUrl;
+        this.UID=UID;
 
     }
 
@@ -53,6 +55,10 @@ public class Add {
     public String getEmail(){
 
         return email;
+    }
+    public String getUID(){
+        return UID;
+
     }
 }
 

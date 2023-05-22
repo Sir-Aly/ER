@@ -84,4 +84,10 @@ SharedPreferences.Editor editor;
             }
         });
     }
+    public void go2test(View v) {
+        Intent i = new Intent(Choose_Login_And_Reg.this,TestMassage.class);
+        startActivity(i);
+        finish();
+        return;
+    }
 }

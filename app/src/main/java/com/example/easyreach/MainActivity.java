@@ -43,7 +43,7 @@ private NavigationView navigationView;
 ImageView leftArrow, rightArrow;
 
 
-TextView nameTextView, skillsTextView, locationTextView,emailTextView,ImageUrlTextview;
+TextView nameTextView, skillsTextView, locationTextView,emailTextView,ImageUrlTextview,IDTEXT;
 //    private TextView mSignOut;
     private FirebaseAuth mAuth;
 
@@ -83,6 +83,7 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView,ImageUrlTe
         emailTextView = findViewById(R.id.email_text);
         ImageUrlTextview = findViewById(R.id.Image_url);
         photoImageView = findViewById(R.id.profile_image);
+        IDTEXT = findViewById(R.id.Text_id);
 
         Button add_to_int = findViewById(R.id.add_to_int);
         String userID =  mAuth.getCurrentUser().getUid();
@@ -99,7 +100,8 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView,ImageUrlTe
                 String Location = locationTextView.getText().toString();
                 String email = emailTextView.getText().toString();
                 String Imageurl = ImageUrlTextview.getText().toString();
-                Add add = new Add(Name,Skills,Location,email,Imageurl);
+                String UID = IDTEXT.getText().toString();
+                Add add = new Add(Name,Skills,Location,email,Imageurl,UID);
                 Usersref.document(userID).collection("Likes").add(add);
 
 
@@ -201,6 +203,7 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView,ImageUrlTe
                     String location = documentSnapshot.getString("location");
                     String photoUrl = documentSnapshot.getString("profileUrl");
                     String email = documentSnapshot.getString("email");
+                    String ID = documentSnapshot.getString("UID");
 
                     // Update the UI with the job seeker's data
                     nameTextView.setText(name);
@@ -209,6 +212,7 @@ TextView nameTextView, skillsTextView, locationTextView,emailTextView,ImageUrlTe
                     Glide.with(photoImageView.getContext()).load(photoUrl).into(photoImageView);
                     emailTextView.setText(email);
                     ImageUrlTextview.setText(photoUrl);
+                    IDTEXT.setText(ID);
 
                     // Assign the function to the left button's click event
 
