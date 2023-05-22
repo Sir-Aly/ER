@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ImageUrlTextview = findViewById(R.id.Image_url);
         photoImageView = findViewById(R.id.profile_image);
         IDTEXT = findViewById(R.id.Text_id);
-
+//button
         Button add_to_int = findViewById(R.id.add_to_int);
         String userID = mAuth.getCurrentUser().getUid();
 //        CollectionReference selectedCategoryRef = jobSeekersRef.document("Field").collection("AI Developer");
