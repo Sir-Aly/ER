@@ -61,7 +61,7 @@ SharedPreferences.Editor editor;
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Choose_Login_And_Reg.this, Choose_between_2options.class);
+                Intent i = new Intent(Choose_Login_And_Reg.this, LoginActivity.class);
                 startActivity(i);
                 finish();
                 return;

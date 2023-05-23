@@ -24,7 +24,7 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingLeft="25dp"
-                android:paddingTop="55dp"
+                android:paddingTop="15dp"
                 android:paddingRight="25dp">
 
                 <LinearLayout
@@ -165,7 +165,11 @@
                             android:clickable="true"/>
 
                     </LinearLayout>
-
+                    <CheckBox
+                        android:id="@+id/job_provider_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="I am a job provider"/>
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/register"
                         android:layout_width="match_parent"

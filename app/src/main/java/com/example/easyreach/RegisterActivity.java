@@ -7,6 +7,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
@@ -23,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         private RadioGroup mRadioGroup;
-
+        private boolean isJobProvider;
         private FirebaseAuth mAuth;
         private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
         final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -75,6 +78,13 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        CheckBox jobProviderCheckbox = findViewById(R.id.job_provider_checkbox);
+        jobProviderCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isJobProvider = isChecked;
+            }
+        });
         mRegister = (Button) findViewById(R.id.register);
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
@@ -98,6 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                 final Boolean tnc = checkBox.isChecked();
 
                 if ( checkInputs(email, name, password, tnc)){
+
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -121,6 +132,18 @@ public class RegisterActivity extends AppCompatActivity {
                                             mEmail.setText("");
                                             mName.setText("");
                                             mPassword.setText("");
+
+                                            User user = new User(name, email, isJobProvider);
+
+                                            // Store the user's information in the Firestore database
+                                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                            String userID = mAuth.getCurrentUser().getUid();
+                                            if (isJobProvider) {
+                                                db.collection("Job Providers").document(userID).set(user);
+                                            } else {
+                                                Toast.makeText(RegisterActivity.this, "Please Don't forget to fill your data when you login.", Toast.LENGTH_SHORT).show();
+                                            }
+
                                             Intent i = new Intent(RegisterActivity.this, Choose_Login_And_Reg.class);
                                             startActivity(i);
                                             finish();
@@ -137,6 +160,8 @@ public class RegisterActivity extends AppCompatActivity {
                     });
 
                 }
+
+
 
                     spinner.setVisibility(View.GONE);
             }
