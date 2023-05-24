@@ -32,11 +32,11 @@ public class Message_Field extends AppCompatActivity {
     }
     public void sendmessage(View view){
 
-        String message = this.message.getText().toString();
-        String description = view_id2.getText().toString();
+        String Message = this.message.getText().toString();
+        String Description = view_id2.getText().toString();
 
         String USERID = view_id.getText().toString();
-        ADD_Message add = new ADD_Message(message,description);
+        ADD_Message add = new ADD_Message(Message,Description);
         Usersref.document(USERID).collection("Messages").add(add);
 
     }

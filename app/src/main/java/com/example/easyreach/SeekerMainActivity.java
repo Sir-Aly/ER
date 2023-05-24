@@ -69,6 +69,12 @@ public class SeekerMainActivity extends AppCompatActivity {
                         startActivity(r);
                         finish();
                         return false;
+
+                    case R.id.menuSeekerInbox:
+                        Intent inbox = new Intent(SeekerMainActivity.this , inbox_viewer.class);
+                        startActivity(inbox);
+                        finish();
+                        return false;
                     case R.id.menuSeekerSettings:
                         Intent s = new Intent(SeekerMainActivity.this, SeekerFillActivity.class);
                         startActivity(s);

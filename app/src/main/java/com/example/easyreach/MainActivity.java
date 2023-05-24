@@ -134,6 +134,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         startActivity(r);
                         finish();
                         return false;
+
+                    case R.id.menuInbox:
+//                        mAuth.signOut();
+                        Intent inbox = new Intent(MainActivity.this, inbox_viewer.class);
+                        startActivity(inbox);
+                        finish();
+                        return false;
+
                     case R.id.menuSettings:
                         Intent s = new Intent(MainActivity.this, OrgFillActivity.class);
                         startActivity(s);

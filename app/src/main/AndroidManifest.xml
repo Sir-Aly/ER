@@ -15,6 +15,9 @@
         android:theme="@style/Theme.EasyReach"
         tools:targetApi="31">
         <activity
+            android:name=".inbox_viewer"
+            android:exported="false" />
+        <activity
             android:name=".Message_Field"
             android:exported="false" />
         <activity
