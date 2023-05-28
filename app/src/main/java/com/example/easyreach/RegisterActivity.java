@@ -102,14 +102,14 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 spinner.setVisibility(View.VISIBLE);
 
-                final String email = mEmail.getText().toString();
+                final String pEmail = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
                 final String name = mName.getText().toString();
                 final Boolean tnc = checkBox.isChecked();
 
-                if ( checkInputs(email, name, password, tnc)){
+                if ( checkInputs(pEmail, name, password, tnc)){
 
-                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                    mAuth.createUserWithEmailAndPassword(pEmail, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful())  {
@@ -133,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             mName.setText("");
                                             mPassword.setText("");
 
-                                            User user = new User(name, email, isJobProvider);
+                                            User user = new User(name, pEmail, isJobProvider);
 
                                             // Store the user's information in the Firestore database
                                             FirebaseFirestore db = FirebaseFirestore.getInstance();

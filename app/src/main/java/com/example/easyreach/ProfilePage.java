@@ -64,8 +64,8 @@ public class ProfilePage extends AppCompatActivity {
         String uMail = user.getEmail();
         DocumentReference reference;
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        reference = firestore.collection("job_offerer").document(currentid);
-        Query dbref = firestore.collection("user").whereEqualTo("Semail", uMail);
+        reference = firestore.collection("Job Providers").document(currentid);
+        Query dbref = firestore.collection("Job Providers").whereEqualTo("pEmail", uMail);
         dbref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -73,14 +73,14 @@ public class ProfilePage extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " => " + document.getData());
-                        String problem = document.get("Fname").toString();
-                        String uaddress = document.get("Address").toString();
-                        String uage = document.get("Age").toString();
-                        String ufield = document.get("Field").toString();
-                        String umail = document.get("Semail").toString();
+                        String orgName = document.get("pName").toString();
+                        String uaddress = document.get("pLocation").toString();
+                        String uage = document.get("pFoundationYear").toString();
+                        String ufield = document.get("pField").toString();
+                        String umail = document.get("pEmail").toString();
 
-                        pNameTv.setText(problem);
-                        nameTv.setText(problem);
+                        pNameTv.setText(orgName);
+                        nameTv.setText(orgName);
                         addressTv.setText(uaddress);
                         ageTv.setText(uage);
                         fieldTv.setText(ufield);

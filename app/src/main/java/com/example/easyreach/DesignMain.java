@@ -51,13 +51,13 @@ public class DesignMain extends AppCompatActivity {
         DocumentReference jobSeekerDocRef = jobSeekersRef.document("jobSeeker" + index);
 
 // Get references to the left and right buttons
-        leftButton = findViewById(R.id.left_button);
-        rightButton = findViewById(R.id.right_button);
-
-// Get references to UI elements that display the job seeker's data
-        nameTextView = findViewById(R.id.name_text_view);
-        skillsTextView = findViewById(R.id.skills_text_view);
-        photoImageView = findViewById(R.id.photo_image_view);
+//        leftButton = findViewById(R.id.left_button);
+//        rightButton = findViewById(R.id.right_button);
+//
+//// Get references to UI elements that display the job seeker's data
+//        nameTextView = findViewById(R.id.name_text_view);
+//        skillsTextView = findViewById(R.id.skills_text_view);
+//        photoImageView = findViewById(R.id.photo_image_view);
 
 // Retrieve the job seeker's data using the document reference
         jobSeekerDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

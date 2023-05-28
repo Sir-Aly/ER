@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null && user.isEmailVerified()) {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    db.collection("Job Providers").whereEqualTo("email", user.getEmail()).get()
+                    db.collection("Job Providers").whereEqualTo("pEmail", user.getEmail()).get()
                             .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                 @Override
                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

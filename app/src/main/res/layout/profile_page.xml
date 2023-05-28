@@ -14,7 +14,7 @@
         android:layout_width="270dp"
         android:layout_height="190dp"
         android:id="@+id/ProfileImage"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/fello"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         />
 
     <LinearLayout
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="140dp"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -63,7 +63,6 @@
                 android:layout_gravity="center_horizontal"
                 android:padding="24dp">
 
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,6 +74,14 @@
                     android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="Username"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="2dp"/>
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/uname"
                     android:background="@drawable/custom_edittext"
@@ -84,7 +91,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="40dp"/>
+                    android:layout_marginTop="2dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -98,7 +105,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="2dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -112,7 +119,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="2dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -126,7 +133,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="2dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -140,7 +147,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="2dp"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
