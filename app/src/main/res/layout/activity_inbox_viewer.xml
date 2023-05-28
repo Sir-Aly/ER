@@ -8,12 +8,23 @@
     android:orientation="vertical"
     android:background="@color/white">
 
+
+
     <ImageView
         android:layout_marginTop="10dp"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/logo_transparent"
         android:layout_gravity="center"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Clear"
+        android:backgroundTint="@color/MainColor"
+        android:textColor="@color/black"
+        android:onClick="clear"
         />
 
 <TextView
@@ -29,6 +40,7 @@
     android:textSize="50dp"
     />
     <TextView
+        android:id="@+id/messages_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2 new messages"
@@ -36,11 +48,17 @@
         android:textSize="25dp"
         android:textColor="@color/red"
         />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refreshlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recview"
         />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

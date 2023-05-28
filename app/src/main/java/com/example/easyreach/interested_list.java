@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +21,7 @@ public class interested_list extends AppCompatActivity {
 
     RecyclerView recview;
     ArrayList<model> datalist;
+
     FirebaseFirestore db;
     myadapter adapter;
     private FirebaseAuth mAuth;
