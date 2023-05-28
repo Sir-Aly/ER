@@ -35,10 +35,7 @@ public class myadapter_inbox extends RecyclerView.Adapter<myadapter_inbox.myview
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = holder.t6.getText().toString();
-                Intent intent = new Intent(view.getContext(), Message_Field.class);
-                intent.putExtra(EXTRA_NAME,name);
-                view.getContext().startActivity(intent);
+                //code here
             }
         });
 

@@ -69,6 +69,11 @@ public class SeekerMainActivity extends AppCompatActivity {
                         startActivity(r);
                         finish();
                         return false;
+                    case R.id.menuSeekerNotifications:
+                        Intent NoTi = new Intent(SeekerMainActivity.this,jobs_viewer.class);
+                        startActivity(NoTi);
+                        finish();
+                        return false;
 
                     case R.id.menuSeekerInbox:
                         Intent inbox = new Intent(SeekerMainActivity.this , inbox_viewer.class);

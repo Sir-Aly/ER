@@ -1,16 +1,23 @@
 package com.example.easyreach;
 
+import static com.bumptech.glide.util.Util.getSnapshot;
+
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.ImageView;
 import android.widget.TextView;
+//import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+//import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
 
 import java.util.ArrayList;
 
@@ -49,6 +56,12 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
         });
 
     }
+
+//    public void deleteItem(int position) {
+//     getSnapshots().getSnapshot(position).getReference().delete();
+//    }
+
+
 
     @Override
     public int getItemCount() {
