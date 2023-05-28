@@ -5,9 +5,9 @@ public class User {
     private String email;
     private boolean isJobProvider;
 
-    public User(String name, String email, boolean isJobProvider) {
-        this.name = name;
-        this.email = email;
+    public User(String pName, String pEmail, boolean isJobProvider) {
+        this.name = pName;
+        this.email = pEmail;
         this.isJobProvider = isJobProvider;
     }
 
