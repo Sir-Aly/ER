@@ -71,14 +71,35 @@ public class LoginActivity extends AppCompatActivity {
                             if (!task.isSuccessful()) {
                                 Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }else {
-                                if(mAuth.getCurrentUser().isEmailVerified()) {
-                                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(i);
-                                    finish();
-                                    return;
-
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Please Verify your Email first", Toast.LENGTH_SHORT).show();
+                                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                if (user != null && user.isEmailVerified()) {
+                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                    db.collection("Job Providers").whereEqualTo("pEmail", user.getEmail()).get()
+                                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                    if (!queryDocumentSnapshots.isEmpty()) {
+                                                        // User is a job provider
+                                                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                                        startActivity(i);
+                                                        finish();
+                                                        return;
+                                                    } else {
+                                                        // User is a job seeker
+                                                        Intent i = new Intent(LoginActivity.this, SeekerMainActivity.class);
+                                                        startActivity(i);
+                                                        finish();
+                                                        return;
+                                                    }
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    // Error checking user type
+                                                }
+                                            });
+                                    spinner.setVisibility(View.GONE);
                                 }
                             }
                         }
@@ -100,45 +121,45 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                spinner.setVisibility(View.VISIBLE);
-                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null && user.isEmailVerified()) {
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    db.collection("Job Providers").whereEqualTo("pEmail", user.getEmail()).get()
-                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    if (!queryDocumentSnapshots.isEmpty()) {
-                                        // User is a job provider
-                                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                        startActivity(i);
-                                        finish();
-                                        return;
-                                    } else {
-                                        // User is a job seeker
-                                        Intent i = new Intent(LoginActivity.this, SeekerMainActivity.class);
-                                        startActivity(i);
-                                        finish();
-                                        return;
-                                    }
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    // Error checking user type
-                                }
-                            });
-                    spinner.setVisibility(View.GONE);
-                    return;
-                }
-
-                spinner.setVisibility(View.GONE);
-            }
-        };
+//        firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                spinner.setVisibility(View.VISIBLE);
+//                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                if (user != null && user.isEmailVerified()) {
+//                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+//                    db.collection("Job Providers").whereEqualTo("pEmail", user.getEmail()).get()
+//                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                                @Override
+//                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                                    if (!queryDocumentSnapshots.isEmpty()) {
+//                                        // User is a job provider
+//                                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+//                                        startActivity(i);
+//                                        finish();
+//                                        return;
+//                                    } else {
+//                                        // User is a job seeker
+//                                        Intent i = new Intent(LoginActivity.this, SeekerMainActivity.class);
+//                                        startActivity(i);
+//                                        finish();
+//                                        return;
+//                                    }
+//                                }
+//                            })
+//                            .addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    // Error checking user type
+//                                }
+//                            });
+//                    spinner.setVisibility(View.GONE);
+//                    return;
+//                }
+//
+//                spinner.setVisibility(View.GONE);
+//            }
+//        };
 
 
 

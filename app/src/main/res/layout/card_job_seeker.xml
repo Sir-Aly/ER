@@ -59,6 +59,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="24sp"
                             android:text="Seeker Name"
+                            android:textColor="@color/black"
                             android:fontFamily="@font/roboto_mono_medium"
                             android:textStyle="bold"
                             android:padding="6dp" />
@@ -75,6 +76,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:text="Seeker Skills: "
                             android:fontFamily="@font/helevaic"
                             android:textSize="24sp"
@@ -87,7 +89,7 @@
                             android:layout_weight="1"
                             android:text="Seeker Skills"
                             android:fontFamily="@font/roboto_mono_medium"
-
+                            android:textColor="@color/black"
                             android:textAlignment="textEnd"
                             android:textSize="24sp"
                             android:padding="6dp" />
@@ -108,7 +110,7 @@
                             android:layout_weight="1"
                             android:textStyle="bold"
                             android:text="Location:"
-
+                            android:textColor="@color/black"
                             android:textSize="24sp"
                             android:fontFamily="@font/helevaic"
                             android:padding="6dp" />
@@ -121,7 +123,7 @@
                             android:textAlignment="textEnd"
                             android:text="Seeker Location"
                             android:fontFamily="@font/roboto_mono_medium"
-
+                            android:textColor="@color/black"
                             android:textSize="24sp"
                             android:padding="6dp" />
                     </LinearLayout>                    <LinearLayout
@@ -139,6 +141,7 @@
                         android:textStyle="bold"
                         android:text="Seeker Email:"
                         android:textSize="24sp"
+                        android:textColor="@color/black"
                         android:fontFamily="@font/helevaic"
                         android:padding="6dp" />
 
@@ -151,7 +154,7 @@
                         android:text="Seeker Email"
                         android:textAlignment="textEnd"
                         android:fontFamily="@font/roboto_mono_medium"
-
+                        android:textColor="@color/black"
                         android:textSize="24sp"
                         android:padding="6dp" />
                 </LinearLayout>

@@ -53,12 +53,12 @@ style="@style/ScreenBackground"
                             android:textStyle="bold"
                             android:layout_gravity="center_horizontal"/>
 
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/switchMode"
-                            android:text="Dark Mode"
-                            android:textSize="20dp"/>
+<!--                        <androidx.appcompat.widget.SwitchCompat-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:id="@+id/switchMode"-->
+<!--                            android:text="Dark Mode"-->
+<!--                            android:textSize="20dp"/>-->
 
 
                         <androidx.appcompat.widget.AppCompatButton
@@ -74,7 +74,6 @@ style="@style/ScreenBackground"
                             android:background="@drawable/grad_main"
                             />
 
-                            />
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/register"
                             android:layout_width="match_parent"

@@ -60,6 +60,22 @@
         <item name="cornerFamily">cut</item>
         <item name="cornerSize">2dp</item>
     </style>
+    <style name="ScreenBackground">
+        <item name="android:background">@color/color_background</item>
+    </style>
+    <style name="MenuItemStyle." parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:itemTextAppearance">@style/MenuItemStyle</item>
+    </style>
+    <style name="Style_TextView">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="MenuItemStyle" parent="Widget.AppCompat.Light.PopupMenu">
+        <item name="android:textAppearance">@style/CustomTextAppearance</item>
+    </style>
+
+    <style name="CustomTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Menu">
+        <item name="android:fontFamily">@font/roboto_mono_medium</item>
+    </style>
 
     <!-- NOTE: Chips don't seem to pick up on the theme fontFamily attributes, so these styles are necessary -->
     <!-- See: https://issuetracker.google.com/issues/127453566 -->
@@ -85,9 +101,6 @@
 
     <style name="AppCard" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">8dp</item>
-    </style>
-    <style name="ScreenBackground">
-        <item name="android:background">@color/black</item>
     </style>
 
     <style name="AppBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView.Colored" />
