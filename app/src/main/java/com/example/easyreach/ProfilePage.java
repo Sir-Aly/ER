@@ -88,8 +88,6 @@ public class ProfilePage extends AppCompatActivity {
                         fieldTv.setText(ufield);
                         emailTv.setText(umail);
 
-
-
                     }
                 } else {
                     Log.w(TAG, "Error getting documents.", task.getException());
