@@ -11,32 +11,33 @@
     >
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:layout_width="270dp"
-        android:layout_height="190dp"
+        android:layout_width="230dp"
+        android:layout_height="200dp"
         android:id="@+id/ProfileImage"
         android:layout_marginTop="20dp"
         android:src="@drawable/fello"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:riv_corner_radius="90dp"
+        app:riv_oval="true"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/name"
-        android:layout_marginTop="10dp"
-        android:text=""
-        android:textColor="@color/white"
-        android:shadowRadius="5"
-        android:shadowColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/ProfileImage"
-        app:layout_constraintStart_toStartOf="@id/ProfileImage"
-        app:layout_constraintTop_toBottomOf="@id/ProfileImage"
-        />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/name"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text=""-->
+<!--        android:textColor="@color/white"-->
+<!--        android:shadowRadius="5"-->
+<!--        android:shadowColor="@color/black"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/ProfileImage"-->
+<!--        app:layout_constraintStart_toStartOf="@id/ProfileImage"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/ProfileImage"-->
+<!--        />-->
 
     <LinearLayout
         android:layout_marginTop="140dp"
@@ -63,27 +64,20 @@
                 android:layout_gravity="center_horizontal"
                 android:padding="24dp">
 
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="USER INFROMATION"
-                    android:id="@+id/loginText"
-                    android:textSize="25sp"
-                    android:textAlignment="center"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Organization Name"
+                    android:textSize="17sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:text="Username"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/bottomNavIconColor"
                     android:layout_marginTop="2dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:id="@+id/uname"
+                    android:id="@+id/sName"
                     android:background="@drawable/custom_edittext"
                     android:text="Username"
                     android:textSize="20dp"
@@ -92,7 +86,15 @@
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
                     android:layout_marginTop="2dp"/>
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Organization Email"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/bottomNavIconColor"
+                    android:layout_marginTop="2dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -106,7 +108,15 @@
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
                     android:layout_marginTop="2dp"/>
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Foundation Year"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/bottomNavIconColor"
+                    android:layout_marginTop="2dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -120,7 +130,15 @@
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
                     android:layout_marginTop="2dp"/>
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Location"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/bottomNavIconColor"
+                    android:layout_marginTop="2dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -134,7 +152,15 @@
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
                     android:layout_marginTop="2dp"/>
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Field"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/bottomNavIconColor"
+                    android:layout_marginTop="2dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"

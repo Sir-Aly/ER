@@ -1,5 +1,4 @@
 package com.example.easyreach;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,30 +19,30 @@ import com.yuyakaido.android.cardstackview.CardStackView;
 
 import java.util.List;
 
-public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAdapter.ViewHolder> {
-    private List<JobSeeker> jobSeekers;
+public class JobsCardAdapter extends CardStackView.Adapter<JobsCardAdapter.ViewHolder> {
+    private List<JobOffer> jobOffers;
 
-    public JobSeekerCardAdapter(List<JobSeeker> jobSeekers) {
-        this.jobSeekers = jobSeekers;
+    public JobsCardAdapter(List<JobOffer> jobOffers) {
+        this.jobOffers = jobOffers;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_job_seeker, parent, false);
+                .inflate(R.layout.jobs_card_layout, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        JobSeeker jobSeeker = jobSeekers.get(position);
-        holder.nameTextView.setText(jobSeeker.getName());
-        holder.skillsTextView.setText(jobSeeker.getSkills());
-        holder.locationTextView.setText(jobSeeker.getLocation());
-        holder.emailTextView.setText(jobSeeker.getEmail());
-        holder.IDTextView.setText(jobSeeker.getUID());
+        JobOffer jobOffer = jobOffers.get(position);
+        holder.nameTextView.setText(jobOffer.getjTitle());
+        holder.skillsTextView.setText(jobOffer.getjRequirements());
+        holder.locationTextView.setText(jobOffer.getjLocation());
+        holder.emailTextView.setText(jobOffer.getpEmail());
+        holder.IDTextView.setText(jobOffer.getpUid());
         Glide.with(holder.photoImageView.getContext())
-                .load(jobSeeker.getProfileUrl())
+                .load(jobOffer.getJobImage())
                 .into(holder.photoImageView);
 
         holder.addToInterestButton.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +56,8 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
                     String userID = user.getUid();
-                    String sID = jobSeeker.getUID().toString();
-                    Add add = new Add(jobSeeker.getName(), jobSeeker.getSkills(), jobSeeker.getLocation(), jobSeeker.getEmail(), jobSeeker.getUID(), jobSeeker.getProfileUrl());
+                    String sID = jobOffer.getpUid().toString();
+                    Add add = new Add(jobOffer.getjTitle(), jobOffer.getjRequirements(), jobOffer.getjLocation(), jobOffer.getpEmail(), jobOffer.getpUid(), jobOffer.getJobImage());
                     FirebaseFirestore.getInstance().collection("user").document(userID).collection("Likes").document(sID).set(add).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
@@ -80,7 +79,7 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
 
     @Override
     public int getItemCount() {
-        return jobSeekers.size();
+        return jobOffers.size();
     }
 
     public static class ViewHolder extends CardStackView.ViewHolder {

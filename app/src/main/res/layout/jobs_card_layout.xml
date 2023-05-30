@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_gravity="center">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="7dp"
+            app:cardCornerRadius="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="677dp"
+                android:orientation="vertical"
+                android:background="@drawable/cardview"
+                >
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/photoImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="370dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ali"
+                    android:backgroundTint="@color/white"
+
+                    app:shapeAppearanceOverlay="@style/Shape"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+                        <TextView
+                            android:id="@+id/nameTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="24sp"
+                            android:text="Seeker Name"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:padding="6dp" />
+
+                        <TextView
+                            android:id="@+id/skillsTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:text="Seeker Skills"
+                            android:textSize="24sp"
+                            android:padding="6dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/locationTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:text="Seeker Location"
+                            android:textSize="24sp"
+                            android:padding="6dp" />
+
+                        <TextView
+                            android:id="@+id/emailTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:text="Seeker Email"
+                            android:textSize="24sp"
+                            android:padding="6dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/ImageUrlTextview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="16dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/IDTEXT"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="16dp"
+                    android:visibility="gone"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    >
+                    <ImageButton
+                        android:id="@+id/add_to_int"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#DDF8FE"
+                        android:src="@drawable/bookmark"
+                        />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

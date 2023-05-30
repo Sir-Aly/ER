@@ -27,7 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 public class SeekerProfileActivity extends AppCompatActivity {
-    TextView pNameTv, nameTv, addressTv, ageTv, fieldTv, emailTv;
+    TextView pNameTv, nameTv, addressTv, ageTv, fieldTv, emailTv,YoETv;
     RoundedImageView profilePictureImageView;
     private Button mForgetPassword;
     private boolean loginBtnClicked;
@@ -36,17 +36,17 @@ public class SeekerProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_page);
+        setContentView(R.layout.activity_seeker_profile);
         final String TAG = "problem";
 
 
         profilePictureImageView = findViewById(R.id.ProfileImage);
-        pNameTv= (TextView) findViewById(R.id.name);
-        nameTv= (TextView) findViewById(R.id.uname);
+        nameTv= (TextView) findViewById(R.id.sName);
         addressTv= (TextView) findViewById(R.id.address);
         ageTv= (TextView) findViewById(R.id.age);
         fieldTv= (TextView) findViewById(R.id.field);
         emailTv= (TextView) findViewById(R.id.email);
+        YoETv = (TextView) findViewById(R.id.sYoE);
         mForgetPassword = (Button) findViewById(R.id.forgetPasswordButton);
         mForgetPassword.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -64,8 +64,8 @@ public class SeekerProfileActivity extends AppCompatActivity {
         String uMail = user.getEmail();
         DocumentReference reference;
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        reference = firestore.collection("job_seeker").document(currentid);
-        Query dbref = firestore.collection("user").whereEqualTo("Semail", uMail);
+        reference = firestore.collection("Job Seekers").document(currentid);
+        Query dbref = firestore.collection("Job Seekers").whereEqualTo("sEmail", uMail);
         dbref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -73,18 +73,20 @@ public class SeekerProfileActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " => " + document.getData());
-                        String problem = document.get("Fname").toString();
-                        String uaddress = document.get("Address").toString();
-                        String uage = document.get("Age").toString();
-                        String ufield = document.get("Field").toString();
-                        String umail = document.get("Semail").toString();
+                        String sName = document.get("sName").toString();
+                        String sLocation = document.get("sLocation").toString();
+                        String sAge = document.get("sAge").toString();
+                        String sField = document.get("sField").toString();
+                        String sEmail = document.get("sEmail").toString();
+                        String sYoE = document.get("sYoE").toString();
 
-                        pNameTv.setText(problem);
-                        nameTv.setText(problem);
-                        addressTv.setText(uaddress);
-                        ageTv.setText(uage);
-                        fieldTv.setText(ufield);
-                        emailTv.setText(umail);
+
+                        nameTv.setText(sName);
+                        addressTv.setText(sLocation);
+                        ageTv.setText(sAge);
+                        YoETv.setText(sYoE);
+                        fieldTv.setText(sField);
+                        emailTv.setText(sEmail);
 
 
 

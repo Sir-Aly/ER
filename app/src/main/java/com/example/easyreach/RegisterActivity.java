@@ -133,7 +133,11 @@ public class RegisterActivity extends AppCompatActivity {
                                             mName.setText("");
                                             mPassword.setText("");
 
-                                            User user = new User(name, pEmail, isJobProvider);
+                                            Map user = new HashMap<>();
+                                            user.put("pEmail", pEmail);
+                                            user.put("pName", name);
+                                            user.put("jobProvider", true);
+
 
                                             // Store the user's information in the Firestore database
                                             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -203,6 +207,5 @@ public class RegisterActivity extends AppCompatActivity {
         Intent i = new Intent(RegisterActivity.this, Choose_Login_And_Reg.class);
         startActivity(i);
         finish();
-
     }
 }

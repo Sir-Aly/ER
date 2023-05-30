@@ -27,7 +27,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 public class ProfilePage extends AppCompatActivity {
-    TextView pNameTv, nameTv, addressTv, ageTv, fieldTv, emailTv;
+    TextView pNameTv;
+    TextView addressTv;
+    TextView ageTv;
+    TextView fieldTv;
+    TextView emailTv;
    RoundedImageView profilePictureImageView;
     private Button mForgetPassword;
     private boolean loginBtnClicked;
@@ -41,8 +45,7 @@ public class ProfilePage extends AppCompatActivity {
 
 
         profilePictureImageView = findViewById(R.id.ProfileImage);
-        pNameTv= (TextView) findViewById(R.id.name);
-        nameTv= (TextView) findViewById(R.id.uname);
+        pNameTv= (TextView) findViewById(R.id.sName);
         addressTv= (TextView) findViewById(R.id.address);
         ageTv= (TextView) findViewById(R.id.age);
         fieldTv= (TextView) findViewById(R.id.field);
@@ -80,7 +83,6 @@ public class ProfilePage extends AppCompatActivity {
                         String umail = document.get("pEmail").toString();
 
                         pNameTv.setText(orgName);
-                        nameTv.setText(orgName);
                         addressTv.setText(uaddress);
                         ageTv.setText(uage);
                         fieldTv.setText(ufield);
@@ -123,7 +125,7 @@ public class ProfilePage extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     // Get the image URL from the document
-                    String imageUrl = documentSnapshot.getString("profilePictureUrl");
+                    String imageUrl = documentSnapshot.getString("profileUrl");
                     Context context = getApplicationContext();
 
                     if (imageUrl != null) {

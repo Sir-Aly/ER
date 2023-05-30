@@ -63,6 +63,8 @@ public class JobPostingActivity extends AppCompatActivity {
                             String Description = jDesc.getText().toString();
                             String Requirements = jReq.getText().toString();
                             String Location = jLoc.getText().toString();
+                            String pEmail = mAuth.getCurrentUser().getEmail();
+                            String ImageUrl = "https://firebasestorage.googleapis.com/v0/b/easyreach-1.appspot.com/o/job_bg.jpg?alt=media&token=0ee85184-6ea9-4e1f-81bc-d9eb8b73ac2f";
                             String Salary = jSalary.getText().toString();
                             Map<String, Object> job = new HashMap<>();
                             job.put("job_id", newJobId);
@@ -72,6 +74,8 @@ public class JobPostingActivity extends AppCompatActivity {
                             job.put("jLocation", Location);
                             job.put("jRequirements", Requirements);
                             job.put("jSalary", Salary);
+                            job.put("pEmail",pEmail);
+                            job.put("JobImage", ImageUrl);
                             jobsRef.document(String.valueOf(newJobId)).set(job);
                             jobsRef.document("job_ids").update("last_job_id", newJobId);
                         }

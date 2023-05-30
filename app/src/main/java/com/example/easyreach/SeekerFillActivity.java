@@ -41,7 +41,7 @@ import java.util.Map;
 
 public class SeekerFillActivity extends AppCompatActivity {
 
-    EditText firstName, age, eAddress, eField, userMail;
+    EditText firstName, age, eAddress, eField, sDescription, sYoE;
     TextView field;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Button btnUpload;
@@ -49,6 +49,7 @@ public class SeekerFillActivity extends AppCompatActivity {
     private ImageView imagePreview;
     private Uri imageUri;
     String skills;
+    String PhotoUrl;
     MaterialButton RegisterBtn, SeekerUploadBtn;
     FirebaseFirestore db;
     private FirebaseAuth mAuth;
@@ -79,7 +80,8 @@ public class SeekerFillActivity extends AppCompatActivity {
         });
         db = FirebaseFirestore.getInstance();
         firstName = findViewById(R.id.firstName);
-        userMail = findViewById(R.id.userMail);
+        sDescription = findViewById(R.id.sDescription);
+        sYoE = findViewById(R.id.YoE);
         age = findViewById(R.id.age);
         eAddress = findViewById(R.id.address);
 //        eField = findViewById(R.id.field);
@@ -90,6 +92,182 @@ public class SeekerFillActivity extends AppCompatActivity {
         selectImageButton = findViewById(R.id.seeker_select_image_button);
         imagePreview = findViewById(R.id.seeker_image_preview);
         btnUpload = findViewById(R.id.seeker_btn_Upload);
+        RegisterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                String userID =  mAuth.getCurrentUser().getUid();
+                String Firstname = firstName.getText().toString();
+                String Email = mAuth.getCurrentUser().getEmail();
+                String Age = age.getText().toString();
+                String YoE = sYoE.getText().toString();
+                String Description = sDescription.getText().toString();
+
+
+                String Address = eAddress.getText().toString();
+//                String Field = eField.getText().toString();
+                Map<String,Object> user = new HashMap<>();
+                user.put("name",Firstname);
+                user.put("email", Email);
+                user.put("age",Age);
+                user.put("location", Address);
+                user.put("skills", skills);
+                user.put("UID", userID);
+
+                CollectionReference SeekersRef = db.collection("Job Seekers");
+                DocumentReference SeekerDocRef = SeekersRef.document(userID);
+
+                CollectionReference SelectedCategoryRef = db.collection("JS").document("Field").collection(skills);
+
+                SelectedCategoryRef.whereEqualTo("UID", userID)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    QuerySnapshot querySnapshot = task.getResult();
+                                    if (querySnapshot.isEmpty()) {
+
+                                        SelectedCategoryRef.document("Field_Id").get().addOnCompleteListener(tasks -> {
+                                            if (tasks.isSuccessful()) {
+                                                DocumentSnapshot document = tasks.getResult();
+                                                if (document.exists()) {
+                                                    long lastSeekerId = document.getLong("last_id");
+                                                    long newSeekerId = lastSeekerId + 1;
+
+                                                    Map<String, Object> Seeker = new HashMap<>();
+                                                    Seeker.put("seeker_id", newSeekerId);
+                                                    Seeker.put("name",Firstname);
+                                                    Seeker.put("UID", userID);
+                                                    Seeker.put("email", Email);
+                                                    Seeker.put("age",Age);
+                                                    Seeker.put("location", Address);
+                                                    Seeker.put("skills", skills);
+                                                    SelectedCategoryRef.document(String.valueOf(newSeekerId)).set(Seeker);
+                                                    SelectedCategoryRef.document("Field_Id").update("last_id", newSeekerId);
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
+                                        String documentId = documentSnapshot.getId();
+                                        SelectedCategoryRef.document(documentId)
+                                                .set(user, SetOptions.merge())
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d(TAG, "DocumentSnapshot updated with ID: " + documentId);
+                                                        Toast.makeText(SeekerFillActivity.this, "Your Data is Updated Successfully", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w(TAG, "Error updating document", e);
+                                                    }
+                                                });
+                                    }
+                                } else {
+                                    Log.d(TAG, "Error getting documents: ", task.getException());
+                                }
+                            }
+                        });
+
+
+                // Create a map to hold the updated data
+                Map<String, Object> updatedData = new HashMap<>();
+
+                // Retrieve the existing data from the database
+                SeekerDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        // Check if the document exists
+                        if (documentSnapshot.exists()) {
+                            // Retrieve the existing data
+                            String existingName = documentSnapshot.getString("sName");
+                            String existingAge = documentSnapshot.getString("sAge");
+                            String existingDescription = documentSnapshot.getString("sDescription");
+                            String existingLocation = documentSnapshot.getString("sLocation");
+                            String existingField = documentSnapshot.getString("sField");
+                            String existingYoE = documentSnapshot.getString("sYoE");
+
+                            // Update the fields if the corresponding EditText fields are not empty
+                            if (!firstName.getText().toString().isEmpty()) {
+                                updatedData.put("sName", firstName.getText().toString());
+                            } else {
+                                updatedData.put("sName", existingName); // Keep the existing value
+                            }
+                            if (!age.getText().toString().isEmpty()) {
+                                updatedData.put("sAge", age.getText().toString());
+                            } else {
+                                updatedData.put("sAge", existingAge); // Keep the existing value
+                            }
+                            if (!sDescription.getText().toString().isEmpty()) {
+                                updatedData.put("sDescription", sDescription.getText().toString());
+                            } else {
+                                updatedData.put("sDescription", existingDescription); // Keep the existing value
+                            }
+                            if (!sYoE.getText().toString().isEmpty()) {
+                                updatedData.put("sYoE", sYoE.getText().toString());
+                            } else {
+                                updatedData.put("sYoE", existingYoE); // Keep the existing value
+                            }
+                            if (!eAddress.getText().toString().isEmpty()) {
+                                updatedData.put("sLocation", eAddress.getText().toString());
+                            } else {
+                                updatedData.put("sLocation", existingLocation); // Keep the existing value
+                            }
+                            if (skills != null && !field.getText().toString().isEmpty()) {
+                                updatedData.put("sField", skills);
+                            } else {
+                                updatedData.put("sField", existingField); // Keep the existing value
+                            }
+                            updatedData.put("sUID",userID);
+                            updatedData.put("sEmail", Email);
+                            updatedData.put("sImageUrl", PhotoUrl);
+                            // Perform the update operation
+                            SeekerDocRef.set(updatedData, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    // Fields updated successfully
+                                    Toast.makeText(SeekerFillActivity.this, "Fields updated successfully", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    // Error updating fields
+                                    Toast.makeText(SeekerFillActivity.this, "Failed to update fields", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }else {
+                            updatedData.put("sYoE", sYoE);
+                            updatedData.put("name",Firstname);
+                            updatedData.put("UID", userID);
+                            updatedData.put("email", Email);
+                            updatedData.put("age",Age);
+                            updatedData.put("location", Address);
+                            updatedData.put("skills", skills);
+                            updatedData.put("sImageUrl", PhotoUrl);
+                            SeekerDocRef.set(updatedData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(SeekerFillActivity.this, "Your data is added successfully", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SeekerFillActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,6 +308,7 @@ public class SeekerFillActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri downloadUrl) {
                                 String imageUrl = downloadUrl.toString();
+                                PhotoUrl = downloadUrl.toString();
                                 // Save the image URL to Firestore
                                 saveImageUrlToFirestore(imageUrl);
                             }
@@ -183,96 +362,7 @@ public class SeekerFillActivity extends AppCompatActivity {
             }
         });
         //Up
-        RegisterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userID =  mAuth.getCurrentUser().getUid();
-                String Firstname = firstName.getText().toString();
-                String Email = userMail.getText().toString();
-                String Age = age.getText().toString();
-                String Address = eAddress.getText().toString();
-//                String Field = eField.getText().toString();
-                Map<String,Object> user = new HashMap<>();
-                user.put("name",Firstname);
-                user.put("email", Email);
-                user.put("age",Age);
-                user.put("location", Address);
-                user.put("skills", skills);
-                user.put("UID", userID);
-                CollectionReference graphicDesignerRef = db.collection("JS").document("Field").collection(skills);
 
-                graphicDesignerRef.whereEqualTo("UID", userID)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    QuerySnapshot querySnapshot = task.getResult();
-                                    if (querySnapshot.isEmpty()) {
-
-                                        graphicDesignerRef.document("Field_Id").get().addOnCompleteListener(tasks -> {
-                                            if (tasks.isSuccessful()) {
-                                                DocumentSnapshot document = tasks.getResult();
-                                                if (document.exists()) {
-                                                    long lastSeekerId = document.getLong("last_id");
-                                                    long newSeekerId = lastSeekerId + 1;
-
-                                                    Map<String, Object> Seeker = new HashMap<>();
-                                                    Seeker.put("seeker_id", newSeekerId);
-                                                    Seeker.put("name",Firstname);
-                                                    Seeker.put("UID", userID);
-                                                    Seeker.put("email", Email);
-                                                    Seeker.put("age",Age);
-                                                    Seeker.put("location", Address);
-                                                    Seeker.put("skills", skills);
-                                                    graphicDesignerRef.document(String.valueOf(newSeekerId)).set(Seeker);
-                                                    graphicDesignerRef.document("Field_Id").update("last_id", newSeekerId);
-                                                }
-                                            }
-                                        });
-                                    } else {
-                                        DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
-                                        String documentId = documentSnapshot.getId();
-                                        graphicDesignerRef.document(documentId)
-                                                .set(user, SetOptions.merge())
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Log.d(TAG, "DocumentSnapshot updated with ID: " + documentId);
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Log.w(TAG, "Error updating document", e);
-                                                    }
-                                                });
-                                    }
-                                } else {
-                                    Log.d(TAG, "Error getting documents: ", task.getException());
-                                }
-                            }
-                        });
-
-//                graphicDesignerRef.document(userID)
-//                        .set(user)
-//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void aVoid) {
-//                                Toast.makeText(SeekerFillActivity.this,"Successful",Toast.LENGTH_SHORT).show();
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull @NotNull Exception e) {
-//
-//                                Toast.makeText(SeekerFillActivity.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
-//
-//
-//                            }
-//                        });
-
-            }
-        });
 
     }
 

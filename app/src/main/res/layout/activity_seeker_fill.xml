@@ -37,15 +37,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emaillayout"
+        android:id="@+id/sDescriptionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/firstnamelayout"
         android:layout_marginTop="7dp"
-        android:hint="Email Address">
+        android:hint="Description">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userMail"
+            android:id="@+id/sDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -57,7 +57,7 @@
         android:id="@+id/agelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/emaillayout"
+        android:layout_below="@+id/sDescriptionLayout"
         android:layout_marginTop="7dp"
         android:hint="Age">
 
@@ -70,10 +70,26 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fieldlayout"
+        android:id="@+id/YoELayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/agelayout"
+        android:layout_marginTop="7dp"
+        android:hint="Years of Experience">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/YoE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fieldlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/YoELayout"
         android:layout_marginTop="7dp"
         android:hint="Experience Field">
 

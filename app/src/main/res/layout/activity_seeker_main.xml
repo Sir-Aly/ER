@@ -33,15 +33,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/profile_image"
+                <com.yuyakaido.android.cardstackview.CardStackView
+                    android:id="@+id/cardStackView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:srcCompat="@drawable/fello"
-                    android:scaleX="1"
-                    android:scaleY="0.95"
-                    android:scaleType="centerCrop"/>
-
+                    android:layout_below="@id/layoutToolBar"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    />
                 <LinearLayout
                     android:id="@+id/layoutToolBar"
                     android:layout_width="match_parent"
@@ -52,7 +51,9 @@
                     android:orientation="horizontal"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
 
                     <ImageView
                         android:id="@+id/imageMenu"
@@ -64,197 +65,64 @@
 
                         />
 
-                    <TextView
-                        android:id="@+id/textTitle"
-                        android:layout_width="266dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:text="@string/app_name"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:shadowRadius="2"
-                        android:shadowColor="@color/black"
-                        android:gravity="center"/>
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/org_name_text"
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/textTitle"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginStart="15dp"-->
+                    <!--                        android:text="@string/app_name"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="18sp"-->
+                    <!--                        android:textStyle="bold"-->
+                    <!--                        android:shadowRadius="2"-->
+                    <!--                        android:shadowColor="@color/black"-->
+                    <!--                        android:gravity="center"/>-->
+                    <Spinner
+                        android:id="@+id/spinner1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="90dp"
-                        android:fontFamily="@font/anton_regular"
-                        android:shadowColor="@color/black"
-                        android:shadowDy="20"
-                        android:shadowRadius="15"
-                        android:text="Ali Abdelrahman"
-                        android:textColor="@color/white"
-                        android:textSize="30dp" />
-                </LinearLayout>
-
-
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/shape_all"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:orientation="vertical">
-
-                    <ImageView
-
-                        android:layout_width="match_parent"
-                        android:layout_height="260dp"
-                        android:background="@drawable/radius"
-                        android:paddingLeft="20dp"
-                        android:textColor="@color/white" />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/about"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/shape_all"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="195dp"
-                    android:orientation="vertical"
-                    android:padding="20dp"
-                    tools:ignore="NotSibling">
-
-                    <TextView
-                        android:layout_width="match_parent"
+                        android:layout_marginStart="77dp"
+                        android:layout_marginEnd="40dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <Button
+                        android:onClick="hi2"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="About"
-                        android:textStyle="bold"
-                        android:textColor="@color/MainColor"
-                        android:textSize="17dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/shape_all"
-                    android:layout_alignStart="@id/about"
-                    android:orientation="vertical"
-                    android:paddingBottom="140dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="10dp"
-                    tools:ignore="NotSibling">
-
-                    <TextView
-                        android:id="@+id/org_location_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Giza-Egypt"
-                        android:textColor="@color/white"
-                        android:drawableStart="@drawable/baseline_location_on_24"
-                        android:drawablePadding="20sp"
-                        android:textSize="20dp"
-                        android:fontFamily="@font/roboto_bold"
-                        />
-
-                    <TextView
-                        android:id="@+id/job_title_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Angular"
-                        android:textColor="@color/white"
-                        android:drawablePadding="20sp"
-                        android:drawableStart="@drawable/baseline_work_outline_24"
-                        android:textSize="20dp"
-                        android:paddingTop="10dp"
-                        android:fontFamily="@font/roboto_bold"
 
                         />
 
+
+
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/arrow_me"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="203dp"
-                    android:paddingLeft="10dp"
-                    app:tint="@color/black" />
 
 
 
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/arrow_me"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="200dp"
-                    android:paddingLeft="10dp"
-
-                    />
 
 
 
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/fliped_arrow_me"
-                    android:layout_alignParentEnd="true"
-                    android:paddingRight="10dp"
-                    android:layout_marginTop="200dp"
-                    app:tint="@color/black" />
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/fliped_arrow_me"
-                    android:layout_alignParentEnd="true"
-                    android:paddingRight="10dp"
-                    android:layout_marginTop="197dp"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:paddingBottom="50dp"
-                    >
 
 
-                    <TextView
-                        android:id="@+id/job_description"
-                        android:layout_width="match_parent"
-                        android:paddingRight="20dp"
-                        android:paddingLeft="20dp"
-                        android:textColor="@color/MainColor"
-                        android:layout_height="wrap_content"
-                        android:text="Lorem ipsum dolor sit amet. At eligendi fuga aut voluptatem delectus sit harum voluptate. A explicabo voluptates eum nemo commodi in molestiae animi. Sit    "
-                        android:textStyle="bold"
-                        />
-                </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             </RelativeLayout>

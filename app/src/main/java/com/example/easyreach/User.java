@@ -2,12 +2,12 @@ package com.example.easyreach;
 
 public class User {
     private String name;
-    private String email;
+    private String pEmail;
     private boolean isJobProvider;
 
-    public User(String pName, String pEmail, boolean isJobProvider) {
-        this.name = pName;
-        this.email = pEmail;
+    public User(String name, String pEmail, boolean isJobProvider) {
+        this.name = name;
+        this.pEmail = pEmail;
         this.isJobProvider = isJobProvider;
     }
 
@@ -16,7 +16,7 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return pEmail;
     }
 
     public boolean isJobProvider() {

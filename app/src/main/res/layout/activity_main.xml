@@ -67,7 +67,9 @@
                     android:orientation="horizontal"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+
 
                     <ImageView
                         android:id="@+id/imageMenu"
@@ -79,18 +81,18 @@
 
                         />
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/textTitle"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="15dp"-->
-<!--                        android:text="@string/app_name"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="18sp"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:shadowRadius="2"-->
-<!--                        android:shadowColor="@color/black"-->
-<!--                        android:gravity="center"/>-->
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/textTitle"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginStart="15dp"-->
+                    <!--                        android:text="@string/app_name"-->
+                    <!--                        android:textColor="@color/black"-->
+                    <!--                        android:textSize="18sp"-->
+                    <!--                        android:textStyle="bold"-->
+                    <!--                        android:shadowRadius="2"-->
+                    <!--                        android:shadowColor="@color/black"-->
+                    <!--                        android:gravity="center"/>-->
                     <Spinner
                         android:id="@+id/spinner1"
                         android:layout_width="wrap_content"
@@ -159,20 +161,3 @@
 
 </LinearLayout>
 
-
-    <!--<FrameLayout-->
-    <!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--    xmlns:tools="http://schemas.android.com/tools"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    tools:context=".SplashScreenActivity">-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/image_splash_screen"-->
-    <!--        android:layout_width="424dp"-->
-    <!--        android:layout_height="860dp"-->
-    <!--        android:layout_gravity="center"-->
-    <!--        android:src="@drawable/registeration" />-->
-
-    <!--</FrameLayout>-->
