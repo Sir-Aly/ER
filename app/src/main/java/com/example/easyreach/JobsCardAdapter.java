@@ -41,6 +41,9 @@ public class JobsCardAdapter extends CardStackView.Adapter<JobsCardAdapter.ViewH
         holder.locationTextView.setText(jobOffer.getjLocation());
         holder.emailTextView.setText(jobOffer.getpEmail());
         holder.IDTextView.setText(jobOffer.getpUid());
+        Long jID = jobOffer.getJob_id();
+        String sID = String.valueOf(jID);
+        holder.JobIDTextView.setText(sID);
         Glide.with(holder.photoImageView.getContext())
                 .load(jobOffer.getJobImage())
                 .into(holder.photoImageView);
@@ -56,8 +59,8 @@ public class JobsCardAdapter extends CardStackView.Adapter<JobsCardAdapter.ViewH
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
                     String userID = user.getUid();
-                    String sID = jobOffer.getpUid().toString();
-                    Add add = new Add(jobOffer.getjTitle(), jobOffer.getjRequirements(), jobOffer.getjLocation(), jobOffer.getJobImage(), jobOffer.getpEmail(), jobOffer.getpUid());
+
+                    JobOffer add = new JobOffer(jobOffer.getjTitle(), jobOffer.getjRequirements(), jobOffer.getjLocation(), jobOffer.getJobImage(),jobOffer.getpEmail(),jobOffer.getpUid(), jobOffer.getJob_id(),jobOffer.getjSalary());
                     FirebaseFirestore.getInstance().collection("user").document(userID).collection("Likes").document(sID).set(add).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
@@ -89,6 +92,7 @@ public class JobsCardAdapter extends CardStackView.Adapter<JobsCardAdapter.ViewH
         TextView locationTextView;
         TextView emailTextView;
         TextView IDTextView;
+        TextView JobIDTextView;
         ImageButton addToInterestButton;
 
         public ViewHolder(View view) {
@@ -99,6 +103,7 @@ public class JobsCardAdapter extends CardStackView.Adapter<JobsCardAdapter.ViewH
             locationTextView = view.findViewById(R.id.locationTextView);
             emailTextView = view.findViewById(R.id.emailTextView);
             IDTextView = view.findViewById(R.id.IDTEXT);
+            JobIDTextView = view.findViewById(R.id.JobID);
             addToInterestButton = view.findViewById(R.id.add_to_int);
         }
     }

@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
+
 import java.util.ArrayList;
 
 public class myadapter_jobs extends RecyclerView.Adapter<myadapter_jobs.myviewholder>{
@@ -26,12 +29,16 @@ public class myadapter_jobs extends RecyclerView.Adapter<myadapter_jobs.myviewho
         return new myviewholder(view);
     }
 
-    public void onBindViewHolder(@NonNull myadapter_jobs.myviewholder holder, int position) {
+    public void onBindViewHolder(@NonNull myviewholder holder, int position) {
         holder.title.setText(datalist_jobs.get(position).getjTitle() + " " +"Job");
         holder.j_description.setText(datalist_jobs.get(position).getjDescription());
         holder.j_location.setText(datalist_jobs.get(position).getjLocation());
         holder.j_requirment.setText(datalist_jobs.get(position).getjRequirements());
         holder.salary.setText(datalist_jobs.get(position).getjSalary()+"LE");
+        Glide.with(holder.jImage.getContext())
+                .load(datalist_jobs.get(position).getJobImage())
+                .into(holder.jImage);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,18 +55,19 @@ public class myadapter_jobs extends RecyclerView.Adapter<myadapter_jobs.myviewho
     class myviewholder extends RecyclerView.ViewHolder
     {
         TextView j_description,j_location,j_requirment,salary,title;
-        private ImageView t4;
+        RoundedImageView jImage;
+
         public myviewholder(@NonNull View itemView) {
             super(itemView);
             j_description=itemView.findViewById(R.id.j_description);
             j_location=itemView.findViewById(R.id.j_location);
             j_requirment=itemView.findViewById(R.id.j_requirment);
-            t4=itemView.findViewById(R.id.holderImage);
             salary=itemView.findViewById(R.id.salary);
             title=itemView.findViewById(R.id.title);
+            jImage=itemView.findViewById(R.id.imageRound);
         }
         public ImageView getImage() {
-            return t4;
+            return jImage;
         }
     }
 }

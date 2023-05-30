@@ -90,6 +90,7 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
         TextView locationTextView;
         TextView emailTextView;
         TextView IDTextView;
+
         ImageButton addToInterestButton;
 
         public ViewHolder(View view) {
@@ -100,6 +101,7 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
             locationTextView = view.findViewById(R.id.locationTextView);
             emailTextView = view.findViewById(R.id.emailTextView);
             IDTextView = view.findViewById(R.id.IDTEXT);
+
             addToInterestButton = view.findViewById(R.id.add_to_int);
         }
     }

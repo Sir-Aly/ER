@@ -125,7 +125,7 @@ public class SeekerProfileActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     // Get the image URL from the document
-                    String imageUrl = documentSnapshot.getString("profilePictureUrl");
+                    String imageUrl = documentSnapshot.getString("sImageUrl");
                     Context context = getApplicationContext();
 
                     if (imageUrl != null) {

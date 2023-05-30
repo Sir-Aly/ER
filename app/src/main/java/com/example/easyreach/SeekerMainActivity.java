@@ -141,5 +141,8 @@ public class SeekerMainActivity extends AppCompatActivity {
         // Set the adapter on the CardStackView
         cardStackView.setAdapter(jAdapter);
     }
-
+    public void hi2(View view) {
+        Intent intent = new Intent(this, JobsInterestedListActivity.class);
+        startActivity(intent);
+    }
 }

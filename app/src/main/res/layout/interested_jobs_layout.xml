@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardCornerRadius="1dp"
+        app:cardCornerRadius="7dp"
         android:elevation="30dp"
         app:cardUseCompatPadding="true"
         app:cardElevation="5dp">
@@ -26,30 +26,30 @@
                 android:id="@+id/linearLayout1"
                 >
 
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/imageRound"
-                android:src="@drawable/fello"
-                android:layout_alignParentLeft="true"
-                app:riv_corner_radius="50dp"
-                />
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/imageRound"
+                    android:src="@drawable/fello"
+                    android:layout_alignParentLeft="true"
+                    app:riv_corner_radius="50dp"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/title"
-                android:text="Name"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"
-                android:textSize="25dp"
-                android:textColor="@color/blue_500"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:id="@+id/title"
+                        android:text="Name"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:textSize="25dp"
+                        android:textColor="@color/blue_500"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -60,12 +60,6 @@
                         />
                 </LinearLayout>
             </LinearLayout>
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="3/4/2000"-->
-<!--                -->
-<!--                />-->
 
             <TextView
                 android:layout_width="match_parent"
@@ -127,18 +121,6 @@
 
 
 
-
-
-
-
-
-
-            <!--        <ImageView-->
-            <!--            android:id="@+id/t4"-->
-            <!--            android:layout_width="150dp"-->
-            <!--            android:layout_height="150dp"-->
-            <!--            android:layout_alignParentRight="true"-->
-            <!--            />-->
 
 
         </RelativeLayout>

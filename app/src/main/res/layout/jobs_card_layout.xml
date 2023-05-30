@@ -29,7 +29,7 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/photoImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="370dp"
+                    android:layout_height="350dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/ali"
                     android:backgroundTint="@color/white"
@@ -45,15 +45,32 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:gravity="center"
+                        >
+
                         <TextView
                             android:id="@+id/nameTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="24sp"
-                            android:text="Seeker Name"
+                            android:text="Org Title"
+
+                            android:textStyle="bold"
+                            android:padding="6dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+                        <TextView
+                            android:id="@+id/skillsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textStyle="bold"
+                            android:text="Requirements "
+                            android:textSize="24sp"
                             android:padding="6dp" />
 
                         <TextView
@@ -75,14 +92,39 @@
                         android:weightSum="2">
 
                         <TextView
+                            android:id="@+id/locationText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:text="Location:"
+                            android:textSize="24sp"
+                            android:padding="6dp" />
+
+                        <TextView
                             android:id="@+id/locationTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textStyle="bold"
-                            android:text="Seeker Location"
+                            android:text="Job Location"
                             android:textSize="24sp"
                             android:padding="6dp" />
+                    </LinearLayout>                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/emailText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Email:"
+                        android:textSize="24sp"
+                        android:padding="6dp" />
 
                         <TextView
                             android:id="@+id/emailTextView"
@@ -91,7 +133,7 @@
                             android:layout_weight="1"
                             android:textStyle="bold"
                             android:text="Seeker Email"
-                            android:textSize="24sp"
+                            android:textSize="24dp"
                             android:padding="6dp" />
                     </LinearLayout>
 
@@ -113,11 +155,19 @@
                     android:textSize="18sp"
                     android:padding="16dp"
                     android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/JobID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="16dp"
+                    android:visibility="gone"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="center"
+
                     >
                     <ImageButton
                         android:id="@+id/add_to_int"

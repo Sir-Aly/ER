@@ -1,25 +1,31 @@
 package com.example.easyreach;
 
 public class JobOffer {
+
+
     private String jTitle;
     private String jRequirements;
     private String jLocation;
     private String JobImage;
     private String pEmail;
     private String pUid;
-
+    private String jSalary;
+    private Long job_id;
 
     public JobOffer() {
         // Default constructor required for Firebase
     }
-    public JobOffer(String jTitle, String jRequirements, String jLocation, String JobImage, String pEmail, String pUid) {
+    public JobOffer(String jTitle, String jRequirements, String jLocation, String JobImage, String pEmail, String pUid, Long job_id, String jSalary) {
         this.jTitle = jTitle;
         this.jRequirements = jRequirements;
         this.jLocation = jLocation;
         this.JobImage = JobImage;
         this.pEmail = pEmail;
         this.pUid = pUid;
+        this.job_id = job_id;
+        this.jSalary= jSalary;
     }
+
 
     public String getjTitle() {
         return jTitle;
@@ -68,5 +74,18 @@ public class JobOffer {
     public void setpUid(String pUid) {
         this.pUid = pUid;
     }
+    public Long getJob_id(){
+        return job_id;
+    }
+    public void setJob_id(Long job_id){
+        this.job_id = job_id;
+    }
 
+    public String getjSalary() {
+        return jSalary;
+    }
+
+    public void setjSalary(String jSalary) {
+        this.jSalary = jSalary;
+    }
 }
