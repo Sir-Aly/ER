@@ -20,7 +20,7 @@ public class model_jobs {
     }
     public String getjRequirements(){
         return jRequirements;
-
+//hi
     }
 
     public String getjSalary(){
