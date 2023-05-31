@@ -64,7 +64,7 @@ public class JobPostingActivity extends AppCompatActivity {
                             String Requirements = jReq.getText().toString();
                             String Location = jLoc.getText().toString();
                             String pEmail = mAuth.getCurrentUser().getEmail();
-                            String ImageUrl = "https://firebasestorage.googleapis.com/v0/b/easyreach-1.appspot.com/o/job_bg.jpg?alt=media&token=0ee85184-6ea9-4e1f-81bc-d9eb8b73ac2f";
+                            String ImageUrl = "https://firebasestorage.googleapis.com/v0/b/easyreach-1.appspot.com/o/jobsbg.jpg?alt=media&token=90f0f4b5-d7c0-451f-9a19-75b98da26c9c";
                             String Salary = jSalary.getText().toString();
                             Map<String, Object> job = new HashMap<>();
                             job.put("job_id", newJobId);

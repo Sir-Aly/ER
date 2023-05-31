@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:layout_gravity="bottom"
+    android:elevation="8dp"
+    >
+
+    <ImageButton
+        android:id="@+id/btnMain"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/home"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_gravity="bottom"
+        android:scaleType="centerInside" />
+
+    <ImageButton
+        android:id="@+id/btnAddJob"
+        android:layout_width="0dp"
+        android:layout_gravity="bottom"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/jobadd"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside" />
+
+    <ImageButton
+        android:id="@+id/btnInterestedList"
+        android:layout_width="0dp"
+        android:layout_gravity="bottom"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/interested"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside" />
+
+</LinearLayout>
