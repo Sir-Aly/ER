@@ -63,7 +63,7 @@ public class SeekerMainActivity extends AppCompatActivity {
                         return false;
                     case R.id.menuSeekerProfile:
 //                        mAuth.signOut();
-                        Intent r = new Intent(SeekerMainActivity.this, SeekerProfileActivity.class);
+                        Intent r = new Intent(SeekerMainActivity.this, MessagingActivity.class);
                         startActivity(r);
                         finish();
                         return false;

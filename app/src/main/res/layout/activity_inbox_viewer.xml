@@ -43,11 +43,12 @@
         android:id="@+id/messages_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2 new messages"
+        android:text="new messages"
         android:layout_gravity="center"
         android:textSize="25dp"
         android:textColor="@color/red"
         />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/refreshlayout"
@@ -60,5 +61,7 @@
         android:id="@+id/recview"
         />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 </LinearLayout>
