@@ -22,7 +22,7 @@ public class model_jobs {
         return jRequirements;
 //hi
     }
-
+//co
     public String getjSalary(){
         return jSalary;
 
