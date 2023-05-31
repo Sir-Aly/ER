@@ -36,7 +36,7 @@
 
         private List<Integer> list;
 
-
+        String previousSelectedItemPosition;
         private DrawerLayout drawerLayout;
         int index = 1;
         private static final String TAG = "MainActivity";
@@ -85,7 +85,7 @@
             btnAddJob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent addJob = new Intent(MainActivity.this, JobPostingActivity.class);
+                    Intent addJob = new Intent(MainActivity.this, MessagingActivity.class);
                     startActivity(addJob);
                 }
             });
@@ -172,10 +172,38 @@
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             text = parent.getItemAtPosition(position).toString();
 
-
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            CollectionReference jobSeekersRef = db.collection("JS").document("Field").collection(text);
 
+            if (!text.equals(previousSelectedItemPosition)) {
+                // Item selection has changed, perform refresh
+
+                CollectionReference jobSeekersRef = db.collection("JS").document("Field").collection(text);
+                jobSeekersRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                jobSeekers.clear();
+                                // Iterate through the documents and add each job seeker to the jobSeekers list
+                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    if (documentSnapshot.exists()) {
+                                        JobSeeker jobSeeker = documentSnapshot.toObject(JobSeeker.class);
+                                        if (jobSeeker != null) {
+                                            jobSeekers.add(jobSeeker);
+                                        }
+                                    }
+                                }
+                                // Call the method to set up the CardStackView with the job seekers list
+                                setupCardStackView();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error getting documents.", e);
+                            }
+                        });
+            }
+            previousSelectedItemPosition = text;
+            CollectionReference jobSeekersRef = db.collection("JS").document("Field").collection(text);
             jobSeekersRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -188,7 +216,6 @@
                                     }
                                 }
                             }
-
                             // Call the method to set up the CardStackView with the job seekers list
                             setupCardStackView();
                         }
@@ -200,10 +227,8 @@
                         }
                     });
         }
-
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-
         }
 
         private void setupCardStackView() {
@@ -213,6 +238,5 @@
             // Set the adapter on the CardStackView
             cardStackView.setAdapter(sAdapter);
         }
-
 
     }

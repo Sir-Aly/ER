@@ -1,24 +1,21 @@
 package com.example.easyreach;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -30,31 +27,18 @@ import java.util.List;
 public class inbox_viewer extends AppCompatActivity {
 
     SwipeRefreshLayout refreshLayout;
-
-
     RecyclerView recview;
     TextView message_size;
     ArrayList<model_inbox> datalist_inbox ;
     FirebaseFirestore db;
     myadapter_inbox myadapter_inbox;
     private FirebaseAuth mAuth;
-
-
-
-
-
-
-
-
-
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox_viewer);
         refreshLayout = findViewById(R.id.refreshlayout);
         message_size = findViewById(R.id.messages_size);
-//       message_size.setText(getItemCounttt());
-
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -70,10 +54,6 @@ public class inbox_viewer extends AppCompatActivity {
         myadapter_inbox=new myadapter_inbox(datalist_inbox);
         recview.setAdapter(myadapter_inbox);
 
-
-
-        //collections
-
         db=FirebaseFirestore.getInstance();
         CollectionReference users = db.collection("user");
         String userID =  mAuth.getCurrentUser().getUid();
@@ -86,13 +66,12 @@ public class inbox_viewer extends AppCompatActivity {
                         {
                             model_inbox obj=d.toObject(model_inbox.class);
                             datalist_inbox.add(obj);
+                            String size = String.valueOf(myadapter_inbox.getItemCount());
+                            message_size.setText(size +" "+"NEW MESSAGES");
                         }
                         myadapter_inbox.notifyDataSetChanged();
                     }
                 });
-
-//        message_size.setText(datalist_inbox.size() +" "+"NEW MESSAGES");
-        message_size.setText(myadapter_inbox.getItemCount() +" "+"NEW MESSAGES");
     }
 
     public void clear(View view){
@@ -107,12 +86,11 @@ public class inbox_viewer extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
-
     }
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent back = new Intent(inbox_viewer.this, MainActivity.class);
+        startActivity(back);
+    }
 }
