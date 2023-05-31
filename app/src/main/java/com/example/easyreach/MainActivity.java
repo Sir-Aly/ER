@@ -7,11 +7,10 @@
     import android.view.View;
     import android.widget.AdapterView;
     import android.widget.ArrayAdapter;
-    import android.widget.Button;
+    import android.widget.ImageButton;
     import android.widget.ImageView;
     import android.widget.Spinner;
     import android.widget.TextView;
-    import android.widget.Toast;
 
     import androidx.annotation.NonNull;
     import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +24,6 @@
     import com.google.firebase.auth.FirebaseAuth;
     import com.google.firebase.auth.FirebaseUser;
     import com.google.firebase.firestore.CollectionReference;
-    import com.google.firebase.firestore.DocumentReference;
     import com.google.firebase.firestore.DocumentSnapshot;
     import com.google.firebase.firestore.FirebaseFirestore;
     import com.google.firebase.firestore.QuerySnapshot;
@@ -44,6 +42,9 @@
         private static final String TAG = "MainActivity";
         ImageView photoImageView;
         String jobSeekerId, text;
+        private ImageButton btnMain;
+        private ImageButton btnAddJob;
+        private ImageButton btnInterestedList;
         private NavigationView navigationView;
         ImageView leftArrow, rightArrow;
         private DocumentSnapshot currentJobSeeker;
@@ -70,7 +71,32 @@
             String selectedCategory = spinner.getSelectedItem().toString();
             spinner.setOnItemSelectedListener(this);
 
+            btnMain = findViewById(R.id.btnMain);
+            btnAddJob = findViewById(R.id.btnAddJob);
+            btnInterestedList = findViewById(R.id.btnInterestedList);
+            btnMain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent main = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(main);
+                }
+            });
 
+            btnAddJob.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent addJob = new Intent(MainActivity.this, JobPostingActivity.class);
+                    startActivity(addJob);
+                }
+            });
+
+            btnInterestedList.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent interested = new Intent(MainActivity.this, interested_list.class);
+                    startActivity(interested);
+                }
+            });
     //        mSignOut = (TextView) findViewById(R.id.signOut);
             navigationView = findViewById(R.id.navigationView);
 

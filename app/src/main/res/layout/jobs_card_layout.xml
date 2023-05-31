@@ -31,15 +31,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/ali"
+                    app:srcCompat="@drawable/jobsbg"
                     android:backgroundTint="@color/white"
 
-                    app:shapeAppearanceOverlay="@style/Shape"
+
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="bottom"
+                    android:background="@drawable/straight_white_bg"
+                    android:padding="10dp"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -71,8 +73,9 @@
                             android:layout_weight="1"
                             android:textStyle="bold"
                             android:text="Requirements "
+                            android:fontFamily="@font/roboto_mono_light"
                             android:textColor="@color/black"
-                            android:textSize="24sp"
+                            android:textSize="20sp"
                             android:padding="6dp" />
 
                         <TextView
@@ -80,8 +83,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/roboto_mono_medium"
                             android:textStyle="bold"
                             android:text="Seeker Skills"
+                            android:textAlignment="textEnd"
                             android:textColor="@color/black"
                             android:textSize="24sp"
                             android:padding="6dp" />
@@ -101,7 +106,8 @@
                             android:layout_weight="1"
                             android:textStyle="bold"
                             android:text="Location:"
-                            android:textSize="24sp"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/roboto_mono_light"
                             android:textColor="@color/black"
                             android:padding="6dp" />
 
@@ -111,11 +117,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textStyle="bold"
+                            android:textAlignment="textEnd"
                             android:text="Job Location"
+                            android:fontFamily="@font/roboto_mono_medium"
                             android:textColor="@color/black"
                             android:textSize="24sp"
                             android:padding="6dp" />
-                    </LinearLayout>                    <LinearLayout
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -129,7 +138,9 @@
                         android:layout_weight="1"
                         android:textStyle="bold"
                         android:text="Email:"
-                        android:textSize="24sp"
+                        android:textAlignment="textStart"
+                        android:fontFamily="@font/roboto_mono_light"
+                        android:textSize="20sp"
                         android:padding="6dp" />
 
                         <TextView
@@ -137,13 +148,31 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
+                            android:textAlignment="textEnd"
                             android:layout_weight="1"
                             android:textStyle="bold"
                             android:text="Seeker Email"
                             android:textSize="24dp"
+                            android:fontFamily="@font/roboto_mono_medium"
                             android:padding="6dp" />
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="center"
 
+                        >
+                        <ImageButton
+                            android:id="@+id/add_to_int"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="#00DDF8FE"
+                            android:src="@drawable/bookmark"
+                            />
+
+
+                    </LinearLayout>
                 </LinearLayout>
 
 
@@ -169,23 +198,7 @@
                     android:textSize="18sp"
                     android:padding="16dp"
                     android:visibility="gone"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
 
-                    >
-                    <ImageButton
-                        android:id="@+id/add_to_int"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="#DDF8FE"
-                        android:src="@drawable/bookmark"
-                        />
-
-
-                </LinearLayout>
             </LinearLayout>
 
 

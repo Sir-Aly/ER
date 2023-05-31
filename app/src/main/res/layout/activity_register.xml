@@ -169,6 +169,7 @@
                         android:id="@+id/job_provider_checkbox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:text="I am a job provider"/>
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/register"
@@ -194,6 +195,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:padding="15sp"
+                    android:textColor="@color/black"
                     android:text="@string/existing_user_login_here"
                     android:layout_gravity="center_horizontal"
                     />

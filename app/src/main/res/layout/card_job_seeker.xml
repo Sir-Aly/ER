@@ -29,18 +29,18 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/photoImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="350dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/ali"
                     android:backgroundTint="@color/white"
-                    app:shapeAppearanceOverlay="@style/Shape"
+
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:orientation="vertical"
-                    android:background="@drawable/white_bg"
+                    android:background="@drawable/straight_white_bg"
                     android:paddingTop="10dp"
 
                     android:paddingBottom="10dp"
@@ -158,7 +158,23 @@
                         android:textSize="24sp"
                         android:padding="6dp" />
                 </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="center"
 
+                        >
+                        <ImageButton
+                            android:id="@+id/add_to_int"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="#00DDF8FE"
+                            android:src="@drawable/bookmark"
+                            />
+
+
+                    </LinearLayout>
                 </LinearLayout>
 
 
@@ -184,23 +200,7 @@
                     android:textSize="18sp"
                     android:padding="16dp"
                     android:visibility="gone"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
 
-                    >
-                    <ImageButton
-                        android:id="@+id/add_to_int"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="#00DDF8FE"
-                        android:src="@drawable/bookmark"
-                        />
-
-
-                </LinearLayout>
             </LinearLayout>
 
 

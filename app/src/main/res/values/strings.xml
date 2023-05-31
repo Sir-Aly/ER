@@ -64,4 +64,7 @@
     <string name="ChooseTitle"> CHOOSE IF YOU WANT TO OFFER JOBS OR TO BE HIRED.</string>
     <string name="org_version_info">Organanization Version info</string>
     <string name="post_a_job">Post A Job</string>
+    <string name="facebook_page">Facebook Page</string>
+    <string name="twitter_page">Twitter Page</string>
+    <string name="instagram_page">Instagram Page</string>
 </resources>
