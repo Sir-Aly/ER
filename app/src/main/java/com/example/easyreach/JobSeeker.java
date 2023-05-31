@@ -1,65 +1,67 @@
 package com.example.easyreach;
 
 public class JobSeeker {
-    private String name;
-    private String skills;
-    private String location;
-    private String profileUrl;
-    private String email;
+    private String sName;
+    private String sField;
+    private String sLocation;
+    private String sImageUrl;
+    private String sEmail;
     private String UID;
 
     public JobSeeker() {
         // Default constructor required for Firebase
     }
 
-    public JobSeeker(String name, String skills, String location, String profileUrl, String email, String UID) {
-        this.name = name;
-        this.skills = skills;
-        this.location = location;
-        this.profileUrl = profileUrl;
-        this.email = email;
+    public JobSeeker(String sName, String sField, String sLocation, String sImageUrl, String sEmail, String UID) {
+        this.sName = sName;
+        this.sField = sField;
+        this.sLocation = sLocation;
+        this.sImageUrl = sImageUrl;
+        this.sEmail = sEmail;
         this.UID = UID;
     }
 
     // Getters and setters
-    public String getName() {
-        return name;
+
+
+    public String getsName() {
+        return sName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setsName(String sName) {
+        this.sName = sName;
     }
 
-    public String getSkills() {
-        return skills;
+    public String getsField() {
+        return sField;
     }
 
-    public void setSkills(String skills) {
-        this.skills = skills;
+    public void setsField(String sField) {
+        this.sField = sField;
     }
 
-    public String getLocation() {
-        return location;
+    public String getsLocation() {
+        return sLocation;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setsLocation(String sLocation) {
+        this.sLocation = sLocation;
     }
 
-    public String getProfileUrl() {
-        return profileUrl;
+    public String getsImageUrl() {
+        return sImageUrl;
     }
 
-    public void setProfileUrl(String profileUrl) {
-        this.profileUrl = profileUrl;
+    public void setsImageUrl(String sImageUrl) {
+        this.sImageUrl = sImageUrl;
     }
 
-    public String getEmail() {
-        return email;
+    public String getsEmail() {
+        return sEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setsEmail(String sEmail) {
+        this.sEmail = sEmail;
     }
 
     public String getUID() {

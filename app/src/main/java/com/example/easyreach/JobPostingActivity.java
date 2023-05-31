@@ -1,8 +1,10 @@
 package com.example.easyreach;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,12 +44,29 @@ public class JobPostingActivity extends AppCompatActivity {
         CollectionReference JobsRef = db.collection("Jobs");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String jobProviderUid = user.getUid();
+
         DocumentReference JobsDocRef =  JobsRef.document(jobProviderUid + "  Jobs");
 
 
         postJobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                String jTitleValue = jTitle.getText().toString();
+                String jDescValue = jDesc.getText().toString();
+                String jReqValue = jReq.getText().toString();
+                String jSalaryValue = jSalary.getText().toString();
+                String jLocValue = jLoc.getText().toString();
+
+                // Check if any of the mandatory fields are empty
+                if (TextUtils.isEmpty(jTitleValue) || TextUtils.isEmpty(jDescValue) ||
+                        TextUtils.isEmpty(jReqValue) || TextUtils.isEmpty(jSalaryValue) ||
+                        TextUtils.isEmpty(jLocValue)) {
+                    // Display an error message indicating the missing fields
+                    Toast.makeText(JobPostingActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    return; // Prevent further action
+                }
                 // Add the code for creating a new job ID and adding a new job to the "Jobs" collection here
                 // For example:
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -78,11 +97,16 @@ public class JobPostingActivity extends AppCompatActivity {
                             job.put("JobImage", ImageUrl);
                             jobsRef.document(String.valueOf(newJobId)).set(job);
                             jobsRef.document("job_ids").update("last_job_id", newJobId);
+                            jTitle.setText("");
+                            jDesc.setText("");
+                            jReq.setText("");
+                            jSalary.setText("");
+                            jLoc.setText("");
                         }
                     }
                 });
                 // End of the code for creating a new job ID and adding a new job to the "Jobs" collection
-            }
+                }
         });
 
 

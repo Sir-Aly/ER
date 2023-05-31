@@ -24,6 +24,7 @@
         android:id="@+id/firstnamelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_below="@+id/seeker_image_preview"
         android:layout_marginTop="15dp"
         android:hint="Full name">
@@ -32,6 +33,7 @@
             android:id="@+id/firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:inputType="text"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -40,6 +42,7 @@
         android:id="@+id/sDescriptionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_below="@+id/firstnamelayout"
         android:layout_marginTop="7dp"
         android:hint="Description">
@@ -49,6 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:textColor="@color/black"
+
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,6 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sDescriptionLayout"
+        android:textColor="@color/black"
         android:layout_marginTop="7dp"
         android:hint="Age">
 
@@ -65,6 +71,7 @@
             android:id="@+id/age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:inputType="number"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -81,6 +88,7 @@
             android:id="@+id/YoE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:inputType="number"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -88,6 +96,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/fieldlayout"
         android:layout_width="match_parent"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:layout_below="@+id/YoELayout"
         android:layout_marginTop="7dp"
@@ -97,7 +106,7 @@
             android:id="@+id/droplist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:textColor="@color/black"
             android:layout_below="@+id/agelayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             >
@@ -106,6 +115,7 @@
                 android:hint="Expirence Field"
                 android:layout_height="wrap_content"
                 android:id="@+id/auto_complete_textview"
+                android:textColor="@color/black"
                 android:inputType="none"
                 />
             <TextView
@@ -122,6 +132,7 @@
         android:id="@+id/addresslayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_below="@+id/fieldlayout"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="20dp"
@@ -130,6 +141,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/address"
             android:layout_width="match_parent"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:maxLines="1" />
@@ -152,8 +164,6 @@
         android:layout_below="@+id/addresslayout"
         android:layout_height="wrap_content" />
 
-=
-
     <Button
         android:id="@+id/btnRegister"
         android:layout_below="@+id/seeker_btn_Upload"
@@ -164,7 +174,6 @@
         android:background="@drawable/grad_main"
         app:backgroundTint="@color/MainColor"
         android:textColor="@color/white"
-
         android:text="REGISTER"
         android:textSize="15dp"
         />

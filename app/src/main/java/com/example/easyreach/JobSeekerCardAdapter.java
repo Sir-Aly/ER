@@ -37,13 +37,13 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         JobSeeker jobSeeker = jobSeekers.get(position);
-        holder.nameTextView.setText(jobSeeker.getName());
-        holder.skillsTextView.setText(jobSeeker.getSkills());
-        holder.locationTextView.setText(jobSeeker.getLocation());
-        holder.emailTextView.setText(jobSeeker.getEmail());
+        holder.nameTextView.setText(jobSeeker.getsName());
+        holder.skillsTextView.setText(jobSeeker.getsField());
+        holder.locationTextView.setText(jobSeeker.getsLocation());
+        holder.emailTextView.setText(jobSeeker.getsEmail());
         holder.IDTextView.setText(jobSeeker.getUID());
         Glide.with(holder.photoImageView.getContext())
-                .load(jobSeeker.getProfileUrl())
+                .load(jobSeeker.getsImageUrl())
                 .into(holder.photoImageView);
 
         holder.addToInterestButton.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
                 if (user != null) {
                     String userID = user.getUid();
                     String sID = jobSeeker.getUID().toString();
-                    Add add = new Add(jobSeeker.getName(), jobSeeker.getSkills(), jobSeeker.getLocation(), jobSeeker.getEmail(), jobSeeker.getUID(), jobSeeker.getProfileUrl());
+                    Add add = new Add(jobSeeker.getsName(), jobSeeker.getsField(), jobSeeker.getsLocation(), jobSeeker.getsEmail(), jobSeeker.getUID(), jobSeeker.getsImageUrl());
                     FirebaseFirestore.getInstance().collection("user").document(userID).collection("Likes").document(sID).set(add).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {

@@ -21,11 +21,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,20 +51,20 @@ public class RegisterActivity extends AppCompatActivity {
         spinner.setVisibility(View.GONE);
         TextView existing = (TextView) findViewById(R.id.existing);
         mAuth = FirebaseAuth.getInstance();
-        firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                spinner.setVisibility(View.VISIBLE);
-                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null && user.isEmailVerified()) {
-                    Intent i = new Intent( RegisterActivity.this, MainActivity.class);
-                    startActivity(i);
-                    finish();
-                    return;
-                }
-                spinner.setVisibility(View.GONE);
-            }
-        };
+//        firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                spinner.setVisibility(View.VISIBLE);
+//                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                if (user != null && user.isEmailVerified()) {
+//                    Intent i = new Intent( RegisterActivity.this, MainActivity.class);
+//                    startActivity(i);
+//                    finish();
+//                    return;
+//                }
+//                spinner.setVisibility(View.GONE);
+//            }
+//        };
 
         existing.setOnClickListener(new View.OnClickListener() {
             @Override

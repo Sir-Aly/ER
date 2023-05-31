@@ -109,11 +109,13 @@ public class SeekerFillActivity extends AppCompatActivity {
                 String Address = eAddress.getText().toString();
 //                String Field = eField.getText().toString();
                 Map<String,Object> user = new HashMap<>();
-                user.put("name",Firstname);
-                user.put("email", Email);
-                user.put("age",Age);
-                user.put("location", Address);
-                user.put("skills", skills);
+                user.put("sName",Firstname);
+                user.put("sEmail", Email);
+                user.put("sAge",Age);
+                user.put("sLocation", Address);
+                user.put("sYoE", YoE);
+                user.put("sDescription", Description);
+                user.put("sField", skills);
                 user.put("UID", userID);
 
                 CollectionReference SeekersRef = db.collection("Job Seekers");
@@ -139,12 +141,14 @@ public class SeekerFillActivity extends AppCompatActivity {
 
                                                     Map<String, Object> Seeker = new HashMap<>();
                                                     Seeker.put("seeker_id", newSeekerId);
-                                                    Seeker.put("name",Firstname);
+                                                    Seeker.put("sName",Firstname);
                                                     Seeker.put("UID", userID);
-                                                    Seeker.put("email", Email);
-                                                    Seeker.put("age",Age);
-                                                    Seeker.put("location", Address);
-                                                    Seeker.put("skills", skills);
+                                                    Seeker.put("sEmail", Email);
+                                                    Seeker.put("sAge",Age);
+                                                    Seeker.put("sYoE", YoE);
+                                                    Seeker.put("sDescription", Description);
+                                                    Seeker.put("sLocation", Address);
+                                                    Seeker.put("sField", skills);
                                                     SelectedCategoryRef.document(String.valueOf(newSeekerId)).set(Seeker);
                                                     SelectedCategoryRef.document("Field_Id").update("last_id", newSeekerId);
                                                 }
@@ -224,7 +228,7 @@ public class SeekerFillActivity extends AppCompatActivity {
                             } else {
                                 updatedData.put("sField", existingField); // Keep the existing value
                             }
-                            updatedData.put("sUID",userID);
+                            updatedData.put("UID",userID);
                             updatedData.put("sEmail", Email);
                             updatedData.put("sImageUrl", PhotoUrl);
                             // Perform the update operation
@@ -242,13 +246,13 @@ public class SeekerFillActivity extends AppCompatActivity {
                                 }
                             });
                         }else {
-                            updatedData.put("sYoE", sYoE);
-                            updatedData.put("name",Firstname);
+                            updatedData.put("sYoE", YoE);
+                            updatedData.put("sName",Firstname);
                             updatedData.put("UID", userID);
-                            updatedData.put("email", Email);
-                            updatedData.put("age",Age);
-                            updatedData.put("location", Address);
-                            updatedData.put("skills", skills);
+                            updatedData.put("sEmail", Email);
+                            updatedData.put("sAge",Age);
+                            updatedData.put("sLocation", Address);
+                            updatedData.put("sField", skills);
                             updatedData.put("sImageUrl", PhotoUrl);
                             SeekerDocRef.set(updatedData).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -341,7 +345,7 @@ public class SeekerFillActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         DocumentReference currentUserRef = jobSeekersRef.document(document.getId());
                         Map<String, Object> data = new HashMap<>();
-                        data.put("profileUrl", imageUrl);
+                        data.put("sImageUrl", imageUrl);
                         currentUserRef.set(data, SetOptions.merge())
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
