@@ -43,8 +43,8 @@ public class inbox_viewer extends AppCompatActivity {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Intent intent = new Intent(inbox_viewer.this,inbox_viewer.class);
-                startActivity(intent);
+//                recreate();
+                recreateData();
             }
         });
         mAuth = FirebaseAuth.getInstance();
@@ -86,6 +86,30 @@ public class inbox_viewer extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void recreateData() {
+        // Recreate your data or update the RecyclerView here
+        recreate();
+        db=FirebaseFirestore.getInstance();
+        CollectionReference users = db.collection("user");
+        String userID =  mAuth.getCurrentUser().getUid();
+        users.document(userID).collection("Messages").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
+                        for(DocumentSnapshot d:list)
+                        {
+                            model_inbox obj=d.toObject(model_inbox.class);
+                            datalist_inbox.add(obj);
+                            String size = String.valueOf(myadapter_inbox.getItemCount());
+                            message_size.setText(size +" "+"NEW MESSAGES");
+                        }
+                        myadapter_inbox.notifyDataSetChanged();
+                    }
+                });
+        // Call setRefreshing(false) to stop the refreshing animation
+        refreshLayout.setRefreshing(false);
     }
     @Override
     public void onBackPressed() {

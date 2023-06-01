@@ -1,7 +1,5 @@
 package com.example.easyreach;
 
-import static com.bumptech.glide.util.Util.getSnapshot;
-
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,15 +38,21 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
 
     @Override
     public void onBindViewHolder(@NonNull myviewholder holder, int position) {
-        holder.t1.setText(datalist.get(position).getName());
-        holder.t2.setText(datalist.get(position).getEmail());
-        holder.t3.setText(datalist.get(position).getSkills());
-        Glide.with(holder.getImage()).load(datalist.get(position).getPhotoUrl()).into(holder.t4);
-        holder.t6.setText(datalist.get(position).getUid());
+        holder.seekerName.setText(datalist.get(position).getsName());
+        holder.seekerEmail.setText(datalist.get(position).getsEmail());
+        holder.seekerAge.setText(datalist.get(position).getsAge());
+        holder.seekerField.setText(datalist.get(position).getsField());
+        Glide.with(holder.getImage()).load(datalist.get(position).getsImageUrl()).into(holder.seekerImage);
+        holder.seekerLocation.setText(datalist.get(position).getsLocation());
+        holder.seekerYoE.setText(datalist.get(position).getsYoE());
+        holder.UID.setText(datalist.get(position).getUID());
+
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            String name = holder.t6.getText().toString();
+            String name = holder.UID.getText().toString();
                 Intent intent = new Intent(view.getContext(), Message_Field.class);
                 intent.putExtra(EXTRA_NAME,name);
                 view.getContext().startActivity(intent);
@@ -70,19 +74,22 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
 
     class myviewholder extends RecyclerView.ViewHolder
     {
-        TextView t1,t2,t3,t5,t6;
-        private ImageView t4;
+        TextView seekerName, seekerAge, seekerField, seekerLocation, seekerYoE, seekerEmail, UID;
+        private ImageView seekerImage;
         public myviewholder(@NonNull View itemView) {
             super(itemView);
-            t1=itemView.findViewById(R.id.t1);
-            t2=itemView.findViewById(R.id.t2);
-            t3=itemView.findViewById(R.id.t3);
-            t4=itemView.findViewById(R.id.holderImage);
-            t5=itemView.findViewById(R.id.t5);
-            t6=itemView.findViewById(R.id.t6);
+            seekerName =itemView.findViewById(R.id.sName);
+            seekerAge =itemView.findViewById(R.id.seeker_age);
+            seekerField =itemView.findViewById(R.id.s_field);
+            seekerImage =itemView.findViewById(R.id.imageRound);
+            seekerLocation =itemView.findViewById(R.id.s_location);
+            UID = itemView.findViewById(R.id.UID);
+            seekerYoE =itemView.findViewById(R.id.sYoe);
+            seekerEmail = itemView.findViewById(R.id.s_email);
         }
         public ImageView getImage() {
-            return t4;
+            return seekerImage;
         }
+
     }
 }

@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardCornerRadius="1dp"
+        app:cardCornerRadius="7dp"
+        app:cardBackgroundColor="@color/white"
+
         android:elevation="30dp"
         app:cardUseCompatPadding="true"
         app:cardElevation="5dp">
@@ -66,7 +68,11 @@
 <!--                android:text="3/4/2000"-->
 <!--                -->
 <!--                />-->
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pUID"
+                android:visibility="gone"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

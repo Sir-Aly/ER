@@ -67,8 +67,8 @@
 
             Spinner spinner = findViewById(R.id.spinner1);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                    R.array.Fields, android.R.layout.simple_spinner_item);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    R.array.Fields, R.layout.custom_simple_spinner_item);
+            adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             spinner.setAdapter(adapter);
             String selectedCategory = spinner.getSelectedItem().toString();
             spinner.setOnItemSelectedListener(this);

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Message_Field"
+    tools:context=".SeekerMessageActivity"
     android:background="@drawable/background_without_logo"
     android:orientation="vertical">
 
@@ -14,6 +14,7 @@
         android:textSize="30dp"
         android:text="TEST"
         android:id="@+id/id_view"
+        android:visibility="gone"
         />
     <TextView
         android:layout_width="0dp"
@@ -35,8 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/white_bg"
-        android:textColor="@color/black"
+        android:background="@drawable/grad_main"
+        android:backgroundTint="@color/white"
         android:id="@+id/message"
         android:hint="Write Your Massage Here"
         />

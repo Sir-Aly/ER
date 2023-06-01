@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Message_Field extends AppCompatActivity {
+public class SeekerMessageActivity extends AppCompatActivity {
     TextView view_id,view_id2;
     FirebaseAuth mAuth;
     EditText message;
@@ -23,12 +23,12 @@ public class Message_Field extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message_field);
+        setContentView(R.layout.activity_seeker_message);
         view_id = findViewById(R.id.id_view);
         String USERID = view_id.getText().toString();
         view_id2 =findViewById(R.id.testo);
         Intent intent = getIntent();
-        String new_id = intent.getStringExtra(myadapter.EXTRA_NAME);
+        String new_id = intent.getStringExtra(myadapter_jobs.EXTRA_NAME);
         view_id.setText(new_id);
         message = findViewById(R.id.message);
 
@@ -54,8 +54,7 @@ public class Message_Field extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-    Intent i = new Intent(Message_Field.this, MainActivity.class);
+    Intent i = new Intent(SeekerMessageActivity.this, SeekerMainActivity.class);
     startActivity(i);
-
     }
 }

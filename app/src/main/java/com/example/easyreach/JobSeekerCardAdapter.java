@@ -58,7 +58,7 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
                 if (user != null) {
                     String userID = user.getUid();
                     String sID = jobSeeker.getUID().toString();
-                    JobSeeker add = new JobSeeker(jobSeeker.getsName(), jobSeeker.getsField(), jobSeeker.getsLocation(), jobSeeker.getsImageUrl(),jobSeeker.getsEmail() , jobSeeker.getUID());
+                    JobSeeker add = new JobSeeker(jobSeeker.getsName(), jobSeeker.getsField(),jobSeeker.getsAge(),jobSeeker.getsYoE(), jobSeeker.getsLocation(), jobSeeker.getsImageUrl(),jobSeeker.getsEmail() , jobSeeker.getUID());
                     FirebaseFirestore.getInstance().collection("user").document(userID).collection("Likes").document(sID).set(add).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
@@ -89,6 +89,8 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
         TextView skillsTextView;
         TextView locationTextView;
         TextView emailTextView;
+        TextView ageTextView;
+        TextView YoETextView;
         TextView IDTextView;
 
         ImageButton addToInterestButton;
@@ -97,6 +99,8 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
             super(view);
             photoImageView = view.findViewById(R.id.photoImageView);
             nameTextView = view.findViewById(R.id.nameTextView);
+            ageTextView = view.findViewById(R.id.AgeTextView);
+            YoETextView = view.findViewById(R.id.YoETextField);
             skillsTextView = view.findViewById(R.id.skillsTextView);
             locationTextView = view.findViewById(R.id.locationTextView);
             emailTextView = view.findViewById(R.id.emailTextView);

@@ -9,7 +9,7 @@
     android:layout_gravity="center">
 
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     app:layout_constraintTop_toTopOf="parent"
@@ -22,9 +22,9 @@
             app:cardCornerRadius="20dp">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="677dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/cardview"
+                android:background="@drawable/straight_white_bg"
                 >
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/photoImageView"
@@ -141,6 +141,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textStyle="bold"
+                        android:maxLines="1"
                         android:text="Email:"
                         android:textAlignment="textStart"
                         android:fontFamily="@font/roboto_mono_light"

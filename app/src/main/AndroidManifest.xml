@@ -15,6 +15,9 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".SeekerMessageActivity"
+            android:exported="false" />
+        <activity
             android:name=".SeekerInboxActivity"
             android:exported="false" />
         <activity

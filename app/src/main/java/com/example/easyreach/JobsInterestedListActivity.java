@@ -1,5 +1,6 @@
 package com.example.easyreach;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,5 +54,12 @@ public class JobsInterestedListActivity extends AppCompatActivity {
                         jobAdapter.notifyDataSetChanged();
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(JobsInterestedListActivity.this, SeekerMainActivity.class);
+        startActivity(i);
     }
 }

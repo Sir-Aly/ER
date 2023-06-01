@@ -18,7 +18,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="16dp"
+        >
 
 
 
@@ -28,6 +29,8 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/t1"
             android:text="Name"
+            android:ellipsize="end"
+            android:maxLines="3"
             android:textStyle="bold"
             android:textSize="30dp"
             android:textColor="@color/white"/>

@@ -9,7 +9,7 @@
     android:layout_gravity="center">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,12 +19,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardElevation="7dp"
+
             app:cardCornerRadius="20dp">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="677dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/cards_bg"
+                android:background="@drawable/straight_white_bg"
                 >
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/photoImageView"
@@ -37,12 +38,11 @@
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:orientation="vertical"
                     android:background="@drawable/straight_white_bg"
                     android:paddingTop="10dp"
-
                     android:paddingBottom="10dp"
 >
                     <LinearLayout
@@ -62,14 +62,34 @@
                             android:textColor="@color/black"
                             android:fontFamily="@font/roboto_mono_medium"
                             android:textStyle="bold"
-                            android:padding="6dp" />
+                             />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="7dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/AgeTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="24sp"
+                            android:text="Age"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/roboto_mono_medium"
+                            android:textStyle="bold"
+                            />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="7dp"
-                        android:weightSum="2">
+                        android:weightSum="2"
+                        android:paddingHorizontal="5dp">
                         <TextView
                             android:id="@+id/skillsText"
                             android:layout_width="wrap_content"
@@ -80,7 +100,7 @@
                             android:text="Seeker Skills: "
                             android:fontFamily="@font/helevaic"
                             android:textSize="24sp"
-                            android:padding="6dp" />
+                             />
 
                         <TextView
                             android:id="@+id/skillsTextView"
@@ -94,7 +114,7 @@
                             android:textColor="@color/black"
                             android:textAlignment="textEnd"
                             android:textSize="24sp"
-                            android:padding="6dp" />
+                             />
                     </LinearLayout>
 
 
@@ -103,6 +123,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="7dp"
+                        android:paddingHorizontal="5dp"
                         android:weightSum="2">
 
                         <TextView
@@ -115,7 +136,7 @@
                             android:textColor="@color/black"
                             android:textSize="24sp"
                             android:fontFamily="@font/helevaic"
-                            android:padding="6dp" />
+                             />
 
                         <TextView
                             android:id="@+id/locationTextView"
@@ -127,11 +148,12 @@
                             android:fontFamily="@font/roboto_mono_medium"
                             android:textColor="@color/black"
                             android:textSize="24sp"
-                            android:padding="6dp" />
+                            />
                     </LinearLayout>                    <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:paddingHorizontal="5dp"
                     android:weightSum="2"
                     android:layout_marginTop="7dp">
 
@@ -143,9 +165,11 @@
                         android:textStyle="bold"
                         android:text="Seeker Email:"
                         android:textSize="24sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         android:textColor="@color/black"
                         android:fontFamily="@font/helevaic"
-                        android:padding="6dp" />
+                        />
 
                     <TextView
                         android:id="@+id/emailTextView"
@@ -159,8 +183,45 @@
                         android:fontFamily="@font/roboto_mono_medium"
                         android:textColor="@color/black"
                         android:textSize="24sp"
-                        android:padding="6dp" />
+                        />
                 </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="5dp"
+                        android:weightSum="2"
+                        android:layout_marginTop="7dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/YoEfield"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:text="Years of Experience"
+                            android:textSize="24sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/helevaic"
+                            />
+
+                        <TextView
+                            android:id="@+id/YoETextField"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:text="1"
+                            android:textAlignment="textEnd"
+                            android:fontFamily="@font/roboto_mono_medium"
+                            android:textColor="@color/black"
+                            android:textSize="24sp"
+                             />
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -173,7 +234,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#00DDF8FE"
-                            android:src="@drawable/bookmark"
+                            android:src="@drawable/addfile"
 
                             />
 

@@ -1,6 +1,5 @@
 package com.example.easyreach;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -53,10 +50,10 @@ public class myadapter_inbox extends RecyclerView.Adapter<myadapter_inbox.myview
             super(itemView);
             t1=itemView.findViewById(R.id.t1);
             t2=itemView.findViewById(R.id.t2);
-            t3=itemView.findViewById(R.id.t3);
-            t4=itemView.findViewById(R.id.holderImage);
-            t5=itemView.findViewById(R.id.t5);
-            t6=itemView.findViewById(R.id.t6);
+//            t3=itemView.findViewById(R.id.t3);
+//            t4=itemView.findViewById(R.id.holderImage);
+//            t5=itemView.findViewById(R.id.t5);
+//            t6=itemView.findViewById(R.id.t6);
         }
         public ImageView getImage() {
             return t4;

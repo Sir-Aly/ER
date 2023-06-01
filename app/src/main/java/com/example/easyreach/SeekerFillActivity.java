@@ -216,7 +216,12 @@ public class SeekerFillActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                uploadImage();
+                if (imagePreview.getDrawable() ==null) {
+                    Toast.makeText(SeekerFillActivity.this, "please Select an Image First!.", Toast.LENGTH_SHORT).show();
+                }else {
+                    uploadImage();
+                }
+
             }
         });
     }

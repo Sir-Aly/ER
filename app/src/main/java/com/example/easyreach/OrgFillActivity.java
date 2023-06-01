@@ -184,7 +184,11 @@ private FirebaseAuth mAuth;
             @Override
             public void onClick(View v)
             {
-                uploadImage();
+                if (imagePreview.getDrawable() ==null) {
+                    Toast.makeText(OrgFillActivity.this, "please Select an Image First!.", Toast.LENGTH_SHORT).show();
+                }else {
+                    uploadImage();
+                }
             }
         });
     }

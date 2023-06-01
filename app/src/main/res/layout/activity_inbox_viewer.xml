@@ -27,18 +27,18 @@
         android:onClick="clear"
         />
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textStyle="bold"
-    android:text="Inbox"
-    android:drawableLeft="@drawable/baseline_inbox_24"
-    android:drawableTint="@color/blue_500"
-    android:drawablePadding="15dp"
-    android:layout_gravity="center"
-    android:textColor="@color/black"
-    android:textSize="50dp"
-    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Inbox"
+        android:drawableLeft="@drawable/baseline_inbox_24"
+        android:drawableTint="@color/blue_500"
+        android:drawablePadding="15dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textSize="50dp"
+        />
     <TextView
         android:id="@+id/messages_size"
         android:layout_width="wrap_content"
@@ -55,11 +55,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recview"
-        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recview"
+            android:nestedScrollingEnabled="true"
+            />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

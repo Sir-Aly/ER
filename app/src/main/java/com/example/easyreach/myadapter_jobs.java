@@ -1,5 +1,6 @@
 package com.example.easyreach;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,19 +31,23 @@ public class myadapter_jobs extends RecyclerView.Adapter<myadapter_jobs.myviewho
     }
 
     public void onBindViewHolder(@NonNull myviewholder holder, int position) {
-        holder.title.setText(datalist_jobs.get(position).getjTitle() + " " +"Job");
+        holder.jTitle.setText(datalist_jobs.get(position).getjTitle() + " " +"Job");
         holder.j_description.setText(datalist_jobs.get(position).getjDescription());
         holder.j_location.setText(datalist_jobs.get(position).getjLocation());
         holder.j_requirment.setText(datalist_jobs.get(position).getjRequirements());
-        holder.salary.setText(datalist_jobs.get(position).getjSalary()+"LE");
-        Glide.with(holder.jImage.getContext())
+        holder.jSalary.setText(datalist_jobs.get(position).getjSalary()+"LE");
+        holder.pUID.setText(datalist_jobs.get(position).getpUid());
+        Glide.with(holder.jobImage.getContext())
                 .load(datalist_jobs.get(position).getJobImage())
-                .into(holder.jImage);
+                .into(holder.jobImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //code here
+                String name = holder.pUID.getText().toString();
+                Intent intent = new Intent(view.getContext(), SeekerMessageActivity.class);
+                intent.putExtra(EXTRA_NAME,name);
+                view.getContext().startActivity(intent);
             }
         });
 
@@ -54,20 +59,21 @@ public class myadapter_jobs extends RecyclerView.Adapter<myadapter_jobs.myviewho
 
     class myviewholder extends RecyclerView.ViewHolder
     {
-        TextView j_description,j_location,j_requirment,salary,title;
-        RoundedImageView jImage;
+        TextView j_description,j_location,j_requirment, jSalary, jTitle, pUID;
+        RoundedImageView jobImage;
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);
             j_description=itemView.findViewById(R.id.j_description);
             j_location=itemView.findViewById(R.id.j_location);
             j_requirment=itemView.findViewById(R.id.j_requirment);
-            salary=itemView.findViewById(R.id.salary);
-            title=itemView.findViewById(R.id.title);
-            jImage=itemView.findViewById(R.id.imageRound);
+            jSalary =itemView.findViewById(R.id.salary);
+            jTitle =itemView.findViewById(R.id.title);
+            jobImage =itemView.findViewById(R.id.imageRound);
+            pUID = itemView.findViewById(R.id.pUID);
         }
         public ImageView getImage() {
-            return jImage;
+            return jobImage;
         }
     }
 }

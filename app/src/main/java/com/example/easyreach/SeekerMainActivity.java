@@ -55,8 +55,8 @@ public class SeekerMainActivity extends AppCompatActivity implements AdapterView
 
         Spinner spinner = findViewById(R.id.jobs_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.Fields, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.Fields, R.layout.custom_simple_spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
             seeker_int = (ImageButton) findViewById(R.id.seeker_interested_list);

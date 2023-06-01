@@ -43,7 +43,7 @@ public class SeekerInboxActivity extends AppCompatActivity {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Intent intent = new Intent(SeekerInboxActivity.this, inbox_viewer.class);
+                Intent intent = new Intent(SeekerInboxActivity.this, SeekerInboxActivity.class);
                 startActivity(intent);
             }
         });
