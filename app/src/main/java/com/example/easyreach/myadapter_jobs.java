@@ -1,5 +1,6 @@
 package com.example.easyreach;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class myadapter_jobs extends RecyclerView.Adapter<myadapter_jobs.myviewho
         holder.j_location.setText(datalist_jobs.get(position).getjLocation());
         holder.j_requirment.setText(datalist_jobs.get(position).getjRequirements());
         holder.salary.setText(datalist_jobs.get(position).getjSalary()+"LE");
+        holder.userid_review.setText(datalist_jobs.get(position).getpUid());
         Glide.with(holder.jImage.getContext())
                 .load(datalist_jobs.get(position).getJobImage())
                 .into(holder.jImage);
@@ -42,7 +44,10 @@ public class myadapter_jobs extends RecyclerView.Adapter<myadapter_jobs.myviewho
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //code here
+                String name = holder.userid_review.getText().toString();
+                Intent intent = new Intent(view.getContext(), Message_Field.class);
+                intent.putExtra(EXTRA_NAME,name);
+                view.getContext().startActivity(intent);
             }
         });
 
@@ -54,7 +59,7 @@ public class myadapter_jobs extends RecyclerView.Adapter<myadapter_jobs.myviewho
 
     class myviewholder extends RecyclerView.ViewHolder
     {
-        TextView j_description,j_location,j_requirment,salary,title;
+        TextView j_description,j_location,j_requirment,salary,title,userid_review;
         RoundedImageView jImage;
 
         public myviewholder(@NonNull View itemView) {
@@ -65,6 +70,7 @@ public class myadapter_jobs extends RecyclerView.Adapter<myadapter_jobs.myviewho
             salary=itemView.findViewById(R.id.salary);
             title=itemView.findViewById(R.id.title);
             jImage=itemView.findViewById(R.id.imageRound);
+            userid_review = itemView.findViewById(R.id.userid_review);
         }
         public ImageView getImage() {
             return jImage;

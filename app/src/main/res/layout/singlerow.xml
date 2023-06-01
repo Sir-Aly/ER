@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:id="@+id/t5"
-            android:text="testo"
+            android:text="testo2"
             android:textSize="23dp"
             android:layout_below="@+id/t3"
             />

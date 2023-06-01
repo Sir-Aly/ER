@@ -3,17 +3,18 @@ package com.example.easyreach;
 
 
 public class model_jobs {
-    String jDescription, jLocation,jRequirements,jSalary,jTitle, jobImage;
+    String jDescription, jLocation,jRequirements,jSalary,jTitle, jobImage,pUid;
 
     public model_jobs(){
     }
-    public model_jobs(String jDescription, String jLocation,String jRequirements, String jSalary, String jTitle, String jobImage){
+    public model_jobs(String jDescription, String jLocation,String jRequirements, String jSalary, String jTitle, String jobImage,String pUid){
         this.jDescription = jDescription;
         this.jLocation = jLocation;
         this.jRequirements = jRequirements;
         this.jSalary = jSalary;
         this.jTitle = jTitle;
         this.jobImage = jobImage;
+        this.pUid = pUid;
     }
     public String getjDescription() {
         return jDescription;
@@ -36,6 +37,9 @@ public class model_jobs {
     public String getjLocation(){
         return jLocation;
 
+    }
+    public String getpUid(){
+        return pUid;
     }
     //// setters
 
@@ -65,6 +69,10 @@ public class model_jobs {
 
     public void setJobImage(String jobImage) {
         this.jobImage = jobImage;
+    }
+    public void setpUid(String pUid){
+
+        this.pUid = pUid;
     }
 }
 

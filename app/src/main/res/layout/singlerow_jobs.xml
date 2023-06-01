@@ -124,6 +124,14 @@
                 android:layout_below="@+id/j_location"
                 />
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/userid_review"
+                android:text="test"
+                android:textSize="70dp"
+                />
+
 
 
 
