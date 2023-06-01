@@ -99,12 +99,7 @@ style="@style/ScreenBackground"
                             android:background="@drawable/grad_main"
                             android:backgroundTint="@color/black"
                             android:text="Log out"/>
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="CODE"
-                            android:onClick="go2test"
-                            />
+
 
 
 

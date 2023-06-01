@@ -30,10 +30,6 @@ public class TestMassage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_massage);
 
-        editTextTitle = findViewById(R.id.edit_text_title);
-        editTextDescription = findViewById(R.id.edit_text_description);
-        textViewData = findViewById(R.id.text_view_data);
-        CollectionReference Usersref = db.collection("user");
     }
 
     public void saveNote(View v) {

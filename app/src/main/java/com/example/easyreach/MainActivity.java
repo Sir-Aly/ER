@@ -20,6 +20,7 @@
 
     import com.google.android.gms.tasks.OnFailureListener;
     import com.google.android.gms.tasks.OnSuccessListener;
+    import com.google.android.material.bottomnavigation.BottomNavigationView;
     import com.google.android.material.navigation.NavigationView;
     import com.google.firebase.auth.FirebaseAuth;
     import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +32,8 @@
 
     import java.util.ArrayList;
     import java.util.List;
+
+    import maes.tech.intentanim.CustomIntent;
 
     public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -46,6 +49,7 @@
         private ImageButton btnAddJob;
         private ImageButton btnInterestedList;
         private NavigationView navigationView;
+
         ImageView leftArrow, rightArrow;
         private DocumentSnapshot currentJobSeeker;
         private CardStackView cardStackView;
@@ -72,7 +76,6 @@
             spinner.setOnItemSelectedListener(this);
 
             btnMain = findViewById(R.id.btnMain);
-            btnAddJob = findViewById(R.id.btnAddJob);
             btnInterestedList = findViewById(R.id.btnInterestedList);
             btnMain.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,19 +85,20 @@
                 }
             });
 
-            btnAddJob.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent addJob = new Intent(MainActivity.this, JobPostingActivity.class);
-                    startActivity(addJob);
-                }
-            });
+//            btnAddJob.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent addJob = new Intent(MainActivity.this, JobPostingActivity.class);
+//                    startActivity(addJob);
+//                }
+//            });
 
             btnInterestedList.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent interested = new Intent(MainActivity.this, interested_list.class);
+                    Intent interested = new Intent(MainActivity.this, jobs_viewer.class);
                     startActivity(interested);
+                    CustomIntent.customType(MainActivity.this,"left-to-right");
                 }
             });
     //        mSignOut = (TextView) findViewById(R.id.signOut);
@@ -167,6 +171,11 @@
             Intent intent = new Intent(this, interested_list.class);
             startActivity(intent);
         }
+        public void floating_method(View view){
+            Intent intent = new Intent(this,JobPostingActivity.class);
+            startActivity(intent);
+            CustomIntent.customType(MainActivity.this,"bottom-to-up");
+        }
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -210,6 +219,14 @@
             sAdapter = new JobSeekerCardAdapter(jobSeekers);
             // Set the adapter on the CardStackView
             cardStackView.setAdapter(sAdapter);
+        }
+        public void onBackPressed() {
+            super.onBackPressed();
+            Intent i = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+            return;
+
         }
 
 

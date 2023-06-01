@@ -69,7 +69,7 @@
                             android:textColor="@color/black"
                             android:padding="20dp"
                             android:drawableStart="@drawable/baseline_email_24"
-                            android:drawableTint="@color/ALI"
+                            android:drawableTint="@color/black"
                             android:drawablePadding="10sp"
                             />
 
@@ -209,7 +209,7 @@
     android:id="@+id/pBar"
     android:layout_width="50dp"
     android:layout_height="50dp"
-    android:indeterminateTint="@color/ALI"
+    android:indeterminateTint="@color/black"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
