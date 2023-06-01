@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true"
         android:backgroundTintMode="multiply"
         android:backgroundTint="#F9F9F9"
-        android:background="@drawable/registeration"/>
+        android:background="@drawable/logo_transparent"/>
 
     <!-- Job Title -->
     <com.google.android.material.textfield.TextInputLayout

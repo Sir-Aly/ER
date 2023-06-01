@@ -108,77 +108,9 @@ public class SeekerFillActivity extends AppCompatActivity {
 
                 String Address = eAddress.getText().toString();
 //                String Field = eField.getText().toString();
-                Map<String,Object> user = new HashMap<>();
-                user.put("sName",Firstname);
-                user.put("sEmail", Email);
-                user.put("sAge",Age);
-                user.put("sLocation", Address);
-                user.put("sYoE", YoE);
-                user.put("sDescription", Description);
-                user.put("sField", skills);
-                user.put("UID", userID);
 
                 CollectionReference SeekersRef = db.collection("Job Seekers");
                 DocumentReference SeekerDocRef = SeekersRef.document(userID);
-
-                CollectionReference SelectedCategoryRef = db.collection("JS").document("Field").collection(skills);
-
-                SelectedCategoryRef.whereEqualTo("UID", userID)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    QuerySnapshot querySnapshot = task.getResult();
-                                    if (querySnapshot.isEmpty()) {
-
-                                        SelectedCategoryRef.document("Field_Id").get().addOnCompleteListener(tasks -> {
-                                            if (tasks.isSuccessful()) {
-                                                DocumentSnapshot document = tasks.getResult();
-                                                if (document.exists()) {
-                                                    long lastSeekerId = document.getLong("last_id");
-                                                    long newSeekerId = lastSeekerId + 1;
-
-                                                    Map<String, Object> Seeker = new HashMap<>();
-                                                    Seeker.put("seeker_id", newSeekerId);
-                                                    Seeker.put("sName",Firstname);
-                                                    Seeker.put("UID", userID);
-                                                    Seeker.put("sEmail", Email);
-                                                    Seeker.put("sAge",Age);
-                                                    Seeker.put("sYoE", YoE);
-                                                    Seeker.put("sDescription", Description);
-                                                    Seeker.put("sLocation", Address);
-                                                    Seeker.put("sField", skills);
-                                                    SelectedCategoryRef.document(String.valueOf(newSeekerId)).set(Seeker);
-                                                    SelectedCategoryRef.document("Field_Id").update("last_id", newSeekerId);
-                                                }
-                                            }
-                                        });
-                                    } else {
-                                        DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
-                                        String documentId = documentSnapshot.getId();
-                                        SelectedCategoryRef.document(documentId)
-                                                .set(user, SetOptions.merge())
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Log.d(TAG, "DocumentSnapshot updated with ID: " + documentId);
-                                                        Toast.makeText(SeekerFillActivity.this, "Your Data is Updated Successfully", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Log.w(TAG, "Error updating document", e);
-                                                    }
-                                                });
-                                    }
-                                } else {
-                                    Log.d(TAG, "Error getting documents: ", task.getException());
-                                }
-                            }
-                        });
-
 
                 // Create a map to hold the updated data
                 Map<String, Object> updatedData = new HashMap<>();
@@ -333,10 +265,10 @@ public class SeekerFillActivity extends AppCompatActivity {
     private void saveImageUrlToFirestore(String imageUrl) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String Email = mAuth.getCurrentUser().getEmail();
 
-
-        CollectionReference jobSeekersRef = db.collection("JS").document("Field").collection(skills);
-        Query query = jobSeekersRef.whereEqualTo("UID", userId);
+        CollectionReference jobSeekersRef = db.collection("Job Seekers");
+        Query query = jobSeekersRef.whereEqualTo("sEmail", Email);
 
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -365,8 +297,6 @@ public class SeekerFillActivity extends AppCompatActivity {
                 }
             }
         });
-        //Up
-
 
     }
 

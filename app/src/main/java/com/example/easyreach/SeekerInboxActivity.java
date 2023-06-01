@@ -24,64 +24,54 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class jobs_viewer extends AppCompatActivity {
+public class SeekerInboxActivity extends AppCompatActivity {
 
     SwipeRefreshLayout refreshLayout;
-
-
     RecyclerView recview;
     TextView message_size;
-    ArrayList<model_jobs> datalist_jobs ;
+    ArrayList<model_inbox> datalist_inbox ;
     FirebaseFirestore db;
-    myadapter_jobs myadapter_jobs;
+    myadapter_inbox myadapter_inbox;
     private FirebaseAuth mAuth;
-
-
-
-
-
-
-
-
-
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.jobs_viewer);
-//        message_size = findViewById(R.id.messages_size);
-//       message_size.setText(getItemCounttt());
+        setContentView(R.layout.activity_seeker_inbox);
+        refreshLayout = findViewById(R.id.refreshlayout);
+        message_size = findViewById(R.id.messages_size);
 
-
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Intent intent = new Intent(SeekerInboxActivity.this, inbox_viewer.class);
+                startActivity(intent);
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
         recview=(RecyclerView)findViewById(R.id.recview);
         recview.setLayoutManager(new LinearLayoutManager(this));
-        datalist_jobs=new ArrayList<>();
-        myadapter_jobs =new myadapter_jobs(datalist_jobs);
-        recview.setAdapter(myadapter_jobs);
-
-
-
-        //collections
+        datalist_inbox=new ArrayList<>();
+        myadapter_inbox=new myadapter_inbox(datalist_inbox);
+        recview.setAdapter(myadapter_inbox);
 
         db=FirebaseFirestore.getInstance();
-        CollectionReference Jobs = db.collection("Jobs");
+        CollectionReference users = db.collection("user");
         String userID =  mAuth.getCurrentUser().getUid();
-        Jobs.get()
+        users.document(userID).collection("Messages").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
                         for(DocumentSnapshot d:list)
                         {
-                            model_jobs obj=d.toObject(model_jobs.class);
-                            datalist_jobs.add(obj);
+                            model_inbox obj=d.toObject(model_inbox.class);
+                            datalist_inbox.add(obj);
+                            String size = String.valueOf(myadapter_inbox.getItemCount());
+                            message_size.setText(size +" "+"NEW MESSAGES");
                         }
-                        myadapter_jobs.notifyDataSetChanged();
+                        myadapter_inbox.notifyDataSetChanged();
                     }
                 });
-
-//        message_size.setText(datalist_jobs.size() +" "+"NEW MESSAGES");
-//        message_size.setText(myadapter_jobs.getItemCount() +" "+"NEW MESSAGES");
     }
 
     public void clear(View view){
@@ -96,16 +86,11 @@ public class jobs_viewer extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(jobs_viewer.this, MainActivity.class);
-        startActivity(i);
+        Intent back = new Intent(SeekerInboxActivity.this, SeekerMainActivity.class);
+        startActivity(back);
     }
 }

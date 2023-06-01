@@ -29,7 +29,7 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/photoImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="300dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/ali"
                     android:backgroundTint="@color/white"
@@ -37,7 +37,7 @@
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="bottom"
                     android:orientation="vertical"
                     android:background="@drawable/straight_white_bg"
@@ -88,6 +88,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Seeker Skills"
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             android:fontFamily="@font/roboto_mono_medium"
                             android:textColor="@color/black"
                             android:textAlignment="textEnd"
@@ -150,7 +152,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         android:text="Seeker Email"
                         android:textAlignment="textEnd"
                         android:fontFamily="@font/roboto_mono_medium"
@@ -171,6 +174,7 @@
                             android:layout_height="wrap_content"
                             android:background="#00DDF8FE"
                             android:src="@drawable/bookmark"
+
                             />
 
 

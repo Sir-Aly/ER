@@ -26,11 +26,14 @@
     import com.google.firebase.firestore.CollectionReference;
     import com.google.firebase.firestore.DocumentSnapshot;
     import com.google.firebase.firestore.FirebaseFirestore;
+    import com.google.firebase.firestore.Query;
     import com.google.firebase.firestore.QuerySnapshot;
     import com.yuyakaido.android.cardstackview.CardStackView;
 
     import java.util.ArrayList;
     import java.util.List;
+
+    import maes.tech.intentanim.CustomIntent;
 
     public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -82,19 +85,20 @@
                 }
             });
 
-            btnAddJob.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent addJob = new Intent(MainActivity.this, JobPostingActivity.class);
-                    startActivity(addJob);
-                }
-            });
+//            btnAddJob.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent addJob = new Intent(MainActivity.this, JobPostingActivity.class);
+//                    startActivity(addJob);
+//                }
+//            });
 
             btnInterestedList.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent interested = new Intent(MainActivity.this, interested_list.class);
+                    Intent interested = new Intent(MainActivity.this, jobs_viewer.class);
                     startActivity(interested);
+                    CustomIntent.customType(MainActivity.this,"left-to-right");
                 }
             });
             orgInterest.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +172,11 @@
             navigationView.setItemIconTintList(null);
 
         }
+        public void floating_method(View view){
+            Intent intent = new Intent(this,JobPostingActivity.class);
+            startActivity(intent);
+            CustomIntent.customType(MainActivity.this,"bottom-to-up");
+        }
 
 
         @Override
@@ -175,9 +184,9 @@
             text = parent.getItemAtPosition(position).toString();
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            CollectionReference jobSeekersRef = db.collection("JS").document("Field").collection(text);
+            Query query = db.collection("Job Seekers").whereEqualTo("sField", text);
 
-            jobSeekersRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             jobSeekers.clear();

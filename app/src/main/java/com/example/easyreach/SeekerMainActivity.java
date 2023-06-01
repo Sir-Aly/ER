@@ -86,7 +86,7 @@ public class SeekerMainActivity extends AppCompatActivity implements AdapterView
                         return false;
 
                     case R.id.menuSeekerInbox:
-                        Intent inbox = new Intent(SeekerMainActivity.this , inbox_viewer.class);
+                        Intent inbox = new Intent(SeekerMainActivity.this , SeekerInboxActivity.class);
                         startActivity(inbox);
                         finish();
                         return false;
@@ -158,7 +158,6 @@ public class SeekerMainActivity extends AppCompatActivity implements AdapterView
         text = parent.getItemAtPosition(position).toString();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference jobSeekersRef = db.collection("JS").document("Field").collection(text);
 
         Query query = db.collection("Jobs").whereEqualTo("jField", text);
 

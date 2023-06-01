@@ -29,7 +29,7 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/photoImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="300dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/jobsbg"
                     android:backgroundTint="@color/white"
@@ -84,12 +84,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_mono_medium"
-                            android:textStyle="bold"
-                            android:text="Seeker Skills"
+                            android:maxLines="1"
+                            android:padding="6dp"
+                            android:text="Requirements"
+                            android:ellipsize="end"
                             android:textAlignment="textEnd"
                             android:textColor="@color/black"
                             android:textSize="24sp"
-                            android:padding="6dp" />
+                            android:textStyle="bold" />
                     </LinearLayout>
 
 
@@ -120,6 +122,8 @@
                             android:textAlignment="textEnd"
                             android:text="Job Location"
                             android:fontFamily="@font/roboto_mono_medium"
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             android:textColor="@color/black"
                             android:textSize="24sp"
                             android:padding="6dp" />
@@ -147,6 +151,8 @@
                             android:id="@+id/emailTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             android:textColor="@color/black"
                             android:textAlignment="textEnd"
                             android:layout_weight="1"

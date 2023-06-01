@@ -231,9 +231,10 @@ private FirebaseAuth mAuth;
     }
     private void saveImageUrlToFirestore(String imageUrl) {
 
+        String pMail = mAuth.getCurrentUser().getEmail();
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         CollectionReference jobSeekersRef = db.collection("Job Providers");
-        Query query = jobSeekersRef.whereEqualTo("pUID", userId);
+        Query query = jobSeekersRef.whereEqualTo("pEmail", pMail);
 
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
