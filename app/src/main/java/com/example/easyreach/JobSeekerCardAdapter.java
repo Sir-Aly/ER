@@ -58,7 +58,7 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
                 if (user != null) {
                     String userID = user.getUid();
                     String sID = jobSeeker.getUID().toString();
-                    Add add = new Add(jobSeeker.getsName(), jobSeeker.getsField(), jobSeeker.getsLocation(), jobSeeker.getsEmail(), jobSeeker.getUID(), jobSeeker.getsImageUrl());
+                    JobSeeker add = new JobSeeker(jobSeeker.getsName(), jobSeeker.getsField(), jobSeeker.getsLocation(),jobSeeker.getsImageUrl(), jobSeeker.getsEmail(), jobSeeker.getUID() );
                     FirebaseFirestore.getInstance().collection("user").document(userID).collection("Likes").document(sID).set(add).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
