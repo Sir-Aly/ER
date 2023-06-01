@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,17 +49,6 @@ public class SeekerProfileActivity extends AppCompatActivity {
         emailTv= (TextView) findViewById(R.id.email);
         YoETv = (TextView) findViewById(R.id.sYoE);
         mForgetPassword = (Button) findViewById(R.id.forgetPasswordButton);
-        mForgetPassword.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent i = new Intent(SeekerProfileActivity.this, ForgetPasswordActivity.class  );
-                startActivity(i);
-                finish();
-            }
-        });
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String currentid = user.getUid();
         String uMail = user.getEmail();
@@ -71,55 +61,43 @@ public class SeekerProfileActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 final String TAG = "problem";
                 if (task.isSuccessful()) {
+                    boolean isProfileDataFilled = false;
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " => " + document.getData());
-                        String sName = document.get("sName").toString();
-                        String sLocation = document.get("sLocation").toString();
-                        String sAge = document.get("sAge").toString();
-                        String sField = document.get("sField").toString();
-                        String sEmail = document.get("sEmail").toString();
-                        String sYoE = document.get("sYoE").toString();
+                        if (document.contains("sField") && document.contains("sLocation") && document.contains("sDescription") && document.contains("sImageUrl")) {
+                            String sField = document.get("sField").toString();
+                            if (!sField.isEmpty()) {
+                                isProfileDataFilled = true;
+                                String sName = document.get("sName").toString();
+                                String sLocation = document.get("sLocation").toString();
+                                String sAge = document.get("sAge").toString();
 
+                                String sEmail = document.get("sEmail").toString();
+                                String sYoE = document.get("sYoE").toString();
 
-                        nameTv.setText(sName);
-                        addressTv.setText(sLocation);
-                        ageTv.setText(sAge);
-                        YoETv.setText(sYoE);
-                        fieldTv.setText(sField);
-                        emailTv.setText(sEmail);
+                                nameTv.setText(sName);
+                                addressTv.setText(sLocation);
+                                ageTv.setText(sAge);
+                                YoETv.setText(sYoE);
+                                fieldTv.setText(sField);
+                                emailTv.setText(sEmail);
+                            }
+                        }
+                    }
+                    if (!isProfileDataFilled) {
 
-
-
+                        Toast.makeText(SeekerProfileActivity.this, "Please Fill your data first", Toast.LENGTH_SHORT).show();
+                        // Redirect the user to the FillActivity to fill the profile data
+                        Intent intent = new Intent(SeekerProfileActivity.this, SeekerFillActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 } else {
-                    Log.w(TAG, "Error getting documents.", task.getException());
+                    Log.d(TAG, "Error getting documents: ", task.getException());
                 }
             }
         });
 
-//        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                final String TAG = "problem";
-//                if (task.getResult().exists()){
-//                    String fullName= task.getResult().getString("Fname");
-//                    String uaddress = task.getResult().getString("Address");
-//                    String uage = task.getResult().getString("Age");
-//                    String ufield = task.getResult().getString("Field");
-//                    String umail = task.getResult().getString("Semail");
-//
-//                    pNameTv.setText(fullName);
-//                    nameTv.setText(fullName);
-//                    addressTv.setText(uaddress);
-//                    ageTv.setText(uage);
-//                    fieldTv.setText(ufield);
-//                    emailTv.setText(umail);
-//                }
-//                else {
-//                    Log.w(TAG, "Error getting documents.", task.getException());
-//                }
-//            }
-//        });
         reference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -146,7 +124,15 @@ public class SeekerProfileActivity extends AppCompatActivity {
 
             }
         });
+        mForgetPassword.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent i = new Intent(SeekerProfileActivity.this, ForgetPasswordActivity.class  );
+                startActivity(i);
+                finish();
+            }
+        });
     }
+
     //    Context context = getApplicationContext();
 //    // Get the image URL from the document
 //    String imageUrl = document.get("profileImageUrl").toString();

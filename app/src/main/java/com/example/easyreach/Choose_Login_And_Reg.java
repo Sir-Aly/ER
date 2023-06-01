@@ -58,7 +58,6 @@ SharedPreferences.Editor editor;
 
         mLogin = (Button) findViewById(R.id.login);
         mRegister = (Button) findViewById(R.id.register);
-        mLogout = (Button) findViewById(R.id.logout);
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -79,13 +78,6 @@ SharedPreferences.Editor editor;
                 startActivity(i);
                 finish();
                 return;
-            }
-        });
-        mLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-
             }
         });
 

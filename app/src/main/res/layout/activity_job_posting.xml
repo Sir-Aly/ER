@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background2"
     xmlns:tools="http://schemas.android.com/tools"
-    android:backgroundTint="#FEFEFE">
+    >
 
 
 
@@ -18,7 +19,7 @@
         android:layout_height="200dp"
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
-android:backgroundTintMode="multiply"
+        android:backgroundTintMode="multiply"
         android:backgroundTint="#F9F9F9"
         android:background="@drawable/registeration"/>
 
@@ -27,7 +28,6 @@ android:backgroundTintMode="multiply"
         android:id="@+id/job_title_text_input"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_below="@id/logo"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -81,6 +81,7 @@ android:backgroundTintMode="multiply"
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/job_requirements_edit_text"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:inputType="textMultiLine"
@@ -89,13 +90,48 @@ android:backgroundTintMode="multiply"
             android:maxLines="5" />
 
     </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fieldlayout"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="16dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/job_requirements_text_input"
+        android:layout_marginTop="7dp"
+        android:hint="Experience Field">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/droplist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_below="@+id/agelayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            >
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:hint="Expirence Field"
+                android:layout_height="wrap_content"
+                android:id="@+id/job_auto_complete_textview"
+                android:textColor="@color/black"
+                android:inputType="none"
+                />
+            <TextView
+                android:id="@+id/field"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                android:text="Test"
+                android:textSize="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
         <!--    Job Location-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/job_location_text_input"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/job_requirements_text_input"
+        android:layout_below="@id/fieldlayout"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:hint="Job Location">

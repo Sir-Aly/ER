@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +44,6 @@ public class ProfilePage extends AppCompatActivity {
         setContentView(R.layout.profile_page);
         final String TAG = "problem";
 
-
         profilePictureImageView = findViewById(R.id.ProfileImage);
         pNameTv= (TextView) findViewById(R.id.sName);
         addressTv= (TextView) findViewById(R.id.address);
@@ -51,17 +51,6 @@ public class ProfilePage extends AppCompatActivity {
         fieldTv= (TextView) findViewById(R.id.field);
         emailTv= (TextView) findViewById(R.id.email);
         mForgetPassword = (Button) findViewById(R.id.forgetPasswordButton);
-        mForgetPassword.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent i = new Intent(ProfilePage.this, ForgetPasswordActivity.class  );
-                startActivity(i);
-                finish();
-            }
-        });
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String currentid = user.getUid();
         String uMail = user.getEmail();
@@ -74,50 +63,40 @@ public class ProfilePage extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 final String TAG = "problem";
                 if (task.isSuccessful()) {
+                    boolean isProfileDataFilled = false;
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Log.d(TAG, document.getId() + " => " + document.getData());
-                        String orgName = document.get("pName").toString();
-                        String uaddress = document.get("pLocation").toString();
-                        String uage = document.get("pFoundationYear").toString();
-                        String ufield = document.get("pField").toString();
-                        String umail = document.get("pEmail").toString();
+                        if (document.contains("pField") && document.contains("pLocation") && document.contains("pFoundationYear") && document.contains("profileUrl")) {
+                            String ufield = document.getString("pField");
+                            if (!ufield.isEmpty()) {
+                                isProfileDataFilled = true;
+                                String orgName = document.getString("pName");
+                                String uaddress = document.getString("pLocation");
+                                String uage = document.getString("pFoundationYear");
+                                String umail = document.getString("pEmail");
 
-                        pNameTv.setText(orgName);
-                        addressTv.setText(uaddress);
-                        ageTv.setText(uage);
-                        fieldTv.setText(ufield);
-                        emailTv.setText(umail);
+                                pNameTv.setText(orgName);
+                                addressTv.setText(uaddress);
+                                ageTv.setText(uage);
+                                fieldTv.setText(ufield);
+                                emailTv.setText(umail);
+                            }
+                        }
+                    }
+                    if (!isProfileDataFilled) {
 
+                        Toast.makeText(ProfilePage.this, "Please Fill your data first", Toast.LENGTH_SHORT).show();
+                        // Redirect the user to the FillActivity to fill the profile data
+                        Intent intent = new Intent(ProfilePage.this, OrgFillActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 } else {
-                    Log.w(TAG, "Error getting documents.", task.getException());
+                    Log.d(TAG, "Error getting documents: ", task.getException());
                 }
             }
         });
 
-//        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                final String TAG = "problem";
-//                if (task.getResult().exists()){
-//                    String fullName= task.getResult().getString("Fname");
-//                    String uaddress = task.getResult().getString("Address");
-//                    String uage = task.getResult().getString("Age");
-//                    String ufield = task.getResult().getString("Field");
-//                    String umail = task.getResult().getString("Semail");
-//
-//                    pNameTv.setText(fullName);
-//                    nameTv.setText(fullName);
-//                    addressTv.setText(uaddress);
-//                    ageTv.setText(uage);
-//                    fieldTv.setText(ufield);
-//                    emailTv.setText(umail);
-//                }
-//                else {
-//                    Log.w(TAG, "Error getting documents.", task.getException());
-//                }
-//            }
-//        });
         reference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -144,16 +123,15 @@ public class ProfilePage extends AppCompatActivity {
 
             }
         });
+        mForgetPassword.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent i = new Intent(ProfilePage.this, ForgetPasswordActivity.class  );
+                startActivity(i);
+                finish();
+            }
+        });
     }
-//    Context context = getApplicationContext();
-//    // Get the image URL from the document
-//    String imageUrl = document.get("profileImageUrl").toString();
-//
-//
-//
-//                        Glide.with(context)
-//            .load(imageUrl)
-//                                .into(profilePictureImageView);
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

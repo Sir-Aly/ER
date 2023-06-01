@@ -44,9 +44,8 @@
         String jobSeekerId, text;
         private ImageButton btnMain;
         private ImageButton btnAddJob;
-        private ImageButton btnInterestedList;
+        private ImageButton btnInterestedList, orgInterest;
         private NavigationView navigationView;
-        ImageView leftArrow, rightArrow;
         private DocumentSnapshot currentJobSeeker;
         private CardStackView cardStackView;
         private JobSeekerCardAdapter sAdapter;
@@ -74,6 +73,7 @@
             btnMain = findViewById(R.id.btnMain);
             btnAddJob = findViewById(R.id.btnAddJob);
             btnInterestedList = findViewById(R.id.btnInterestedList);
+            orgInterest = findViewById(R.id.interest_org);
             btnMain.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -95,6 +95,13 @@
                 public void onClick(View view) {
                     Intent interested = new Intent(MainActivity.this, interested_list.class);
                     startActivity(interested);
+                }
+            });
+            orgInterest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent orgInt = new Intent(MainActivity.this, interested_list.class);
+                    startActivity(orgInt);
                 }
             });
     //        mSignOut = (TextView) findViewById(R.id.signOut);
@@ -162,11 +169,6 @@
 
         }
 
-
-        public void hi2(View view) {
-            Intent intent = new Intent(this, interested_list.class);
-            startActivity(intent);
-        }
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

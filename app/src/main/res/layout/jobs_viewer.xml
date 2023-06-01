@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".interested_list"
+    android:background="@drawable/background2"
     >
     <RelativeLayout
         android:id="@+id/layoutToolBar"

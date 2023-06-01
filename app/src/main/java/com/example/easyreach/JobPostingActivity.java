@@ -1,9 +1,14 @@
 package com.example.easyreach;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,14 +28,36 @@ public class JobPostingActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
+    TextView field;
+    String jField;
     EditText jTitle, jDesc, jReq, jSalary, jLoc;
     MaterialButton postJobBtn;
+    String[] item = {"Web Developer", "AI Developer", "Data Scientist", "Accountant", "Graphic Designer"};
+    AutoCompleteTextView autoCompleteTextView;
+    ArrayAdapter<String> adapterItems;
+    private static final String TAG = "Job Posting Activity";
 
     Long MaxJobs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_posting);
+        autoCompleteTextView = findViewById(R.id.job_auto_complete_textview);
+
+        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, item);
+
+        autoCompleteTextView.setAdapter(adapterItems);
+
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                field = findViewById(R.id.field);
+                field.setText(item);
+                jField = field.getText().toString();
+            }
+        });
 
         jTitle = findViewById(R.id.job_title_edit_text);
         jDesc = findViewById(R.id.job_description_edit_text);
@@ -88,6 +115,7 @@ public class JobPostingActivity extends AppCompatActivity {
                             Map<String, Object> job = new HashMap<>();
                             job.put("job_id", newJobId);
                             job.put("jTitle",Title);
+                            job.put("jField", jField);
                             job.put("pUid", userID);
                             job.put("jDescription",Description);
                             job.put("jLocation", Location);
@@ -110,5 +138,12 @@ public class JobPostingActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent back = new Intent(JobPostingActivity.this, MainActivity.class);
+        startActivity(back);
     }
 }

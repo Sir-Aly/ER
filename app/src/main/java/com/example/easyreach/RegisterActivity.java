@@ -7,9 +7,8 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,12 +17,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,13 +34,14 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
 
         private Button mRegister;
-        private ProgressBar spinner;
-        private EditText mEmail, mPassword, mName, mBudget;
 
+        private EditText mEmail, mPassword, mName, mBudget;
+        RadioGroup userTypeRadioGroup;
 
         private RadioGroup mRadioGroup;
-        private boolean isJobProvider;
+
         private FirebaseAuth mAuth;
+        private RadioButton mJobSeekerRadioButton, mJobProviderRadioButton;
         private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
         final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 //        private static final String TAG = "RegisterActivity";
@@ -46,25 +50,46 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        userTypeRadioGroup = findViewById(R.id.userTypeRadioGroup);
+        mJobSeekerRadioButton = findViewById(R.id.jobSeekerRadioButton);
+        mJobProviderRadioButton = findViewById(R.id.jobProviderRadioButton);
 
-        spinner = (ProgressBar) findViewById(R.id.pBar);
-        spinner.setVisibility(View.GONE);
         TextView existing = (TextView) findViewById(R.id.existing);
         mAuth = FirebaseAuth.getInstance();
-//        firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                spinner.setVisibility(View.VISIBLE);
-//                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//                if (user != null && user.isEmailVerified()) {
-//                    Intent i = new Intent( RegisterActivity.this, MainActivity.class);
-//                    startActivity(i);
-//                    finish();
-//                    return;
-//                }
-//                spinner.setVisibility(View.GONE);
-//            }
-//        };
+        firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null && user.isEmailVerified()) {
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection("Job Providers").whereEqualTo("pEmail", user.getEmail()).get()
+                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    if (!queryDocumentSnapshots.isEmpty()) {
+                                        // User is a job provider
+                                        Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                        return;
+                                    } else {
+                                        // User is a job seeker
+                                        Intent i = new Intent(RegisterActivity.this, SeekerMainActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                        return;
+                                    }
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    // Error checking user type
+                                }
+                            });
+                }
+            }
+        };
 
         existing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,13 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        CheckBox jobProviderCheckbox = findViewById(R.id.job_provider_checkbox);
-        jobProviderCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                isJobProvider = isChecked;
-            }
-        });
+
         mRegister = (Button) findViewById(R.id.register);
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
@@ -98,8 +117,6 @@ public class RegisterActivity extends AppCompatActivity {
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                spinner.setVisibility(View.VISIBLE);
-
                 final String pEmail = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
                 final String name = mName.getText().toString();
@@ -134,18 +151,24 @@ public class RegisterActivity extends AppCompatActivity {
                                             Map user = new HashMap<>();
                                             user.put("pEmail", pEmail);
                                             user.put("pName", name);
-                                            user.put("jobProvider", true);
+                                            user.put("jobProvider", isJobProvider());
+
+                                            Map seekerUser = new HashMap<>();
+                                            seekerUser.put("sEmail", pEmail);
+                                            seekerUser.put("sName", name);
+                                            seekerUser.put("jobProvider", isJobProvider());
 
 
                                             // Store the user's information in the Firestore database
                                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                                             String userID = mAuth.getCurrentUser().getUid();
-                                            if (isJobProvider) {
+                                            if (isJobProvider()) {
                                                 db.collection("Job Providers").document(userID).set(user);
+                                                Toast.makeText(RegisterActivity.this, "Please Don't forget to fill your data when you login.", Toast.LENGTH_SHORT).show();
                                             } else {
+                                                db.collection("Job Seekers").document(userID).set(seekerUser);
                                                 Toast.makeText(RegisterActivity.this, "Please Don't forget to fill your data when you login.", Toast.LENGTH_SHORT).show();
                                             }
-
                                             Intent i = new Intent(RegisterActivity.this, Choose_Login_And_Reg.class);
                                             startActivity(i);
                                             finish();
@@ -165,7 +188,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-                    spinner.setVisibility(View.GONE);
             }
         });
 
@@ -187,7 +209,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return true;
     }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -198,6 +219,11 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         mAuth.removeAuthStateListener(firebaseAuthStateListener);
+    }
+
+    private boolean isJobProvider() {
+        int checkedRadioButtonId = userTypeRadioGroup.getCheckedRadioButtonId();
+        return checkedRadioButtonId == R.id.jobProviderRadioButton;
     }
 
     @Override

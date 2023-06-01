@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,38 +25,29 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
 
-    private ProgressBar spinner;
     private Button mLogin;
     private EditText mEmail, mPassword;
-    private TextView mForgetPassword;
+    private TextView mForgetPassword, newUser;
     private boolean loginBtnClicked;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
-
-    Button Test_Test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         loginBtnClicked = false;
-        spinner = (ProgressBar) findViewById(R.id.pBar);
-        spinner.setVisibility(View.GONE);
-
-        Test_Test = findViewById(R.id.test_test);
-
         mAuth = FirebaseAuth.getInstance();
         mLogin = (Button) findViewById(R.id.login);
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
         mForgetPassword = (TextView) findViewById(R.id.forgetPasswordButton);
+        newUser = (TextView) findViewById(R.id.new_user);
 
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loginBtnClicked = true;
-                spinner.setVisibility(View.VISIBLE);
                 final String email = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
 
@@ -99,24 +89,28 @@ public class LoginActivity extends AppCompatActivity {
                                                     // Error checking user type
                                                 }
                                             });
-                                    spinner.setVisibility(View.GONE);
                                 }
                             }
                         }
                     });
                 }
-                spinner.setVisibility(View.GONE);
             }
         });
 
         mForgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                spinner.setVisibility(View.VISIBLE);
                 Intent i = new Intent(LoginActivity.this, ForgetPasswordActivity.class  );
                 startActivity(i);
                 finish();
                 return;
+            }
+        });
+        newUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent n = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(n);
             }
         });
 
@@ -124,7 +118,6 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                spinner.setVisibility(View.VISIBLE);
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null && user.isEmailVerified()) {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -153,31 +146,14 @@ public class LoginActivity extends AppCompatActivity {
                                     // Error checking user type
                                 }
                             });
-                    spinner.setVisibility(View.GONE);
                     return;
                 }
 
-                spinner.setVisibility(View.GONE);
             }
         };
 
 
 
-        firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null && user.isEmailVerified() && !loginBtnClicked) {
-                    spinner.setVisibility(View.VISIBLE);
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(i);
-                    finish();
-                    spinner.setVisibility(View.GONE);
-                    return;
-
-                }
-            }
-        };
     }
 
     private boolean isStringNull(String email) {

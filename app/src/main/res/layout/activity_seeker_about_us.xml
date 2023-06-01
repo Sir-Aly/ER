@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#FFFFFF"
-    tools:context=".SeekerAboutUsActivity">
+    android:background="@drawable/background2"
+    tools:context=".AboutUsActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,66 +18,61 @@
             android:id="@+id/logo_image"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:src="@drawable/registeration"
-
+            android:src="@drawable/logo_transparent"
             android:layout_centerHorizontal="true"
+
             android:layout_marginTop="32dp"
             android:contentDescription="@string/easyreach_logo"/>
 
-        <TextView
-            android:id="@+id/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_below="@+id/logo_image"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"/>
 
         <TextView
             android:id="@+id/version_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/version_info"
-            android:textSize="16sp"
-            android:layout_below="@+id/app_name"
+            android:fontFamily="@font/raleway_bold"
+            android:text="@string/org_version_info"
+            android:textSize="26sp"
+            android:textColor="@color/black"
+            android:layout_below="@+id/logo_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"/>
-
         <TextView
             android:id="@+id/about_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_bold"
             android:text="@string/app_info"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_below="@+id/version_info"
+            android:textColor="@color/black"
             android:layout_marginTop="32dp"
             android:layout_centerHorizontal="true"/>
-
         <TextView
             android:id="@+id/social_media_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/social_media_accounts"
-            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/raleway_bold"
+            android:textSize="18sp"
             android:layout_below="@+id/about_text"
             android:layout_marginTop="32dp"
             android:layout_centerHorizontal="true"
             />
-
         <ImageButton
             android:id="@+id/facebook_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/black"
+            android:backgroundTint="#00FFFFFF"
             android:autoLink="web"
             android:linksClickable="true"
             android:src="@drawable/facebook"
             android:layout_below="@+id/social_media_text"
             android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/facebook_page" />
 
         <ImageButton
             android:id="@+id/twitter_text"
@@ -85,21 +80,24 @@
             android:layout_height="wrap_content"
             android:src="@drawable/twitter"
             android:drawablePadding="8dp"
-            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/black"
+            android:backgroundTint="#00FFFFFF"
             android:layout_below="@+id/facebook_text"
             android:layout_marginTop="8dp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/twitter_page" />
 
         <ImageButton
             android:id="@+id/instagram_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="#00FFFFFF"
             android:drawablePadding="8dp"
             android:layout_below="@+id/twitter_text"
+            android:textColor="@color/black"
             android:layout_marginTop="8dp"
             android:src="@drawable/instagram"
-            android:layout_centerHorizontal="true"/>
-
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/instagram_page" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
