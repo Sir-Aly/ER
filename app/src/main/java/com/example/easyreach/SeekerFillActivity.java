@@ -4,6 +4,8 @@ package com.example.easyreach;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -44,10 +46,14 @@ public class SeekerFillActivity extends AppCompatActivity {
     EditText firstName, age, eAddress, eField, sDescription, sYoE;
     TextView field;
     private static final int PICK_IMAGE_REQUEST = 1;
-    private Button btnUpload;
+    private Button btnUpload, btnChooseCV, btnUploadCV;
     private Button selectImageButton;
     private ImageView imagePreview;
     private Uri imageUri;
+    private static final int PICK_PDF_REQUEST = 2;
+    private Uri cvUri;
+    private StorageReference cvStorageRef;
+    private DocumentReference userRef; // Unique integer value for CV selection request
     String skills;
     String PhotoUrl;
     MaterialButton RegisterBtn, SeekerUploadBtn;
@@ -64,11 +70,64 @@ public class SeekerFillActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seeker_fill);
         autoCompleteTextView = findViewById(R.id.auto_complete_textview);
+        cvStorageRef = FirebaseStorage.getInstance().getReference().child("cv");
 
+// Initialize Firestore document reference for the current user
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userRef = db.collection("Job Seekers").document(currentUserId);
         adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, item);
+        AutoCompleteTextView citySpinner = findViewById(R.id.cityAutoCompleteTextView);
 
+        // Retrieve the list of Egyptian cities from resources
+        String[] egyptianCities = getResources().getStringArray(R.array.egyptian_cities);
+
+        // Create an ArrayAdapter with the Egyptian cities
+        final ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, egyptianCities);
+
+        // Set the ArrayAdapter as the adapter for the AutoCompleteTextView
+        citySpinner.setAdapter(cityAdapter);
+
+        // Set a TextWatcher to filter the city list as the user types
+        citySpinner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not needed in this case
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Filter the city list based on the user's input
+                String filter = s.toString().toLowerCase();
+                cityAdapter.getFilter().filter(filter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not needed in this case
+            }
+        });
         autoCompleteTextView.setAdapter(adapterItems);
+        btnUpload = findViewById(R.id.seeker_btn_Upload);
+        btnUploadCV = findViewById(R.id.btnUploadCV);
+        btnUploadCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (cvUri != null) {
+                    uploadPDFToStorage(cvUri);
+                } else {
+                    Toast.makeText(SeekerFillActivity.this, "Please select a CV file", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
+        btnChooseCV = findViewById(R.id.btnChooseCV);
+        btnChooseCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectPDFFile();
+            }
+        });
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -83,7 +142,7 @@ public class SeekerFillActivity extends AppCompatActivity {
         sDescription = findViewById(R.id.sDescription);
         sYoE = findViewById(R.id.YoE);
         age = findViewById(R.id.age);
-        eAddress = findViewById(R.id.address);
+
 //        eField = findViewById(R.id.field);
         RegisterBtn = findViewById(R.id.btnRegister);
 
@@ -106,17 +165,16 @@ public class SeekerFillActivity extends AppCompatActivity {
                 String Description = sDescription.getText().toString();
 
 
-                String Address = eAddress.getText().toString();
+                String Address = citySpinner.getText().toString();
 //                String Field = eField.getText().toString();
 
-                CollectionReference SeekersRef = db.collection("Job Seekers");
-                DocumentReference SeekerDocRef = SeekersRef.document(userID);
+
 
                 // Create a map to hold the updated data
                 Map<String, Object> updatedData = new HashMap<>();
 
                 // Retrieve the existing data from the database
-                SeekerDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         // Check if the document exists
@@ -128,6 +186,7 @@ public class SeekerFillActivity extends AppCompatActivity {
                             String existingLocation = documentSnapshot.getString("sLocation");
                             String existingField = documentSnapshot.getString("sField");
                             String existingYoE = documentSnapshot.getString("sYoE");
+                            String existingImageUrl = documentSnapshot.getString("sImageUrl");
 
                             // Update the fields if the corresponding EditText fields are not empty
                             if (!firstName.getText().toString().isEmpty()) {
@@ -150,8 +209,8 @@ public class SeekerFillActivity extends AppCompatActivity {
                             } else {
                                 updatedData.put("sYoE", existingYoE); // Keep the existing value
                             }
-                            if (!eAddress.getText().toString().isEmpty()) {
-                                updatedData.put("sLocation", eAddress.getText().toString());
+                            if (!citySpinner.getText().toString().isEmpty()) {
+                                updatedData.put("sLocation", citySpinner.getText().toString());
                             } else {
                                 updatedData.put("sLocation", existingLocation); // Keep the existing value
                             }
@@ -160,11 +219,15 @@ public class SeekerFillActivity extends AppCompatActivity {
                             } else {
                                 updatedData.put("sField", existingField); // Keep the existing value
                             }
+                            if (!(imagePreview.getDrawable() == null)){
+                                updatedData.put("sImageUrl", PhotoUrl);
+                            }else {
+                                updatedData.put("sImageUrl", existingImageUrl);
+                            }
                             updatedData.put("UID",userID);
                             updatedData.put("sEmail", Email);
-                            updatedData.put("sImageUrl", PhotoUrl);
                             // Perform the update operation
-                            SeekerDocRef.set(updatedData, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            userRef.set(updatedData, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     // Fields updated successfully
@@ -186,7 +249,7 @@ public class SeekerFillActivity extends AppCompatActivity {
                             updatedData.put("sLocation", Address);
                             updatedData.put("sField", skills);
                             updatedData.put("sImageUrl", PhotoUrl);
-                            SeekerDocRef.set(updatedData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            userRef.set(updatedData).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(SeekerFillActivity.this, "Your data is added successfully", Toast.LENGTH_SHORT).show();
@@ -233,6 +296,11 @@ public class SeekerFillActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
             imagePreview.setImageURI(imageUri);
+        }
+        else if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            cvUri = data.getData();
+            // Set the selected file name to a TextView or perform any other action
+
         }
     }
     private void uploadImage() {
@@ -304,7 +372,49 @@ public class SeekerFillActivity extends AppCompatActivity {
         });
 
     }
+    private void saveCVUrlToFirestore(String downloadUrl) {
+        userRef.update("cvUrl", downloadUrl)
+                .addOnSuccessListener(aVoid -> {
+                    // CV URL saved successfully
+                    Toast.makeText(SeekerFillActivity.this, "CV uploaded successfully!", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    // Handle any errors that occurred while updating the document
+                    Toast.makeText(SeekerFillActivity.this, "Failed to upload CV: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+    private void selectPDFFile() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("application/pdf");
+        startActivityForResult(intent, PICK_PDF_REQUEST);
+    }
+    private void uploadPDFToStorage(Uri fileUri) {
+        if (fileUri != null) {
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            // Define the storage reference for the file
+            StorageReference fileRef = cvStorageRef.child( userId + "/CV");
 
+            // Start the upload process
+            fileRef.putFile(fileUri)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        // Retrieve the download URL of the uploaded file
+                        fileRef.getDownloadUrl()
+                                .addOnSuccessListener(uri -> {
+                                    String downloadUrl = uri.toString();
+                                    // Save the download URL to Firestore
+                                    saveCVUrlToFirestore(downloadUrl);
+                                })
+                                .addOnFailureListener(e -> {
+                                    // Handle any errors that occurred while retrieving the download URL
+                                    Toast.makeText(SeekerFillActivity.this, "Failed to upload CV: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
+                    })
+                    .addOnFailureListener(e -> {
+                        // Handle any errors that occurred during the upload process
+                        Toast.makeText(SeekerFillActivity.this, "Failed to upload CV: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+        }
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

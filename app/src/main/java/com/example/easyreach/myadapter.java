@@ -23,6 +23,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
 {
 
     public static final String EXTRA_NAME ="name";
+    public static final String EXTRA_Email ="Email";
     ArrayList<model> datalist;
 
     public myadapter(ArrayList<model> datalist) {
@@ -52,9 +53,11 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String sEmail = holder.seekerEmail.getText().toString();
             String name = holder.UID.getText().toString();
                 Intent intent = new Intent(view.getContext(), Message_Field.class);
                 intent.putExtra(EXTRA_NAME,name);
+                intent.putExtra(EXTRA_Email,sEmail);
                 view.getContext().startActivity(intent);
             }
         });
@@ -72,7 +75,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
         return datalist.size();
     }
 
-    class myviewholder extends RecyclerView.ViewHolder
+    static class myviewholder extends RecyclerView.ViewHolder
     {
         TextView seekerName, seekerAge, seekerField, seekerLocation, seekerYoE, seekerEmail, UID;
         private ImageView seekerImage;

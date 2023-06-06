@@ -88,6 +88,7 @@
             android:id="@+id/YoE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text=""
             android:textColor="@color/black"
             android:inputType="number"
             android:maxLines="1" />
@@ -112,7 +113,7 @@
             >
             <AutoCompleteTextView
                 android:layout_width="match_parent"
-                android:hint="Expirence Field"
+                android:hint="Experience Field"
                 android:layout_height="wrap_content"
                 android:id="@+id/auto_complete_textview"
                 android:textColor="@color/black"
@@ -129,28 +130,41 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/addresslayout"
+        android:id="@+id/locationLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/fieldlayout"
         android:layout_marginTop="7dp"
-        android:layout_marginBottom="20dp"
-        android:hint="Address">
+        android:hint="Experience Field">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/address"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/location_droplist"
             android:layout_width="match_parent"
-            android:textColor="@color/black"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:maxLines="1" />
+            android:textColor="@color/black"
+            android:layout_below="@+id/fieldlayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/cityAutoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter city name"
+                android:completionThreshold="1" />
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                android:text="Test"
+                android:textSize="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:id="@+id/seeker_select_image_button"
         android:text="Choose"
-        android:layout_below="@+id/addresslayout"
-
+        android:layout_below="@+id/locationLayout"
         android:layout_width="140dp"
 
         android:layout_height="wrap_content" />
@@ -161,12 +175,29 @@
         android:layout_width="140dp"
         android:layout_toEndOf="@id/seeker_select_image_button"
         android:layout_marginStart="97dp"
-        android:layout_below="@+id/addresslayout"
+        android:layout_below="@+id/locationLayout"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnChooseCV"
+        android:text="Choose CV"
+        android:layout_below="@+id/seeker_select_image_button"
+
+        android:layout_width="140dp"
+
+        android:layout_height="wrap_content" />
+    <!--Button for uploading image-->
+    <Button
+        android:id="@+id/btnUploadCV"
+        android:text="Upload CV"
+        android:layout_width="140dp"
+        android:layout_toEndOf="@id/seeker_select_image_button"
+        android:layout_marginStart="97dp"
+        android:layout_below="@+id/seeker_btn_Upload"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_below="@+id/seeker_btn_Upload"
+        android:layout_below="@+id/btnUploadCV"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -177,4 +208,5 @@
         android:text="REGISTER"
         android:textSize="15dp"
         />
+
 </RelativeLayout>

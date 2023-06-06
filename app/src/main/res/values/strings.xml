@@ -13,7 +13,63 @@
     <string name="fcm_message"> New Notification </string>
     <string name="default_notification_channel_id">fcm_default_channel</string>
     <string name="default_notification_channel_name">default</string>
+    <string name="username">/@EasyReachDev</string>
     <string name="Notifications" />
+    <string name="years">Years</string>
+    <string-array name="egyptian_cities">
+        <item>Cairo, Egypt</item>
+        <item>Alexandria, Egypt</item>
+        <item>Giza, Egypt</item>
+        <item>Shubra El-Kheima, Egypt</item>
+        <item>Port Said, Egypt</item>
+        <item>Suez, Egypt</item>
+        <item>Luxor, Egypt</item>
+        <item>El Mahalla El Kubra, Egypt</item>
+        <item>Tanta, Egypt</item>
+        <item>Asyut, Egypt</item>
+        <item>Ismailia, Egypt</item>
+        <item>Faiyum, Egypt</item>
+        <item>Zagazig, Egypt</item>
+        <item>Aswan, Egypt</item>
+        <item>Damanhur, Egypt</item>
+        <item>Minya, Egypt</item>
+        <item>Beni Suef, Egypt</item>
+        <item>Hurghada, Egypt</item>
+        <item>Qena, Egypt</item>
+        <item>Sohag, Egypt</item>
+        <item>Shibin El Kom, Egypt</item>
+        <item>Banha, Egypt</item>
+        <item>Arish, Egypt</item>
+        <item>Mallawi, Egypt</item>
+        <item>Bilbais, Egypt</item>
+        <item>Marsa Matruh, Egypt</item>
+        <item>Idfu, Egypt</item>
+        <item>Mit Ghamr, Egypt</item>
+        <item>Al Minya, Egypt</item>
+        <item>Kafr El Sheikh, Egypt</item>
+        <item>Dikirnis, Egypt</item>
+        <item>Damietta, Egypt</item>
+        <item>Sinai, Egypt</item>
+        <item>Al Mansurah, Egypt</item>
+        <item>Al Arish, Egypt</item>
+        <item>Ain Sukhna, Egypt</item>
+        <item>Ras Gharib, Egypt</item>
+        <item>Al Khankah, Egypt</item>
+        <item>Al Faiyum, Egypt</item>
+        <item>Al Ibrahimiyah, Egypt</item>
+        <item>Bani Mazar, Egypt</item>
+        <item>Kafr Saqr, Egypt</item>
+        <item>Bur Safajah, Egypt</item>
+        <item>Nag Hammadi, Egypt</item>
+        <item>Qasr, Egypt</item>
+        <item>Marsa Alam, Egypt</item>
+        <item>Kafr ad Dawwar, Egypt</item>
+        <item>Qalyub, Egypt</item>
+        <item>Abu Tij, Egypt</item>
+        <item>Qift, Egypt</item>
+        <item>Qus, Egypt</item>
+    </string-array>
+
     <string name="Inbox" />
     <string name="Settings">Settings</string>
     <string name="inbox">Inbox</string>
@@ -67,4 +123,8 @@
     <string name="facebook_page">Facebook Page</string>
     <string name="twitter_page">Twitter Page</string>
     <string name="instagram_page">Instagram Page</string>
+    <string name="year_of_experience">" Years"</string>
+    <string name="no_messages">No Messages</string>
+    <string name="sent_messages">Sent Messages</string>
+    <string name="cv">CV</string>
 </resources>

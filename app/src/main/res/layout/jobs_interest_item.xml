@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardCornerRadius="7dp"
+        app:cardBackgroundColor="@color/white"
+
+        android:elevation="30dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/linearLayout1"
+                >
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/imageRound"
+                    android:src="@drawable/fello"
+                    android:layout_alignParentLeft="true"
+                    app:riv_corner_radius="50dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/title"
+                        android:text="Name"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:textSize="25dp"
+                        android:textColor="@color/blue_500"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="3/4/2000"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pUID"
+                android:visibility="gone"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:id="@+id/j_description"
+                android:text="j_description"
+                android:paddingLeft="7dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:layout_below="@+id/linearLayout1"
+                />
+            <LinearLayout
+                android:id="@+id/loc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/j_description">
+
+                <TextView
+                    android:id="@+id/j_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingTop="5dp"
+                    android:drawableLeft="@drawable/baseline_location_on_24"
+                    android:drawableTint="@color/black"
+                    android:drawablePadding="10dp"
+                    android:text="j_location"
+                    android:textSize="18dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:id="@+id/j_salary"
+                    android:paddingTop="5dp"
+                    android:drawableLeft="@drawable/salary"
+                    android:drawablePadding="10dp"
+                    android:text="Salary" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/baseline_auto_stories_24"
+                android:drawableTint="@color/black"
+                android:drawablePadding="10dp"
+                android:paddingTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/j_requirment"
+                android:text="j_requirment"
+                android:textSize="18dp"
+                android:layout_below="@+id/loc"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/p_email"
+                android:text="Email"
+                android:layout_alignParentEnd="true"
+                android:textSize="24dp"
+                android:textColor="@color/black"
+                android:padding="4dp"
+                android:background="@drawable/radius"
+                android:backgroundTint="@color/MainColor"
+
+                android:layout_below="@+id/j_requirment"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

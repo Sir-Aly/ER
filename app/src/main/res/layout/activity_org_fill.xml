@@ -120,7 +120,8 @@
         android:id="@+id/seeker_select_image_button"
         android:text="Choose"
         android:layout_below="@+id/addresslayout"
-
+android:background="@drawable/custom_edittext"
+        android:backgroundTint="@color/black"
         android:layout_width="140dp"
 
         android:layout_height="wrap_content" />

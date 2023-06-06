@@ -11,6 +11,7 @@
     import android.widget.ImageView;
     import android.widget.Spinner;
     import android.widget.TextView;
+    import android.widget.Toast;
 
     import androidx.annotation.NonNull;
     import androidx.appcompat.app.AppCompatActivity;
@@ -74,14 +75,12 @@
             spinner.setOnItemSelectedListener(this);
 
             btnMain = findViewById(R.id.btnMain);
-            btnAddJob = findViewById(R.id.btnAddJob);
-            btnInterestedList = findViewById(R.id.btnInterestedList);
+            btnInterestedList = findViewById(R.id.btnListedJobs);
             orgInterest = findViewById(R.id.interest_org);
             btnMain.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent main = new Intent(MainActivity.this, MainActivity.class);
-                    startActivity(main);
+                    Toast.makeText(MainActivity.this, "You are currently at Swipes", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -155,6 +154,11 @@
                             startActivity(add);
                             finish();
                             return false;
+                        case R.id.sentMsgs:
+                            Intent sent = new Intent(MainActivity.this, SentMessagesActivity.class);
+                            startActivity(sent);
+                            finish();
+                            return false;
                     }
 
                     return false;
@@ -172,12 +176,12 @@
             navigationView.setItemIconTintList(null);
 
         }
-        public void floating_method(View view){
-            Intent intent = new Intent(this,JobPostingActivity.class);
-            startActivity(intent);
-            CustomIntent.customType(MainActivity.this,"bottom-to-up");
-        }
-
+//        public void floating_method(View view){
+//            Intent intent = new Intent(this,JobPostingActivity.class);
+//            startActivity(intent);
+//            CustomIntent.customType(MainActivity.this,"bottom-to-up");
+//        }
+//
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

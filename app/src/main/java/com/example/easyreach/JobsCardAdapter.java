@@ -51,16 +51,12 @@ public class JobsCardAdapter extends CardStackView.Adapter<JobsCardAdapter.ViewH
         holder.addToInterestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Add your code to handle adding job seekers to the interested list
-                // For example, you can call a method from the MainActivity passing the job seeker information
-                // MainActivity.addToInterestedList(jobSeeker);
 
-                // Example implementation:
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
                     String userID = user.getUid();
 
-                    JobOffer add = new JobOffer(jobOffer.getjTitle(), jobOffer.getjRequirements(), jobOffer.getjLocation(), jobOffer.getJobImage(),jobOffer.getpEmail(),jobOffer.getpUid(), jobOffer.getJob_id(),jobOffer.getjSalary());
+                    JobOffer add = new JobOffer(jobOffer.getjTitle(), jobOffer.getjRequirements(), jobOffer.getjLocation(), jobOffer.getJobImage(), jobOffer.getpEmail(),jobOffer.getpUid(),jobOffer.getjDescription(), jobOffer.getJob_id(),jobOffer.getjSalary());
                     FirebaseFirestore.getInstance().collection("user").document(userID).collection("Likes").document(sID).set(add).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {

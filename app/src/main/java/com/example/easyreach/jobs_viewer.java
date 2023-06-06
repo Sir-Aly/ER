@@ -3,7 +3,10 @@ package com.example.easyreach;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +27,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import maes.tech.intentanim.CustomIntent;
+
 public class jobs_viewer extends AppCompatActivity {
 
     SwipeRefreshLayout refreshLayout;
@@ -31,17 +36,14 @@ public class jobs_viewer extends AppCompatActivity {
 
     RecyclerView recview;
     TextView message_size;
-    ArrayList<model_jobs> datalist_jobs ;
+    ArrayList<JobOffer> datalist_jobs ;
     FirebaseFirestore db;
-    myadapter_jobs myadapter_jobs;
+    JobsAdapter myadapter_jobs;
     private FirebaseAuth mAuth;
-
-
-
-
-
-
-
+    private ImageButton btnMain, btnInterest;
+    private ImageButton btnAddJob;
+    private ImageButton btnInterestedList;
+    ImageView  backBtn;
 
 
     protected void onCreate(Bundle savedInstanceState)
@@ -52,14 +54,63 @@ public class jobs_viewer extends AppCompatActivity {
 //       message_size.setText(getItemCounttt());
 
 
+        btnInterest = findViewById(R.id.seeker_interest_list);
+        btnInterest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent interest = new Intent(jobs_viewer.this, JobsInterestedListActivity.class);
+                startActivity(interest);
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
         recview=(RecyclerView)findViewById(R.id.recview);
         recview.setLayoutManager(new LinearLayoutManager(this));
         datalist_jobs=new ArrayList<>();
-        myadapter_jobs =new myadapter_jobs(datalist_jobs);
+        myadapter_jobs =new JobsAdapter(datalist_jobs);
         recview.setAdapter(myadapter_jobs);
 
+        btnMain = findViewById(R.id.btnMain);
+//        btnAddJob = findViewById(R.id.btnAddJob);
+        btnInterestedList = findViewById(R.id.btnListedJobs);
 
+
+        backBtn = findViewById(R.id.backbtn);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent backs = new Intent(jobs_viewer.this, SeekerMainActivity.class);
+                startActivity(backs);
+                CustomIntent.customType(jobs_viewer.this,"right-to-left");
+            }
+        });
+
+
+        btnMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(jobs_viewer.this, SeekerMainActivity.class);
+                startActivity(i);
+                CustomIntent.customType(jobs_viewer.this,"right-to-left");
+
+            }
+        });
+
+//        btnAddJob.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(jobs_viewer.this, JobPostingActivity.class);
+//                startActivity(i);
+//                CustomIntent.customType(jobs_viewer.this,"bottom-to-up");
+//
+//            }
+//        });
+        btnInterestedList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(jobs_viewer.this, "You are currently at the Listed Jobs!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //collections
 
@@ -73,7 +124,7 @@ public class jobs_viewer extends AppCompatActivity {
                         List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
                         for(DocumentSnapshot d:list)
                         {
-                            model_jobs obj=d.toObject(model_jobs.class);
+                            JobOffer obj=d.toObject(JobOffer.class);
                             datalist_jobs.add(obj);
                         }
                         myadapter_jobs.notifyDataSetChanged();
@@ -86,13 +137,13 @@ public class jobs_viewer extends AppCompatActivity {
 
     public void clear(View view){
         String userID =  mAuth.getCurrentUser().getUid();
-        db.collection("user").document(userID).collection("Messages").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("user").document(userID).collection("com.example.easyreach.Messages").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot snapshot :task.getResult()){
 
-//                    db.collection("user/" + userID + "Messages/").document(snapshot.getId()).delete();
-                    db.collection("user").document(userID).collection("Messages").document(snapshot.getId()).delete();
+//                    db.collection("user/" + userID + "com.example.easyreach.Messages/").document(snapshot.getId()).delete();
+                    db.collection("user").document(userID).collection("com.example.easyreach.Messages").document(snapshot.getId()).delete();
                 }
             }
         });

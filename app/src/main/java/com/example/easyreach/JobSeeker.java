@@ -9,12 +9,13 @@ public class JobSeeker {
     private String sImageUrl;
     private String sEmail;
     private String UID;
+    private String cvUrl;
 
     public JobSeeker() {
         // Default constructor required for Firebase
     }
 
-    public JobSeeker(String sName, String sField,String sAge, String sYoE,  String sLocation, String sImageUrl, String sEmail, String UID) {
+    public JobSeeker(String sName, String sField,String sAge, String sYoE,  String sLocation, String sImageUrl, String sEmail, String UID, String cvUrl) {
         this.sName = sName;
         this.sField = sField;
         this.sAge = sAge;
@@ -23,6 +24,7 @@ public class JobSeeker {
         this.sImageUrl = sImageUrl;
         this.sEmail = sEmail;
         this.UID = UID;
+        this.cvUrl = cvUrl;
     }
 
     // Getters and setters
@@ -90,5 +92,13 @@ public class JobSeeker {
 
     public void setUID(String UID) {
         this.UID = UID;
+    }
+
+    public String getCvUrl() {
+        return cvUrl;
+    }
+
+    public void setCvUrl(String cvUrl) {
+        this.cvUrl = cvUrl;
     }
 }

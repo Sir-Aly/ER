@@ -10,16 +10,60 @@
     android:background="@drawable/background_test"
     >
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/MainColor"
+        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back32px"
+            android:layout_gravity="start"
+            android:backgroundTint="#00000000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile Page"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:layout_gravity="center" />
+
+        <ImageButton
+            android:id="@+id/editProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/layoutToolBar"
+            android:src="@drawable/edit_info"
+            android:layout_gravity="end"
+            android:backgroundTint="#00000000"
+
+            />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
     <com.makeramen.roundedimageview.RoundedImageView
-        android:layout_width="170dp"
-        android:layout_height="170dp"
         android:id="@+id/ProfileImage"
-        android:layout_marginTop="20dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/fello"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
         app:riv_oval="true"
         />
 
@@ -40,35 +84,34 @@
 <!--        />-->
 
     <LinearLayout
-        android:layout_marginTop="110dp"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        tools:context=".SeekerProfileActivity">
+        app:layout_constraintTop_toBottomOf="@id/ProfileImage"
+        app:layout_constraintEnd_toEndOf="@id/ProfileImage"
+        app:layout_constraintStart_toStartOf="@id/ProfileImage">
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             app:cardCornerRadius="30dp"
-            app:cardElevation="50dp"
+            app:cardElevation="5dp"
             android:background="@drawable/custom_edittext">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center_horizontal"
-                android:padding="24dp">
+                android:padding="20dp">
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="Full Name"
                     android:textSize="17sp"
                     android:textStyle="bold"
@@ -76,11 +119,12 @@
                     android:layout_marginTop="2dp"/>
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:id="@+id/sName"
                     android:background="@drawable/custom_edittext"
-                    android:text="Username"
-                    android:textSize="20dp"
+                    android:text="ADD your Full Name"
+                    android:textSize="20sp"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -89,7 +133,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"                    android:text="E-Mail Address"
+                    android:layout_marginStart="10dp"
+                    android:text="E-Mail Address"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     android:textColor="@color/bottomNavIconColor"
@@ -97,11 +142,13 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:background="@drawable/custom_edittext"
                     android:drawablePadding="8dp"
                     android:text="Email"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
+                    android:ellipsize="end"
                     android:id="@+id/email"
                     android:padding="10dp"
                     android:textStyle="bold"
@@ -111,7 +158,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"                    android:text="Age"
+                    android:layout_marginStart="10dp"
+                    android:text="Age"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     android:textColor="@color/bottomNavIconColor"
@@ -119,12 +167,13 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:background="@drawable/custom_edittext"
                     android:drawablePadding="8dp"
                     android:id="@+id/age"
-                    android:text="Age"
-                    android:textSize="20dp"
+                    android:text="ADD your Age"
+                    android:textSize="20sp"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -133,19 +182,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"                    android:text="Years of Experience"
+                    android:layout_marginStart="10dp"
+                    android:text="Years of Experience"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     android:textColor="@color/bottomNavIconColor"
                     android:layout_marginTop="2dp"/>
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:background="@drawable/custom_edittext"
                     android:drawablePadding="8dp"
                     android:id="@+id/sYoE"
-                    android:text="Years of Experience"
-                    android:textSize="20dp"
+                    android:text="ADD your Years of Experience"
+                    android:textSize="20sp"
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -154,7 +205,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="Address"
                     android:textSize="17sp"
                     android:textStyle="bold"
@@ -162,13 +213,15 @@
                     android:layout_marginTop="2dp"/>
 
                 <TextView
+                    android:id="@+id/address"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:background="@drawable/custom_edittext"
                     android:drawablePadding="8dp"
-                    android:text="Address"
-                    android:textSize="20dp"
-                    android:id="@id/address"
+                    android:text="ADD your Address"
+                    android:textSize="20sp"
+
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -178,7 +231,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="Field"
                     android:textSize="17sp"
                     android:textStyle="bold"
@@ -186,13 +239,15 @@
                     android:layout_marginTop="2dp"/>
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:background="@drawable/custom_edittext"
                     android:drawablePadding="8dp"
-                    android:text="Field"
+                    android:text="ADD your Field"
                     android:textSize="20sp"
                     android:id="@+id/field"
-                    android:padding="10dp"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="15dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"
@@ -201,24 +256,39 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/forgetPasswordButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/custom_edittext"
-            android:backgroundTint="@color/black"
-            android:gravity="center"
-            android:padding="12dp"
-            android:text="@string/forgot_password"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-            app:layout_constraintStart_toStartOf="@id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="30dp"-->
+<!--            android:orientation="horizontal">-->
+<!--&lt;!&ndash;            <androidx.appcompat.widget.AppCompatButton&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/forgetPasswordButton"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginStart="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:background="@drawable/custom_edittext"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:backgroundTint="@color/black"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textAlignment="textStart"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:padding="7dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_weight="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="@string/forgot_password"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="@color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="17sp" />&ndash;&gt;-->
+<!--&lt;!&ndash;            &ndash;&gt;-->
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:id="@+id/edit_profile"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/custom_edittext"-->
+<!--                android:backgroundTint="@color/black"-->
+<!--                android:padding="7dp"-->
+<!--                android:textAlignment="center"-->
+<!--                android:text="Edit Profile"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="17sp" />-->
+<!--        </LinearLayout>-->
+
 
     </LinearLayout>
 

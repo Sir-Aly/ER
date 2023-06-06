@@ -12,7 +12,6 @@
     >
 
     <androidx.drawerlayout.widget.DrawerLayout
-
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,7 +33,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_gravity="bottom"
 
+                    android:layout_alignParentBottom="true"
+                    android:elevation="8dp"
+                    >
+                    <include
+                        layout="@layout/bottom_navigation"
+                        />
+
+                </LinearLayout>
                 <com.yuyakaido.android.cardstackview.CardStackView
                     android:id="@+id/cardStackView"
                     android:layout_width="match_parent"
@@ -82,32 +96,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </RelativeLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -117,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:headerLayout="@layout/layout_navigation_header"
+            app:headerLayout="@layout/seeker_layout_navigation_header"
             app:menu="@menu/seeker_navigation_menu" >
 
         </com.google.android.material.navigation.NavigationView>

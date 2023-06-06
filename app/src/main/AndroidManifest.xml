@@ -15,6 +15,21 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".SentMessagesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MessageDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InboxActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InboxTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Full_Massage_Viewer_Replay"
+            android:exported="false" />
+        <activity
             android:name=".SeekerMessageActivity"
             android:exported="false" />
         <activity

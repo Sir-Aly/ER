@@ -32,7 +32,7 @@ public class SeekerAboutUsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Open the Facebook page in a browser
-                String instagramUrl = "https://www.instagram.com/mostofaly/";
+                String instagramUrl = "https://www.instagram.com/easyreachdev/";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(instagramUrl));
                 startActivity(intent);
@@ -42,7 +42,7 @@ public class SeekerAboutUsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Open the Facebook page in a browser
-                String twitterUrl = "https://www.instagram.com/mostofaly/";
+                String twitterUrl = "https://twitter.com/easyreachDev";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(twitterUrl));
                 startActivity(intent);

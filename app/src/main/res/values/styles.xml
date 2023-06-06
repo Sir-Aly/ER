@@ -18,7 +18,7 @@
         <!--<item name="android:statusBarColor">@color/red</item>-->
         <!-- Global type attributes -->
         <item name="textAppearanceButton">@style/AppTextAppearance.Button</item>
-
+        <item name="fontFamily">@font/montserrat</item>
 
         <!-- Global shape attributes -->
         <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>
@@ -36,10 +36,12 @@
         <!-- Bottom Navigation widget style attribute -->
         <item name="bottomNavigationStyle">@style/AppBottomNavigation</item>
     </style>
-
+    <style name= "RobotoTextViewStyle" parent= "android:Widget.TextView" >
+        <item name= "android:fontFamily" > @font/playfair_semi </item>
+    </style>
     <style name="AppTextAppearance.Chip" parent="TextAppearance.MaterialComponents.Chip">
-        <item name="fontFamily">@font/roboto_mono_regular</item>
-        <item name="android:fontFamily">@font/roboto_mono_regular</item>
+        <item name="fontFamily">@font/playfair_semi </item>
+        <item name="android:fontFamily">@font/playfair_semi </item>
     </style>
 
     <style name="AppTextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">
@@ -67,14 +69,14 @@
         <item name="android:itemTextAppearance">@style/MenuItemStyle</item>
     </style>
     <style name="Style_TextView">
-        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="fontFamily">@font/playfair_semi </item>
     </style>
     <style name="MenuItemStyle" parent="Widget.AppCompat.Light.PopupMenu">
         <item name="android:textAppearance">@style/CustomTextAppearance</item>
     </style>
 
     <style name="CustomTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Menu">
-        <item name="android:fontFamily">@font/roboto_mono_medium</item>
+        <item name="android:fontFamily">@font/playfair_semi </item>
     </style>
 
     <!-- NOTE: Chips don't seem to pick up on the theme fontFamily attributes, so these styles are necessary -->

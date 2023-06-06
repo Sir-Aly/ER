@@ -24,20 +24,8 @@
         android:scaleType="centerInside" />
 
     <ImageButton
-        android:id="@+id/btnAddJob"
-        android:onClick="floating_method"
-        android:layout_width="70dp"
-        android:layout_gravity="bottom"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_add"
-        android:background="@drawable/color_main"
-        android:layout_marginBottom="3dp"
-        android:scaleType="centerInside"
-        app:tint="@color/white" />
-
-    <ImageButton
         android:padding="10dp"
-        android:id="@+id/btnInterestedList"
+        android:id="@+id/btnListedJobs"
         android:layout_width="0dp"
         android:layout_gravity="bottom"
         android:layout_height="match_parent"

@@ -69,8 +69,6 @@
                             android:drawableLeft="@drawable/baseline_email_24"
                             android:drawablePadding="10dp"
                             android:drawableTint="@color/black"
-
-
                              />
                         
                     </com.google.android.material.textfield.TextInputLayout>

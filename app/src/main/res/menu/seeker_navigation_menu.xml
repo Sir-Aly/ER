@@ -7,9 +7,9 @@
         android:title="@string/profile"
         />
     <item
-        android:id="@+id/menuSeekerLanguage"
-        android:icon="@drawable/baseline_language_24"
-        android:title="@string/language"
+        android:id="@+id/menuCV"
+        android:icon="@drawable/cv"
+        android:title="@string/cv"
         />
     <item
         android:id="@+id/menuSeekerCountry"

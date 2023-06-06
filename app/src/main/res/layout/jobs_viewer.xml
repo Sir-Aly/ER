@@ -5,75 +5,80 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".interested_list"
+    tools:context=".jobs_viewer"
     android:background="@drawable/background2"
     >
-    <RelativeLayout
+
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/layoutToolBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?actionBarSize"
         android:background="@color/MainColor"
         android:backgroundTint="@color/MainColor"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="10dp"
-        android:paddingEnd="15dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:id="@+id/HEAD"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="JOBS PAGE"
-            android:textAlignment="center"
-            android:textSize="30dp"
-            android:fontFamily="@font/helevaic"
-            android:textColor="@color/black"
+        <ImageView
+            android:id="@+id/backbtn"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/app_name"
+            android:layout_gravity="start"
+            android:src="@drawable/back32px"
+
+            app:tint="#FFFFFF"
             />
 
-        <ImageView
+        <TextView
+            android:id="@+id/JobsViewerTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_delete"
-            android:layout_alignParentRight="true"
-            android:paddingTop="10dp"
-            app:tint="@color/black" />
+            android:text="Jobs List"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/raleway_extrabold"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center"
+            />
+
+        <ImageButton
+            android:id="@+id/seeker_interest_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/list"
+            app:layout_constraintStart_toEndOf="@+id/layoutToolBar"
+            android:backgroundTint="#00FFFFFF"
+            android:layout_gravity="end"
+            />
 
 
 
-
-    <ImageView
-        android:id="@+id/imageMenu"
-        android:layout_marginTop="10dp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/baseline_menu_24"
-        app:tint="@color/black"
-
-        />
-    </RelativeLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="5dp"
-        android:outlineAmbientShadowColor="@color/black"
-        android:layout_gravity="center"
-        >
-
-
-    </androidx.cardview.widget.CardView>
-
+    </androidx.appcompat.widget.Toolbar>
 
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recview"/>
+        android:id="@+id/recview"
+        android:layout_weight="1"/>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:elevation="8dp"
+        >
+        <include
+            layout="@layout/bottom_navigation"
+            />
+    </LinearLayout>
+
+
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -29,7 +29,6 @@ public class TestMassage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_massage);
-
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
         textViewData = findViewById(R.id.text_view_data);
@@ -39,8 +38,9 @@ public class TestMassage extends AppCompatActivity {
     public void saveNote(View v) {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
+        String desc = editTextDescription.getText().toString();
 
-        ADD_Message add = new ADD_Message(title,description);
+        ADD_Message add = new ADD_Message(title,description,desc);
 
         Usersref.document("YsPMkdQqwgcWd2jOkYLYGOgwZPu1").collection("Massages").add(add);
     }

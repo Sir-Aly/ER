@@ -3,11 +3,11 @@ package com.example.easyreach;
 
 
 public class model_jobs {
-    String jDescription, jLocation,jRequirements,jSalary,jTitle, jobImage, pUid;
+    String jDescription, jLocation,jRequirements,jSalary,jTitle, jobImage, pUid, pEmail;
 
     public model_jobs(){
     }
-    public model_jobs(String jDescription, String jLocation,String jRequirements, String jSalary, String jTitle, String jobImage,String pUid){
+    public model_jobs(String jDescription, String jLocation,String jRequirements, String jSalary, String jTitle, String jobImage,String pUid, String pEmail){
         this.jDescription = jDescription;
         this.jLocation = jLocation;
         this.jRequirements = jRequirements;
@@ -15,6 +15,7 @@ public class model_jobs {
         this.jTitle = jTitle;
         this.jobImage = jobImage;
         this.pUid = pUid;
+        this.pEmail = pEmail;
     }
     public String getjDescription() {
         return jDescription;
@@ -74,6 +75,14 @@ public class model_jobs {
 
     public void setpUid(String pUid) {
         this.pUid = pUid;
+    }
+
+    public String getpEmail() {
+        return pEmail;
+    }
+
+    public void setpEmail(String pEmail) {
+        this.pEmail = pEmail;
     }
 }
 

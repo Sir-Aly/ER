@@ -1,5 +1,8 @@
 package com.example.easyreach;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +45,8 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
         holder.locationTextView.setText(jobSeeker.getsLocation());
         holder.emailTextView.setText(jobSeeker.getsEmail());
         holder.IDTextView.setText(jobSeeker.getUID());
+        holder.CVImageButton.setTag(jobSeeker.getCvUrl());
+        holder.YoETextView.setText(jobSeeker.getsYoE() + " years" );
         Glide.with(holder.photoImageView.getContext())
                 .load(jobSeeker.getsImageUrl())
                 .into(holder.photoImageView);
@@ -58,7 +63,7 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
                 if (user != null) {
                     String userID = user.getUid();
                     String sID = jobSeeker.getUID().toString();
-                    JobSeeker add = new JobSeeker(jobSeeker.getsName(), jobSeeker.getsField(),jobSeeker.getsAge(),jobSeeker.getsYoE(), jobSeeker.getsLocation(), jobSeeker.getsImageUrl(),jobSeeker.getsEmail() , jobSeeker.getUID());
+                    JobSeeker add = new JobSeeker(jobSeeker.getsName(), jobSeeker.getsField(),jobSeeker.getsAge(),jobSeeker.getsYoE(), jobSeeker.getsLocation(), jobSeeker.getsImageUrl(),jobSeeker.getsEmail() , jobSeeker.getUID(), jobSeeker.getCvUrl());
                     FirebaseFirestore.getInstance().collection("user").document(userID).collection("Likes").document(sID).set(add).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
@@ -73,6 +78,24 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
                                     Toast.makeText(view.getContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
                                 }
                             });
+                }
+            }
+        });
+        holder.CVImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String cvUrl = (String) view.getTag();
+
+                // Open the CV using an appropriate PDF viewer application
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.parse(cvUrl), "application/pdf");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                try {
+                    view.getContext().startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    // Handle the case where a PDF viewer application is not available
+                    Toast.makeText(view.getContext(), "No PDF viewer found", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -93,7 +116,7 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
         TextView YoETextView;
         TextView IDTextView;
 
-        ImageButton addToInterestButton;
+        ImageButton addToInterestButton, CVImageButton;
 
         public ViewHolder(View view) {
             super(view);
@@ -107,6 +130,7 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
             IDTextView = view.findViewById(R.id.IDTEXT);
 
             addToInterestButton = view.findViewById(R.id.add_to_int);
+            CVImageButton = view.findViewById(R.id.CV);
         }
     }
 }

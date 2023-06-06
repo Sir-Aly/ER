@@ -8,6 +8,9 @@ plugins {
 android {
     namespace 'com.example.easyreach'
     compileSdk 33
+    lintOptions {
+        warning 'deprecation'
+    }
 
     defaultConfig {
         applicationId "com.example.easyreach"

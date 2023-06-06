@@ -10,18 +10,20 @@ public class JobOffer {
     private String pEmail;
     private String pUid;
     private String jSalary;
+    private String jDescription;
     private Long job_id;
 
     public JobOffer() {
         // Default constructor required for Firebase
     }
-    public JobOffer(String jTitle, String jRequirements, String jLocation, String JobImage, String pEmail, String pUid, Long job_id, String jSalary) {
+    public JobOffer(String jTitle, String jRequirements, String jLocation, String JobImage, String pEmail, String pUid,String jDescription, Long job_id, String jSalary) {
         this.jTitle = jTitle;
         this.jRequirements = jRequirements;
         this.jLocation = jLocation;
         this.JobImage = JobImage;
         this.pEmail = pEmail;
         this.pUid = pUid;
+        this.jDescription = jDescription;
         this.job_id = job_id;
         this.jSalary= jSalary;
     }
@@ -74,6 +76,15 @@ public class JobOffer {
     public void setpUid(String pUid) {
         this.pUid = pUid;
     }
+
+    public String getjDescription() {
+        return jDescription;
+    }
+
+    public void setjDescription(String jDescription) {
+        this.jDescription = jDescription;
+    }
+
     public Long getJob_id(){
         return job_id;
     }

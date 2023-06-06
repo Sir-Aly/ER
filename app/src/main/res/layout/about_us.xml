@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background2"
+    android:orientation="vertical"
     tools:context=".AboutUsActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:backgroundTint="#FFFFFF">
+
 
         <ImageView
             android:id="@+id/logo_image"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:src="@drawable/logo_transparent"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
 
             android:layout_marginTop="32dp"
             android:contentDescription="@string/easyreach_logo"/>
@@ -33,6 +30,7 @@
             android:text="@string/org_version_info"
             android:textSize="26sp"
             android:textColor="@color/black"
+            android:layout_gravity="center"
             android:layout_below="@+id/logo_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"/>
@@ -44,6 +42,7 @@
             android:text="@string/app_info"
             android:textSize="18sp"
             android:layout_below="@+id/version_info"
+            android:layout_gravity="center"
             android:textColor="@color/black"
             android:layout_marginTop="32dp"
             android:layout_centerHorizontal="true"/>
@@ -53,26 +52,39 @@
             android:layout_height="wrap_content"
             android:text="@string/social_media_accounts"
             android:textColor="@color/black"
+            android:layout_gravity="center"
             android:fontFamily="@font/raleway_bold"
             android:textSize="18sp"
             android:layout_below="@+id/about_text"
             android:layout_marginTop="32dp"
             android:layout_centerHorizontal="true"
             />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
         <ImageButton
-            android:id="@+id/facebook_text"
+            android:id="@+id/facebook_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:textColor="@color/black"
-            android:backgroundTint="#00FFFFFF"
-            android:autoLink="web"
-            android:linksClickable="true"
             android:src="@drawable/facebook"
-            android:layout_below="@+id/social_media_text"
-            android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"
+            android:backgroundTint="#00F49F1C"
             android:contentDescription="@string/facebook_page" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/@Eas"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp" />
+
+    </LinearLayout>
+
 
         <ImageButton
             android:id="@+id/twitter_text"
@@ -96,8 +108,8 @@
             android:layout_below="@+id/twitter_text"
             android:textColor="@color/black"
             android:layout_marginTop="8dp"
+
             android:src="@drawable/instagram"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/instagram_page" />
-    </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

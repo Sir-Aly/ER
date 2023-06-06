@@ -57,7 +57,7 @@ public class inbox_viewer extends AppCompatActivity {
         db=FirebaseFirestore.getInstance();
         CollectionReference users = db.collection("user");
         String userID =  mAuth.getCurrentUser().getUid();
-        users.document(userID).collection("Messages").get()
+        users.document(userID).collection("com.example.easyreach.Messages").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -76,13 +76,13 @@ public class inbox_viewer extends AppCompatActivity {
 
     public void clear(View view){
         String userID =  mAuth.getCurrentUser().getUid();
-        db.collection("user").document(userID).collection("Messages").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("user").document(userID).collection("com.example.easyreach.Messages").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot snapshot :task.getResult()){
 
-//                    db.collection("user/" + userID + "Messages/").document(snapshot.getId()).delete();
-                    db.collection("user").document(userID).collection("Messages").document(snapshot.getId()).delete();
+//                    db.collection("user/" + userID + "com.example.easyreach.Messages/").document(snapshot.getId()).delete();
+                    db.collection("user").document(userID).collection("com.example.easyreach.Messages").document(snapshot.getId()).delete();
                 }
             }
         });
@@ -93,7 +93,7 @@ public class inbox_viewer extends AppCompatActivity {
         db=FirebaseFirestore.getInstance();
         CollectionReference users = db.collection("user");
         String userID =  mAuth.getCurrentUser().getUid();
-        users.document(userID).collection("Messages").get()
+        users.document(userID).collection("com.example.easyreach.Messages").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

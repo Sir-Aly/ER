@@ -18,22 +18,19 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="7dp"
-
-            app:cardCornerRadius="20dp">
+            app:cardCornerRadius="28dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/straight_white_bg"
                 >
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/photoImageView"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     app:srcCompat="@drawable/ali"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/profile_test"
 
                     />
                 <LinearLayout
@@ -41,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:orientation="vertical"
-                    android:background="@drawable/straight_white_bg"
+                    android:background="@drawable/card_tests"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
 >
@@ -88,17 +85,16 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="7dp"
-                        android:weightSum="2"
                         android:paddingHorizontal="5dp">
                         <TextView
                             android:id="@+id/skillsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:text="Seeker Skills: "
-                            android:fontFamily="@font/helevaic"
+                            android:drawableStart="@drawable/skills32px"
+                            android:text=" : "
+                            android:fontFamily="@font/open_sans_semibold"
                             android:textSize="24sp"
                              />
 
@@ -106,13 +102,13 @@
                             android:id="@+id/skillsTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+
                             android:text="Seeker Skills"
                             android:maxLines="1"
                             android:ellipsize="end"
                             android:fontFamily="@font/roboto_mono_medium"
                             android:textColor="@color/black"
-                            android:textAlignment="textEnd"
+                            android:textAlignment="textStart"
                             android:textSize="24sp"
                              />
                     </LinearLayout>
@@ -123,27 +119,25 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="7dp"
-                        android:paddingHorizontal="5dp"
-                        android:weightSum="2">
+                        android:paddingHorizontal="5dp">
 
                         <TextView
                             android:id="@+id/locationText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:textStyle="bold"
-                            android:text="Location:"
                             android:textColor="@color/black"
+                            android:drawableStart="@drawable/location32px"
+                            android:text=" : "
+                            android:fontFamily="@font/open_sans_semibold"
                             android:textSize="24sp"
-                            android:fontFamily="@font/helevaic"
                              />
 
                         <TextView
                             android:id="@+id/locationTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textAlignment="textEnd"
+                            android:textAlignment="textStart"
                             android:text="Seeker Location"
                             android:fontFamily="@font/roboto_mono_medium"
                             android:textColor="@color/black"
@@ -154,32 +148,28 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingHorizontal="5dp"
-                    android:weightSum="2"
                     android:layout_marginTop="7dp">
 
                     <TextView
                         android:id="@+id/emailText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:textStyle="bold"
-                        android:text="Seeker Email:"
-                        android:textSize="24sp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/helevaic"
+                        android:drawableStart="@drawable/email32px"
+                        android:text=" : "
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:textSize="24sp"
                         />
 
                     <TextView
                         android:id="@+id/emailTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:maxLines="1"
                         android:ellipsize="end"
                         android:text="Seeker Email"
-                        android:textAlignment="textEnd"
+                        android:textAlignment="textStart"
                         android:fontFamily="@font/roboto_mono_medium"
                         android:textColor="@color/black"
                         android:textSize="24sp"
@@ -190,7 +180,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingHorizontal="5dp"
-                        android:weightSum="2"
                         android:layout_marginTop="7dp"
                         >
 
@@ -198,21 +187,18 @@
                             android:id="@+id/YoEfield"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:textStyle="bold"
-                            android:text="Years of Experience"
-                            android:textSize="24sp"
-                            android:maxLines="1"
-                            android:ellipsize="end"
                             android:textColor="@color/black"
-                            android:fontFamily="@font/helevaic"
+                            android:drawableStart="@drawable/work32px"
+                            android:text=" YoE: "
+                            android:fontFamily="@font/open_sans_semibold"
+                            android:textSize="24sp"
                             />
 
                         <TextView
                             android:id="@+id/YoETextField"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:maxLines="1"
                             android:ellipsize="end"
                             android:text="1"
@@ -223,9 +209,10 @@
                              />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
+                        android:orientation="horizontal"
                         android:layout_gravity="center"
 
                         >
@@ -234,10 +221,21 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#00DDF8FE"
+                            android:layout_weight="1"
                             android:src="@drawable/addfile"
-
                             />
-
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2" />
+                        <ImageButton
+                            android:id="@+id/CV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="#00DDF8FE"
+                            android:layout_weight="1"
+                            android:src="@drawable/cv_icon"
+                            />
 
                     </LinearLayout>
                 </LinearLayout>

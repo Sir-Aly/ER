@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,10 +31,11 @@ public class ProfilePage extends AppCompatActivity {
     TextView pNameTv;
     TextView addressTv;
     TextView ageTv;
+    ImageButton editProfile;
     TextView fieldTv;
     TextView emailTv;
    RoundedImageView profilePictureImageView;
-    private Button mForgetPassword;
+//    private Button mForgetPassword;
     private boolean loginBtnClicked;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
@@ -44,13 +45,14 @@ public class ProfilePage extends AppCompatActivity {
         setContentView(R.layout.profile_page);
         final String TAG = "problem";
 
+        editProfile = findViewById(R.id.editProfile);
         profilePictureImageView = findViewById(R.id.ProfileImage);
         pNameTv= (TextView) findViewById(R.id.sName);
         addressTv= (TextView) findViewById(R.id.address);
         ageTv= (TextView) findViewById(R.id.age);
         fieldTv= (TextView) findViewById(R.id.field);
         emailTv= (TextView) findViewById(R.id.email);
-        mForgetPassword = (Button) findViewById(R.id.forgetPasswordButton);
+//        mForgetPassword = (Button) findViewById(R.id.forgetPasswordButton);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String currentid = user.getUid();
         String uMail = user.getEmail();
@@ -58,6 +60,13 @@ public class ProfilePage extends AppCompatActivity {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         reference = firestore.collection("Job Providers").document(currentid);
         Query dbref = firestore.collection("Job Providers").whereEqualTo("pEmail", uMail);
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent fill = new Intent(ProfilePage.this, OrgFillActivity.class);
+                startActivity(fill);
+            }
+        });
         dbref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -123,13 +132,13 @@ public class ProfilePage extends AppCompatActivity {
 
             }
         });
-        mForgetPassword.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent i = new Intent(ProfilePage.this, ForgetPasswordActivity.class  );
-                startActivity(i);
-                finish();
-            }
-        });
+//        mForgetPassword.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                Intent i = new Intent(ProfilePage.this, ForgetPasswordActivity.class  );
+//                startActivity(i);
+//                finish();
+//            }
+//        });
     }
 
     @Override

@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -37,15 +37,16 @@
                 android:layout_alignParentLeft="true"
                 app:riv_corner_radius="50dp"
                 />
+
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:id="@+id/title"
                 android:text="Name"
                 android:layout_marginTop="10dp"
@@ -56,18 +57,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="3/4/2000"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="10dp"
                         android:textSize="20dp"
                         android:textColor="@color/black"
                         />
                 </LinearLayout>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_to_interest"
+                    android:src="@drawable/favourite"
+                    android:backgroundTint="#00F49F1C"
+                    android:layout_gravity="end"/>
             </LinearLayout>
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="3/4/2000"-->
-<!--                -->
-<!--                />-->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,20 +88,42 @@
                 android:textColor="@color/black"
                 android:layout_below="@+id/linearLayout1"
                 />
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/loc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/j_location"
-                android:text="j_location"
-                android:paddingTop="5dp"
-                android:drawableLeft="@drawable/baseline_location_on_24"
-                android:drawableTint="@color/black"
-                android:drawablePadding="10dp"
-                android:textSize="18dp"
-                android:layout_below="@+id/j_description"
-                />
+                android:orientation="horizontal"
+                android:layout_below="@+id/j_description">
+
+                <TextView
+                    android:id="@+id/j_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingTop="5dp"
+                    android:drawableLeft="@drawable/baseline_location_on_24"
+                    android:drawableTint="@color/black"
+                    android:drawablePadding="10dp"
+                    android:text="j_location"
+                    android:textSize="18dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:id="@+id/j_salary"
+                    android:paddingTop="5dp"
+                    android:drawableLeft="@drawable/salary"
+                    android:drawablePadding="10dp"
+                    android:text="Salary" />
+
+            </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -110,43 +135,23 @@
                 android:id="@+id/j_requirment"
                 android:text="j_requirment"
                 android:textSize="18dp"
-                android:layout_below="@+id/j_location"
+                android:layout_below="@+id/loc"
                 />
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/salary"
-                android:text="salary"
+                android:id="@+id/p_email"
+                android:text="Email"
                 android:layout_alignParentEnd="true"
-                android:textSize="30dp"
+                android:textSize="24dp"
                 android:textColor="@color/black"
-                android:padding="7dp"
+                android:padding="4dp"
                 android:background="@drawable/radius"
                 android:backgroundTint="@color/MainColor"
-                android:textStyle="bold"
-                android:layout_below="@+id/j_location"
+
+                android:layout_below="@+id/j_requirment"
                 />
-
-
-
-
-
-
-
-
-
-
-            <!--        <ImageView-->
-            <!--            android:id="@+id/t4"-->
-            <!--            android:layout_width="150dp"-->
-            <!--            android:layout_height="150dp"-->
-            <!--            android:layout_alignParentRight="true"-->
-            <!--            />-->
-
-
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

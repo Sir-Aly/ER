@@ -33,18 +33,13 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-        private Button mRegister;
-
-        private EditText mEmail, mPassword, mName, mBudget;
-        RadioGroup userTypeRadioGroup;
-
-        private RadioGroup mRadioGroup;
-
-        private FirebaseAuth mAuth;
-        private RadioButton mJobSeekerRadioButton, mJobProviderRadioButton;
-        private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
-        final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-//        private static final String TAG = "RegisterActivity";
+    private Button mRegister;
+    private EditText mEmail, mPassword, mName, mBudget;
+    RadioGroup userTypeRadioGroup;
+    private FirebaseAuth mAuth;
+    private RadioButton mJobSeekerRadioButton, mJobProviderRadioButton;
+    private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
+    final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +66,11 @@ public class RegisterActivity extends AppCompatActivity {
                                         Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                                         startActivity(i);
                                         finish();
-                                        return;
                                     } else {
                                         // User is a job seeker
                                         Intent i = new Intent(RegisterActivity.this, SeekerMainActivity.class);
                                         startActivity(i);
                                         finish();
-                                        return;
                                     }
                                 }
                             })
@@ -97,7 +90,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
-                return;
             }
         });
 
@@ -139,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             String userId = mAuth.getCurrentUser().getUid();
                                             DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
 
-                                            Map userInfo = new HashMap<>();
+                                            Map<String, Object> userInfo = new HashMap<>();
                                             userInfo.put("name", name);
                                             userInfo.put("profileImageUrl", "default");
                                             currentUserDb.updateChildren(userInfo);
@@ -148,12 +140,12 @@ public class RegisterActivity extends AppCompatActivity {
                                             mName.setText("");
                                             mPassword.setText("");
 
-                                            Map user = new HashMap<>();
+                                            Map<String, Object> user = new HashMap<>();
                                             user.put("pEmail", pEmail);
                                             user.put("pName", name);
                                             user.put("jobProvider", isJobProvider());
 
-                                            Map seekerUser = new HashMap<>();
+                                            Map<String, Object> seekerUser = new HashMap<>();
                                             seekerUser.put("sEmail", pEmail);
                                             seekerUser.put("sName", name);
                                             seekerUser.put("jobProvider", isJobProvider());
@@ -176,7 +168,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                         } else {
 
-                                        Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
