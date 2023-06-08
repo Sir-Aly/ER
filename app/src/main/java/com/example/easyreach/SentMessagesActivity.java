@@ -1,9 +1,11 @@
 package com.example.easyreach;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,7 @@ public class SentMessagesActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private FirebaseAuth auth;
     private String currentUserId;
+    ImageView backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,13 @@ public class SentMessagesActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         currentUserId = auth.getCurrentUser().getUid();
+        backBtn = findViewById(R.id.backbtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         setUpRecyclerView();
         loadSentMessages();
@@ -128,5 +138,12 @@ public class SentMessagesActivity extends AppCompatActivity {
         // Implement your own logic here, such as converting the timestamp to a string representation
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         return dateFormat.format(timestamp.toDate());
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent back = new Intent(SentMessagesActivity.this, MainActivity.class);
+        startActivity(back);
     }
 }

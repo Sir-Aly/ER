@@ -44,6 +44,7 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
         holder.skillsTextView.setText(jobSeeker.getsField());
         holder.locationTextView.setText(jobSeeker.getsLocation());
         holder.emailTextView.setText(jobSeeker.getsEmail());
+        holder.ageTextView.setText(jobSeeker.getsAge());
         holder.IDTextView.setText(jobSeeker.getUID());
         holder.CVImageButton.setTag(jobSeeker.getCvUrl());
         holder.YoETextView.setText(jobSeeker.getsYoE() + " years" );
@@ -54,11 +55,7 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
         holder.addToInterestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Add your code to handle adding job seekers to the interested list
-                // For example, you can call a method from the MainActivity passing the job seeker information
-                // MainActivity.addToInterestedList(jobSeeker);
 
-                // Example implementation:
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
                     String userID = user.getUid();
@@ -85,8 +82,6 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
             @Override
             public void onClick(View view) {
                 String cvUrl = (String) view.getTag();
-
-                // Open the CV using an appropriate PDF viewer application
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(Uri.parse(cvUrl), "application/pdf");
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -94,7 +89,6 @@ public class JobSeekerCardAdapter extends CardStackView.Adapter<JobSeekerCardAda
                 try {
                     view.getContext().startActivity(intent);
                 } catch (ActivityNotFoundException e) {
-                    // Handle the case where a PDF viewer application is not available
                     Toast.makeText(view.getContext(), "No PDF viewer found", Toast.LENGTH_SHORT).show();
                 }
             }

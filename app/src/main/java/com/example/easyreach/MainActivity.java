@@ -3,6 +3,7 @@
     import android.content.Intent;
     import android.os.Bundle;
     import android.util.Log;
+    import android.view.Menu;
     import android.view.MenuItem;
     import android.view.View;
     import android.widget.AdapterView;
@@ -25,10 +26,12 @@
     import com.google.firebase.auth.FirebaseAuth;
     import com.google.firebase.auth.FirebaseUser;
     import com.google.firebase.firestore.CollectionReference;
+    import com.google.firebase.firestore.DocumentReference;
     import com.google.firebase.firestore.DocumentSnapshot;
     import com.google.firebase.firestore.FirebaseFirestore;
     import com.google.firebase.firestore.Query;
     import com.google.firebase.firestore.QuerySnapshot;
+    import com.squareup.picasso.Picasso;
     import com.yuyakaido.android.cardstackview.CardStackView;
 
     import java.util.ArrayList;
@@ -73,7 +76,46 @@
             spinner.setAdapter(adapter);
             String selectedCategory = spinner.getSelectedItem().toString();
             spinner.setOnItemSelectedListener(this);
+            navigationView=findViewById(R.id.navigationView);
+            View headerView = navigationView.getHeaderView(0);
+            ImageView profileImageView = headerView.findViewById(R.id.profileImageView);
+            Menu menu = navigationView.getMenu();
+            ImageView profileIconImageView = headerView.findViewById(R.id.profileIconImageView);
+            TextView nameTextView = headerView.findViewById(R.id.nameTextView);
+            FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+            String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+            DocumentReference userRef = firestore.collection("Job Providers").document(currentUserId);
+            userRef.get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.exists()) {
+                    String name = documentSnapshot.getString("pName");
+                    String profileImageUri = documentSnapshot.getString("profileUrl");
+
+                    if (name != null && !name.isEmpty()) {
+                        nameTextView.setText(name);
+                    } else {
+                        // Handle the case where the name field is empty
+                        nameTextView.setText("Name");
+                    }
+
+                    if (profileImageUri != null && !profileImageUri.isEmpty()) {
+                        // Load the profile image using your preferred image loading library (e.g., Picasso, Glide, etc.)
+                        // For example, using Picasso:
+                        Picasso.get().load(profileImageUri).into(profileImageView);
+                    } else {
+                        // Handle the case where the profile image URL is empty
+                        // You can set a default placeholder image or hide the profile image view
+                        profileImageView.setImageResource(R.drawable.ali);
+                    }
+                }
+            }).addOnFailureListener(e -> {
+                // Handle the failure to retrieve the user data from Firestore
+            });
+            profileIconImageView.setOnClickListener(v -> {
+                // Open the ProfileActivity
+                Intent intent = new Intent(MainActivity.this, ProfilePage.class);
+                startActivity(intent);
+            });
             btnMain = findViewById(R.id.btnMain);
             btnInterestedList = findViewById(R.id.btnListedJobs);
             orgInterest = findViewById(R.id.interest_org);
@@ -194,7 +236,6 @@
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             jobSeekers.clear();
-                            // Iterate through the documents and add each job seeker to the jobSeekers list
                             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                 if (documentSnapshot.exists()) {
                                     JobSeeker jobSeeker = documentSnapshot.toObject(JobSeeker.class);
@@ -203,7 +244,6 @@
                                     }
                                 }
                             }
-                            // Call the method to set up the CardStackView with the job seekers list
                             setupCardStackView();
                         }
                     })

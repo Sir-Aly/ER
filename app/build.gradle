@@ -83,5 +83,9 @@ dependencies {
     implementation 'com.github.hajiyevelnur92:intentanimation:1.0'
     implementation 'com.github.grantland:android-autofittextview:0.2.1'
 
+    implementation 'com.github.yalantis:ucrop:2.2.5'
+
+
+
 
 }

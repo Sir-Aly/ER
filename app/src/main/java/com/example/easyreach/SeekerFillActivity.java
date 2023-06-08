@@ -2,8 +2,10 @@ package com.example.easyreach;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,7 +40,10 @@ import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.yalantis.ucrop.UCrop;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +54,9 @@ public class SeekerFillActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Button btnUpload, btnChooseCV, btnUploadCV;
     private Button selectImageButton;
+
+    private Uri selectedImageUri;
+    private Uri croppedImageUri;
     private ImageView imagePreview;
     private Uri imageUri;
     private static final int PICK_PDF_REQUEST = 2;
@@ -55,6 +64,7 @@ public class SeekerFillActivity extends AppCompatActivity {
     private StorageReference cvStorageRef;
     private DocumentReference userRef; // Unique integer value for CV selection request
     String skills;
+    private static final int REQUEST_SELECT_IMAGE = 1;
     String PhotoUrl;
     MaterialButton RegisterBtn, SeekerUploadBtn;
     FirebaseFirestore db;
@@ -68,6 +78,7 @@ public class SeekerFillActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_seeker_fill);
         autoCompleteTextView = findViewById(R.id.auto_complete_textview);
         cvStorageRef = FirebaseStorage.getInstance().getReference().child("cv");
@@ -270,9 +281,7 @@ public class SeekerFillActivity extends AppCompatActivity {
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, PICK_IMAGE_REQUEST);
+                openGallery();
             }
         });
         btnUpload.setOnClickListener(new View.OnClickListener() {
@@ -289,27 +298,14 @@ public class SeekerFillActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData();
-            imagePreview.setImageURI(imageUri);
-        }
-        else if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            cvUri = data.getData();
-            // Set the selected file name to a TextView or perform any other action
-
-        }
-    }
     private void uploadImage() {
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         StorageReference imagesRef = storageRef.child( userId + "/profile_picture");
 
-        imagesRef.putFile(imageUri)
+        imagesRef.putFile(croppedImageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -413,6 +409,58 @@ public class SeekerFillActivity extends AppCompatActivity {
                         // Handle any errors that occurred during the upload process
                         Toast.makeText(SeekerFillActivity.this, "Failed to upload CV: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
+        }
+    }
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_SELECT_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_SELECT_IMAGE && resultCode == RESULT_OK && data != null) {
+            selectedImageUri = data.getData();
+            startCropActivity(selectedImageUri);
+        } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+            handleCropResult(data);
+        }
+        else if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            cvUri = data.getData();
+            // Set the selected file name to a TextView or perform any other action
+
+        }
+    }
+
+    private void startCropActivity(Uri sourceUri) {
+        String destinationFileName = "cropped_image.jpg";
+        UCrop uCrop = UCrop.of(sourceUri, Uri.fromFile(new File(getCacheDir(), destinationFileName)))
+                .withAspectRatio(1, 1)
+                .withMaxResultSize(500, 500);
+
+        UCrop.Options options = new UCrop.Options();
+        options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
+        options.setCompressionQuality(90);
+
+        uCrop.withOptions(options);
+
+        uCrop.start(SeekerFillActivity.this);
+    }
+
+    private void handleCropResult(Intent data) {
+        final Uri resultUri = UCrop.getOutput(data);
+
+        if (resultUri != null) {
+            croppedImageUri = resultUri;
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), croppedImageUri);
+                imagePreview.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(this, "Failed to crop image", Toast.LENGTH_SHORT).show();
         }
     }
     @Override

@@ -69,20 +69,22 @@
         android:textColor="@color/MainColor"
         />
 
-<!--    <EditText-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="90dp"-->
-<!--        android:text=""-->
-<!--        android:id="@+id/message_repley"/>-->
+    <!--    <EditText-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="90dp"-->
+    <!--        android:text=""-->
+    <!--        android:id="@+id/message_repley"/>-->
     <Button
         android:id="@+id/btnaccept"
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:text="ACCEPT OFFER"
-        android:textSize="30dp"
+        android:layout_width="240dp"
+        android:layout_height="93dp"
+        android:backgroundTint="@color/green"
         android:onClick="replymessage"
+        android:text="ACCEPT OFFER"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:visibility="visible"
+        android:layout_marginLeft="80dp"
         />
 
 

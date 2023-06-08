@@ -130,16 +130,13 @@ public class RegisterActivity extends AppCompatActivity {
                                             Toast.makeText(RegisterActivity.this, "Registered Successfully." + " Please Check your email for Verification. ", Toast.LENGTH_SHORT).show();
                                             String userId = mAuth.getCurrentUser().getUid();
                                             DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-
                                             Map<String, Object> userInfo = new HashMap<>();
                                             userInfo.put("name", name);
                                             userInfo.put("profileImageUrl", "default");
                                             currentUserDb.updateChildren(userInfo);
-
                                             mEmail.setText("");
                                             mName.setText("");
                                             mPassword.setText("");
-
                                             Map<String, Object> user = new HashMap<>();
                                             user.put("pEmail", pEmail);
                                             user.put("pName", name);
@@ -149,8 +146,6 @@ public class RegisterActivity extends AppCompatActivity {
                                             seekerUser.put("sEmail", pEmail);
                                             seekerUser.put("sName", name);
                                             seekerUser.put("jobProvider", isJobProvider());
-
-
                                             // Store the user's information in the Firestore database
                                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                                             String userID = mAuth.getCurrentUser().getUid();

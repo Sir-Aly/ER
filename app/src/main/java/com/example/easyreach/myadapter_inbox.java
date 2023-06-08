@@ -77,9 +77,7 @@ public class myadapter_inbox extends RecyclerView.Adapter<myadapter_inbox.myview
             t2=itemView.findViewById(R.id.t2);
             t3=itemView.findViewById(R.id.t3);
             cardview_rec = itemView.findViewById(R.id.cardview_rec);
-//            t4=itemView.findViewById(R.id.holderImage);
-//            t5=itemView.findViewById(R.id.t5);
-//            t6=itemView.findViewById(R.id.t6);
+
         }
         public ImageView getImage() {
             return t4;

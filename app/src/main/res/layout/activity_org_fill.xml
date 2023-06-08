@@ -1,150 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     tools:context=".OrgFillActivity"
-    android:background="@drawable/background2"
-    >
+    android:background="@drawable/background2">
 
-    <ImageView
-        android:id="@+id/provider_image_preview"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"/>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/firstnamelayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_below="@id/provider_image_preview"
-        android:hint="Organization Name">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/firstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLines="1"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/agelayout"
+        android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/layoutToolBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/firstnamelayout"
-        android:layout_marginTop="20dp"
-        android:hint="Foundation Year">
+        android:layout_height="?actionBarSize"
+        android:background="@color/MainColor"
+        android:backgroundTint="@color/MainColor"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pFoundationYear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLines="1" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/descriptionLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/agelayout"
-        android:layout_marginTop="20dp"
-        android:hint="Organization Description">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLines="1" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/droplist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/descriptionLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        >
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:hint="Expirence Field"
-            android:layout_height="wrap_content"
-            android:id="@+id/auto_complete_textview"
-            android:inputType="none"
+        <ImageView
+            android:id="@+id/backbtn"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/app_name"
+            android:layout_gravity="start"
+            android:src="@drawable/backb"
+            app:tint="@color/black"
             />
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <TextView
-        android:id="@+id/orgField"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:textColor="@color/black"
-        android:text="Test"
-        android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/JobsViewerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_gravity="center"
+            />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/addresslayout"
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/droplist"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:hint="Location">
+        app:layout_constraintTop_toBottomOf="@id/layoutToolBar"
+        app:layout_constraintEnd_toEndOf="@id/layoutToolBar"
+        app:layout_constraintStart_toStartOf="@id/layoutToolBar"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pLocation"
+        <ImageView
+            android:id="@+id/provider_image_preview"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/firstnamelayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:maxLines="1" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="30dp"
+            android:hint="Organization Name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/firstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:inputType="text"
+                android:maxLines="1"
+                android:background="@drawable/border"
+                android:layout_marginHorizontal="16dp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Button
-        android:id="@+id/seeker_select_image_button"
-        android:text="Choose"
-        android:layout_below="@+id/addresslayout"
-android:background="@drawable/custom_edittext"
-        android:backgroundTint="@color/black"
-        android:layout_width="140dp"
 
-        android:layout_height="wrap_content" />
-    <!--Button for uploading image-->
-    <Button
-        android:id="@+id/seeker_btn_Upload"
-        android:text="Upload"
-        android:layout_width="140dp"
-        android:layout_toEndOf="@id/seeker_select_image_button"
-        android:layout_marginStart="97dp"
-        android:layout_below="@+id/addresslayout"
-        android:layout_height="wrap_content" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/agelayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/firstnamelayout"
+            android:layout_marginTop="15dp"
+            android:hint="Foundation Year">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pFoundationYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textStyle="bold"
+                android:inputType="text"
+                android:maxLines="1"
+                android:background="@drawable/border"
+                android:layout_marginHorizontal="16dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descriptionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/agelayout"
+            android:layout_marginTop="15dp"
+            android:hint="Organization Description">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:inputType="text"
+
+                android:maxLines="1"
+                android:background="@drawable/border"
+                android:layout_marginHorizontal="16dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/droplist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/descriptionLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/auto_complete_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:hint="Expirence Field"
+
+                android:inputType="none"
+                android:background="@drawable/border"
+                android:layout_marginHorizontal="16dp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/orgField"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:text="Test"
+            android:textSize="20dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addresslayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/droplist"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Location"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:background="@drawable/border"
+                android:layout_marginHorizontal="16dp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/seeker_select_image_button"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addresslayout"
+            android:text="Choose"
+            android:background="@drawable/grad_main"
+            android:backgroundTint="#050404"
+            app:backgroundTint="@color/MainColor"
+            android:layout_marginHorizontal="16dp"
+            />
+        <!--Button for uploading image-->
+
+        <Button
+            android:id="@+id/seeker_btn_Upload"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addresslayout"
+            android:layout_marginStart="84dp"
+            android:layout_toEndOf="@id/seeker_select_image_button"
+            android:background="@drawable/grad_main"
+            app:backgroundTint="@color/MainColor"
+            android:text="Upload"
+            />
+    </LinearLayout>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegister"
         android:layout_below="@+id/seeker_btn_Upload"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
         android:text="REGISTER"
         android:textSize="15dp"
         android:textColor="@color/white"
         android:background="@drawable/grad_main"
-        app:backgroundTint="@color/MainColor"
+        app:backgroundTint="@color/ALI"
+        android:layout_gravity="center"
         />
-</RelativeLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

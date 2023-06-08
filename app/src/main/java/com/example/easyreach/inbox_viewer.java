@@ -2,115 +2,137 @@ package com.example.easyreach;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.firebase.firestore.Query;
 
 public class inbox_viewer extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
+    private MessagesAdapter adapter;
     SwipeRefreshLayout refreshLayout;
     RecyclerView recview;
+    int messageCount;
+
     TextView message_size;
-    ArrayList<model_inbox> datalist_inbox ;
     FirebaseFirestore db;
-    myadapter_inbox myadapter_inbox;
+    MessagesAdapter myadapter_inbox;
     private FirebaseAuth mAuth;
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox_viewer);
+
         refreshLayout = findViewById(R.id.refreshlayout);
         message_size = findViewById(R.id.messages_size);
+
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.recview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                recreate();
                 recreateData();
             }
         });
-        mAuth = FirebaseAuth.getInstance();
-        recview=(RecyclerView)findViewById(R.id.recview);
-        recview.setLayoutManager(new LinearLayoutManager(this));
-        datalist_inbox=new ArrayList<>();
-        myadapter_inbox=new myadapter_inbox(datalist_inbox);
-        recview.setAdapter(myadapter_inbox);
+        // Set up Firestore query to retrieve the user's received messages
+        FirestoreRecyclerOptions<Messages> options = new FirestoreRecyclerOptions.Builder<Messages>()
+                .setQuery(getMessagesQuery(), Messages.class)
+                .build();
+        getMessageCount();
+        // Initialize and set up the adapter
+        adapter = new MessagesAdapter(options);
 
-        db=FirebaseFirestore.getInstance();
-        CollectionReference users = db.collection("user");
-        String userID =  mAuth.getCurrentUser().getUid();
-        users.document(userID).collection("com.example.easyreach.Messages").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
-                        for(DocumentSnapshot d:list)
-                        {
-                            model_inbox obj=d.toObject(model_inbox.class);
-                            datalist_inbox.add(obj);
-                            String size = String.valueOf(myadapter_inbox.getItemCount());
-                            message_size.setText(size +" "+"NEW MESSAGES");
-                        }
-                        myadapter_inbox.notifyDataSetChanged();
-                    }
-                });
+        recyclerView.setAdapter(adapter);
+        // Set item click listener
+//        adapter.setOnItemClickListener(new MessagesAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(DocumentSnapshot snapshot) {
+//                // Handle item click, open message details activity
+//                showMessageDetails(snapshot);
+//            }
+//        });
     }
 
-    public void clear(View view){
-        String userID =  mAuth.getCurrentUser().getUid();
-        db.collection("user").document(userID).collection("com.example.easyreach.Messages").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot snapshot :task.getResult()){
+    private Query getMessagesQuery() {
+        // Customize this method to retrieve the received messages for the current user from Firestore
+        // You can use Firestore queries to filter and order the messages as needed
+        return FirebaseFirestore.getInstance()
+                .collection("Messages")
+                .whereEqualTo("recipientID", getCurrentUserId());
+    }
 
-//                    db.collection("user/" + userID + "com.example.easyreach.Messages/").document(snapshot.getId()).delete();
-                    db.collection("user").document(userID).collection("com.example.easyreach.Messages").document(snapshot.getId()).delete();
-                }
+    private String getCurrentUserId() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            return currentUser.getUid();
+        } else {
+            // Handle the case when the current user is not available
+            return null;
+        }
+    }
+
+    private void showMessageDetails(DocumentSnapshot snapshot) {
+        // Extract the message ID from the snapshot
+        String messageId = snapshot.getId();
+
+        // Create an intent to open the message details activity
+        Intent intent = new Intent(this, MessageDetailsActivity.class);
+        intent.putExtra("messageId", messageId);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+    private void getMessageCount() {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Query query = db.collection("Messages")
+                .whereEqualTo("recipientID", getCurrentUserId());
+
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                int count = task.getResult().size();
+                messageCount = count;
+                message_size.setText(String.valueOf(count +" "+"NEW MESSAGES"));
+            } else {
+                // Handle the case when the query fails
             }
         });
     }
+
     private void recreateData() {
         // Recreate your data or update the RecyclerView here
         recreate();
-        db=FirebaseFirestore.getInstance();
-        CollectionReference users = db.collection("user");
-        String userID =  mAuth.getCurrentUser().getUid();
-        users.document(userID).collection("com.example.easyreach.Messages").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
-                        for(DocumentSnapshot d:list)
-                        {
-                            model_inbox obj=d.toObject(model_inbox.class);
-                            datalist_inbox.add(obj);
-                            String size = String.valueOf(myadapter_inbox.getItemCount());
-                            message_size.setText(size +" "+"NEW MESSAGES");
-                        }
-                        myadapter_inbox.notifyDataSetChanged();
-                    }
-                });
+getMessagesQuery();
+
+
         // Call setRefreshing(false) to stop the refreshing animation
         refreshLayout.setRefreshing(false);
     }
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

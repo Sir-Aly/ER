@@ -11,16 +11,7 @@
         android:icon="@drawable/cv"
         android:title="@string/cv"
         />
-    <item
-        android:id="@+id/menuSeekerCountry"
-        android:icon="@drawable/baseline_other_houses_24"
-        android:title="@string/country"
-        />
-    <item
-        android:id="@+id/menuSeekerNotifications"
-        android:icon="@drawable/baseline_circle_notifications_24"
-        android:title="@string/notifications"
-        />
+
     <item
         android:id="@+id/menuSeekerInbox"
         android:icon="@drawable/baseline_all_inbox_24"
@@ -31,11 +22,7 @@
         android:icon="@drawable/baseline_settings_24"
         android:title="@string/Settings"
         />
-    <item
-        android:id="@+id/menuJobMatches"
-        android:icon="@drawable/baseline_newspaper_24"
-        android:title="@string/job_matches"
-        />
+
     <item
         android:id="@+id/menuSeekerSupport"
         android:icon="@drawable/baseline_support_agent_24"

@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/border"
+    android:layout_margin="5dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,6 +13,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:cardCornerRadius="7dp"
         android:elevation="30dp"
+        android:backgroundTint="#6DFFEAD0"
+
         app:cardUseCompatPadding="true"
         app:cardElevation="5dp">
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class ProfilePage extends AppCompatActivity {
     TextView pNameTv;
     TextView addressTv;
     TextView ageTv;
+    ImageView backBtn;
     ImageButton editProfile;
     TextView fieldTv;
     TextView emailTv;
@@ -52,6 +54,13 @@ public class ProfilePage extends AppCompatActivity {
         ageTv= (TextView) findViewById(R.id.age);
         fieldTv= (TextView) findViewById(R.id.field);
         emailTv= (TextView) findViewById(R.id.email);
+        backBtn = findViewById(R.id.backbtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 //        mForgetPassword = (Button) findViewById(R.id.forgetPasswordButton);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String currentid = user.getUid();

@@ -8,21 +8,13 @@
         android:icon="@drawable/baseline_person_24"
         android:title="@string/profile"
      />
-    <item
-    android:id="@+id/menuLanguage"
-    android:icon="@drawable/baseline_language_24"
-    android:title="@string/language"
-    />
+
     <item
         android:id="@+id/sentMsgs"
         android:icon="@drawable/sen32pxmail"
         android:title="@string/sent_messages"
         />
-    <item
-        android:id="@+id/menuNotifications"
-        android:icon="@drawable/baseline_circle_notifications_24"
-        android:title="@string/notifications"
-        />
+
     <item
         android:id="@+id/menuInbox"
         android:icon="@drawable/baseline_all_inbox_24"

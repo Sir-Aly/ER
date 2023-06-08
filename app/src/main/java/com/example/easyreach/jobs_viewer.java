@@ -156,7 +156,7 @@ public class jobs_viewer extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(jobs_viewer.this, MainActivity.class);
+        Intent i = new Intent(jobs_viewer.this, SeekerMainActivity.class);
         startActivity(i);
     }
 }

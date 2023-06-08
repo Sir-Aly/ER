@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    // Error checking user type
+                                                    Toast.makeText(LoginActivity.this, "Can't Recognise User Type!", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                 }

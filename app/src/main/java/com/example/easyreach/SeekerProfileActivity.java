@@ -103,7 +103,6 @@ public class SeekerProfileActivity extends AppCompatActivity {
                                 String sName = document.get("sName").toString();
                                 String sLocation = document.get("sLocation").toString();
                                 String sAge = document.get("sAge").toString();
-                                String cvUrl = document.get("cvUrl").toString();
 
                                 String sEmail = document.get("sEmail").toString();
                                 String sYoE = document.get("sYoE").toString();

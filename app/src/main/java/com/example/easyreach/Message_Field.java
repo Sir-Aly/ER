@@ -36,7 +36,6 @@ public class Message_Field extends AppCompatActivity {
         rEmail = findViewById(R.id.rEmail);
         String USERID = view_id.getText().toString();
         view_id2 =findViewById(R.id.testo);
-
         Intent intent = getIntent();
         String new_id = intent.getStringExtra(myadapter.EXTRA_NAME);
         String receiverEmail = intent.getStringExtra(myadapter.EXTRA_Email);
@@ -63,30 +62,25 @@ sendMsg.setOnClickListener(new View.OnClickListener() {
         message.setSenderEmail(senderEmail);
         message.setAccepted(false);
 
-        // Get the current timestamp
+
         long currentTimeMillis = System.currentTimeMillis();
         Timestamp timestamp = new Timestamp(currentTimeMillis / 1000, (int) (currentTimeMillis % 1000) * 1000000);
         message.setTimestamp(timestamp);
         CollectionReference messagesRef = db.collection("Messages");
-
-        // Save the message to Firestore
         messagesRef.add(message)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        // Message sent successfully
                         Toast.makeText(Message_Field.this, "Message sent", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        // Error sending message
                         Toast.makeText(Message_Field.this, "Failed to send message", Toast.LENGTH_SHORT).show();
                     }
                 });
         messageEditText.setText("");
-
     }
 });
 

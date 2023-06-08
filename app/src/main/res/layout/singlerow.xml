@@ -3,15 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:background="@drawable/border">
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:cardCornerRadius="7dp"
-        app:cardBackgroundColor="@color/white"
-        android:elevation="30dp"
+        app:cardBackgroundColor="#6DFFEAD0"
+
+        android:elevation="6dp"
         app:cardUseCompatPadding="true"
         app:cardElevation="5dp">
 
@@ -30,7 +33,7 @@
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="1dp"
                     android:id="@+id/imageRound"
                     android:src="@drawable/fello"
                     android:layout_alignParentLeft="true"

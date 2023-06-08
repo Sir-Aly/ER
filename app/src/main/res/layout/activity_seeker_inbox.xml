@@ -30,15 +30,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Inbox"
-        android:drawableLeft="@drawable/baseline_inbox_24"
-        android:drawableTint="@color/blue_500"
-        android:drawablePadding="15dp"
         android:layout_gravity="center"
+        android:drawableLeft="@drawable/baseline_inbox_24"
+        android:drawablePadding="15dp"
+        android:drawableTint="@color/blue_500"
+        android:text="Inbox"
         android:textColor="@color/black"
-        android:textSize="50dp"
-        />
+        android:textSize="30dp"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/messages_size"
         android:layout_width="wrap_content"

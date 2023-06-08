@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ProfilePage"
-    android:background="@drawable/background_test"
+    android:background="@drawable/background2"
     >
 
     <androidx.appcompat.widget.Toolbar
@@ -27,7 +27,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/back32px"
+            android:src="@drawable/backb"
             android:layout_gravity="start"
             android:backgroundTint="#00000000"/>
 
@@ -55,241 +55,215 @@
     </androidx.appcompat.widget.Toolbar>
 
     <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:id="@+id/ProfileImage"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="75dp"
         android:src="@drawable/fello"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintEnd_toEndOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:riv_oval="true"
         />
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/name"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:text=""-->
-<!--        android:textColor="@color/white"-->
-<!--        android:shadowRadius="5"-->
-<!--        android:shadowColor="@color/black"-->
-<!--        android:textSize="20sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/ProfileImage"-->
-<!--        app:layout_constraintStart_toStartOf="@id/ProfileImage"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/ProfileImage"-->
-<!--        />-->
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:id="@+id/name"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:text=""-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:shadowRadius="5"-->
+    <!--        android:shadowColor="@color/black"-->
+    <!--        android:textSize="20sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/ProfileImage"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/ProfileImage"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/ProfileImage"-->
+    <!--        />-->
 
     <LinearLayout
-
+        android:layout_marginTop="110dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/ProfileImage"
-        app:layout_constraintEnd_toEndOf="@id/ProfileImage"
-        app:layout_constraintStart_toStartOf="@id/ProfileImage">
+        tools:context=".SeekerProfileActivity">
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             app:cardCornerRadius="30dp"
-            app:cardElevation="5dp"
+            app:cardElevation="50dp"
             android:background="@drawable/custom_edittext">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal"
-                android:padding="20dp">
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Full Name"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/bottomNavIconColor"
-                    android:layout_marginTop="2dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:id="@+id/sName"
-                    android:background="@drawable/custom_edittext"
-                    android:text="ADD your Full Name"
-                    android:textSize="20sp"
-                    android:padding="10dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="2dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:text="E-Mail Address"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/bottomNavIconColor"
-                    android:layout_marginTop="2dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:background="@drawable/custom_edittext"
-                    android:drawablePadding="8dp"
-                    android:text="Email"
-                    android:textSize="20sp"
-                    android:ellipsize="end"
-                    android:id="@+id/email"
-                    android:padding="10dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="2dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Age"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/bottomNavIconColor"
-                    android:layout_marginTop="2dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:background="@drawable/custom_edittext"
-                    android:drawablePadding="8dp"
-                    android:id="@+id/age"
-                    android:text="ADD your Age"
-                    android:textSize="20sp"
-                    android:padding="10dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="2dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Years of Experience"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/bottomNavIconColor"
-                    android:layout_marginTop="2dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:background="@drawable/custom_edittext"
-                    android:drawablePadding="8dp"
-                    android:id="@+id/sYoE"
-                    android:text="ADD your Years of Experience"
-                    android:textSize="20sp"
-                    android:padding="10dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="2dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Address"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/bottomNavIconColor"
-                    android:layout_marginTop="2dp"/>
-
-                <TextView
-                    android:id="@+id/address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:background="@drawable/custom_edittext"
-                    android:drawablePadding="8dp"
-                    android:text="ADD your Address"
-                    android:textSize="20sp"
-
-                    android:padding="10dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="2dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Field"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/bottomNavIconColor"
-                    android:layout_marginTop="2dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:background="@drawable/custom_edittext"
-                    android:drawablePadding="8dp"
-                    android:text="ADD your Field"
-                    android:textSize="20sp"
-                    android:id="@+id/field"
-                    android:paddingVertical="5dp"
-                    android:paddingHorizontal="15dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/cardview_dark_background"
-                    android:layout_marginTop="2dp"/>
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginHorizontal="30dp"-->
-<!--            android:orientation="horizontal">-->
-<!--&lt;!&ndash;            <androidx.appcompat.widget.AppCompatButton&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/forgetPasswordButton"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_marginStart="30dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:background="@drawable/custom_edittext"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:backgroundTint="@color/black"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:textAlignment="textStart"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:padding="7dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_weight="1"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:text="@string/forgot_password"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:textColor="@color/white"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:textSize="17sp" />&ndash;&gt;-->
-<!--&lt;!&ndash;            &ndash;&gt;-->
-<!--            <androidx.appcompat.widget.AppCompatButton-->
-<!--                android:id="@+id/edit_profile"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/custom_edittext"-->
-<!--                android:backgroundTint="@color/black"-->
-<!--                android:padding="7dp"-->
-<!--                android:textAlignment="center"-->
-<!--                android:text="Edit Profile"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="17sp" />-->
-<!--        </LinearLayout>-->
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Full Name"
+            android:textColor="@color/bottomNavIconColor"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/sName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/border"
+            android:padding="10dp"
+            android:text="Username"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/cardview_dark_background"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:text="E-Mail Address"
+            android:textColor="@color/bottomNavIconColor"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/border"
+            android:drawablePadding="8dp"
+            android:padding="10dp"
+            android:text="Email"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/cardview_dark_background"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="16dp"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:text="Age"
+            android:textColor="@color/bottomNavIconColor"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/border"
+            android:drawablePadding="8dp"
+            android:padding="10dp"
+            android:text="Age"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/cardview_dark_background"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:text="Years of Experience"
+            android:textColor="@color/bottomNavIconColor"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/sYoE"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/border"
+            android:drawablePadding="8dp"
+            android:padding="10dp"
+            android:text="Years of Experience"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/cardview_dark_background"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:text="Address"
+            android:textColor="@color/bottomNavIconColor"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/border"
+            android:drawablePadding="8dp"
+            android:padding="10dp"
+            android:text="Address"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/cardview_dark_background"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:text="Field"
+            android:textColor="@color/bottomNavIconColor"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/field"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/border"
+            android:drawablePadding="8dp"
+            android:padding="10dp"
+            android:text="Field"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/cardview_dark_background"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="16dp"
+            />
 
 
     </LinearLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

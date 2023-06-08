@@ -87,18 +87,28 @@ public class SeekerMainActivity extends AppCompatActivity implements AdapterView
         userRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 String name = documentSnapshot.getString("sName");
-                cvUrl = documentSnapshot.get("cvUrl").toString();
                 String profileImageUri = documentSnapshot.getString("sImageUrl");
 
-                nameTextView.setText(name);
-                // Load the profile image using your preferred image loading library (e.g., Picasso, Glide, etc.)
-                // For example, using Picasso:
-                Picasso.get().load(profileImageUri).into(profileImageView);
+                if (name != null && !name.isEmpty()) {
+                    nameTextView.setText(name);
+                } else {
+                    // Handle the case where the name field is empty
+                    nameTextView.setText("Name");
+                }
+
+                if (profileImageUri != null && !profileImageUri.isEmpty()) {
+                    // Load the profile image using your preferred image loading library (e.g., Picasso, Glide, etc.)
+                    // For example, using Picasso:
+                    Picasso.get().load(profileImageUri).into(profileImageView);
+                } else {
+                    // Handle the case where the profile image URL is empty
+                    // You can set a default placeholder image or hide the profile image view
+                    profileImageView.setImageResource(R.drawable.ali);
+                }
             }
         }).addOnFailureListener(e -> {
             // Handle the failure to retrieve the user data from Firestore
         });
-
         profileIconImageView.setOnClickListener(v -> {
             // Open the ProfileActivity
             Intent intent = new Intent(SeekerMainActivity.this, SeekerProfileActivity.class);
@@ -107,23 +117,45 @@ public class SeekerMainActivity extends AppCompatActivity implements AdapterView
         menuCvItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                 // Replace with the actual CV URL or retrieve it from your data source
+                FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+                String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                // Open the CV using an appropriate PDF viewer application
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.parse(cvUrl), "application/pdf");
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                DocumentReference userRef = firestore.collection("Job Seekers").document(currentUserId);
+                userRef.get().addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String name = documentSnapshot.getString("sName");
+                        String cvUrl = documentSnapshot.getString("cvUrl");
+                        String profileImageUri = documentSnapshot.getString("sImageUrl");
 
-                try {
-                    startActivity(intent);
-                } catch (ActivityNotFoundException e) {
-                    // Handle the case where a PDF viewer application is not available
-                    Toast.makeText(SeekerMainActivity.this, "No PDF viewer found", Toast.LENGTH_SHORT).show();
-                }
+                        if (cvUrl != null && !cvUrl.isEmpty()) {
+                            // Open the CV using an appropriate PDF viewer application
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setDataAndType(Uri.parse(cvUrl), "application/pdf");
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                            try {
+                                startActivity(intent);
+                            } catch (ActivityNotFoundException e) {
+                                // Handle the case where a PDF viewer application is not available
+                                Toast.makeText(SeekerMainActivity.this, "No PDF viewer found", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(SeekerMainActivity.this, "You didn't upload your CV", Toast.LENGTH_SHORT).show();
+                        }
+
+                        nameTextView.setText(name);
+                        // Load the profile image using your preferred image loading library (e.g., Picasso, Glide, etc.)
+                        // For example, using Picasso:
+                        Picasso.get().load(profileImageUri).into(profileImageView);
+                    }
+                }).addOnFailureListener(e -> {
+                    // Handle the failure to retrieve the user data from Firestore
+                });
 
                 return true;
             }
         });
+
 
 
         btnMain = findViewById(R.id.btnMain);
@@ -163,11 +195,7 @@ public class SeekerMainActivity extends AppCompatActivity implements AdapterView
                         startActivity(r);
                         finish();
                         return false;
-                    case R.id.menuSeekerNotifications:
-                        Intent NoTi = new Intent(SeekerMainActivity.this,jobs_viewer.class);
-                        startActivity(NoTi);
-                        finish();
-                        return false;
+
 
                     case R.id.menuSeekerInbox:
                         Intent inbox = new Intent(SeekerMainActivity.this , InboxActivity.class);

@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class JobPostingActivity extends AppCompatActivity {
     FirebaseFirestore db;
     TextView field;
     String jField;
+    ImageView backBtn;
     EditText jTitle, jDesc, jReq, jSalary, jLoc;
     MaterialButton postJobBtn;
     String[] item = {"Web Developer", "AI Developer", "Data Scientist", "Accountant", "Graphic Designer"};
@@ -47,7 +49,7 @@ public class JobPostingActivity extends AppCompatActivity {
         adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, item);
 
         autoCompleteTextView.setAdapter(adapterItems);
-
+        backBtn = findViewById(R.id.backbtn);
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,6 +67,12 @@ public class JobPostingActivity extends AppCompatActivity {
         jSalary = findViewById(R.id.job_salary_edit_text);
         jLoc = findViewById(R.id.job_location_edit_text);
         postJobBtn = findViewById(R.id.post_job_button);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -125,6 +133,7 @@ public class JobPostingActivity extends AppCompatActivity {
                             job.put("JobImage", ImageUrl);
                             jobsRef.document(String.valueOf(newJobId)).set(job);
                             jobsRef.document("job_ids").update("last_job_id", newJobId);
+                            Toast.makeText(JobPostingActivity.this, "Job offer Added successfully", Toast.LENGTH_SHORT).show();
                             jTitle.setText("");
                             jDesc.setText("");
                             jReq.setText("");

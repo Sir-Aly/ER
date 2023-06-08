@@ -34,17 +34,17 @@
                         android:layout_height="300dp"
                         android:layout_gravity="center_horizontal"
                         android:tintMode="multiply"
-                       android:foregroundTint="#00FFFFFF"
+                        android:foregroundTint="#00FFFFFF"
                         android:background="@drawable/logo_transparent"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Login Page"
+                        android:text="Login"
                         android:textColor="@color/black"
                         android:fontFamily="@font/open_sans_semibold"
                         android:textStyle="bold"
-                        android:textSize="23sp"
+                        android:textSize="25sp"
                         android:layout_gravity="center_horizontal"
                         />
                     <com.google.android.material.textfield.TextInputLayout
@@ -55,7 +55,7 @@
 
                         android:gravity="bottom">
 
-                        
+
                         <EditText
                             android:id="@+id/email"
                             android:textColor="@color/black"
@@ -63,14 +63,15 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/custom_edittext"
                             android:hint="Enter you Email"
-
                             android:inputType="textEmailAddress"
                             android:padding="20dp"
                             android:drawableLeft="@drawable/baseline_email_24"
                             android:drawablePadding="10dp"
                             android:drawableTint="@color/black"
-                             />
-                        
+
+
+                            />
+
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -106,7 +107,7 @@
                         android:background="@drawable/custom_edittext"
                         android:backgroundTint="@color/MainColor"
                         android:padding="12dp"
-                        android:text="Login!"
+                        android:text="Login"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         app:cornerRadius= "20dp"
@@ -119,17 +120,17 @@
                         android:orientation="horizontal"
 
                         >
-                    <TextView
-                        android:id="@+id/forgetPasswordButton"
-                        android:layout_width="match_parent"
-                        android:textAlignment="textStart"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="25dp"
-                        android:layout_weight="1"
-                        android:text="Forgot Password?"
-                        android:textColor="@color/blue_500"
-                        android:textSize="16sp"
-                        />
+                        <TextView
+                            android:id="@+id/forgetPasswordButton"
+                            android:layout_width="match_parent"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="25dp"
+                            android:layout_weight="1"
+                            android:text="Forgot Password?"
+                            android:textColor="@color/blue_500"
+                            android:textSize="16sp"
+                            />
                         <TextView
                             android:id="@+id/new_user"
                             android:layout_width="match_parent"
@@ -142,12 +143,12 @@
                             android:clickable="true"
                             android:textSize="16sp"
                             />
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
-
             </LinearLayout>
-
-        </LinearLayout>
 
         </ScrollView>
 

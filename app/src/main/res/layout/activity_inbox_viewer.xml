@@ -9,6 +9,42 @@
     android:background="@drawable/background2">
 
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/layoutToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/MainColor"
+        android:backgroundTint="@color/MainColor"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backbtn"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/app_name"
+            android:layout_gravity="start"
+            android:src="@drawable/backb"
+            app:tint="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/JobsViewerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inbox"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/raleway_extrabold"
+            android:textColor="#000000"
+            android:layout_gravity="center"
+            />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
 
     <ImageView
         android:layout_marginTop="10dp"
@@ -17,28 +53,9 @@
         android:src="@drawable/logo_transparent"
         android:layout_gravity="center"
         />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Clear"
-        android:backgroundTint="@color/MainColor"
-        android:textColor="@color/black"
-        android:onClick="clear"
-        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Inbox"
-        android:drawableLeft="@drawable/baseline_inbox_24"
-        android:drawableTint="@color/blue_500"
-        android:drawablePadding="15dp"
-        android:layout_gravity="center"
-        android:textColor="@color/black"
-        android:textSize="50dp"
-        />
+
+
     <TextView
         android:id="@+id/messages_size"
         android:layout_width="wrap_content"
@@ -49,8 +66,18 @@
         android:textColor="@color/red"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/MainColor"
+        android:onClick="clear"
+        android:text="Clear"
+
+        android:textColor="@color/black"
+        />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/refreshlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -60,7 +87,9 @@
             android:layout_height="match_parent"
             android:id="@+id/recview"
             android:nestedScrollingEnabled="true"
-            />
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
