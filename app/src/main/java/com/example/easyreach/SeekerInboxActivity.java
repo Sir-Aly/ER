@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -54,6 +55,16 @@ public class SeekerInboxActivity extends AppCompatActivity {
         myadapter_inbox=new myadapter_inbox(datalist_inbox);
         recview.setAdapter(myadapter_inbox);
 
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
         db=FirebaseFirestore.getInstance();
         CollectionReference users = db.collection("user");
         String userID =  mAuth.getCurrentUser().getUid();
@@ -76,13 +87,12 @@ public class SeekerInboxActivity extends AppCompatActivity {
 
     public void clear(View view){
         String userID =  mAuth.getCurrentUser().getUid();
-        db.collection("user").document(userID).collection("com.example.easyreach.Messages").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("user").document(userID).collection("Messages").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot snapshot :task.getResult()){
 
-//                    db.collection("user/" + userID + "com.example.easyreach.Messages/").document(snapshot.getId()).delete();
-                    db.collection("user").document(userID).collection("com.example.easyreach.Messages").document(snapshot.getId()).delete();
+                    db.collection("user").document(userID).collection("Messages").document(snapshot.getId()).delete();
                 }
             }
         });
@@ -90,7 +100,5 @@ public class SeekerInboxActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(SeekerInboxActivity.this, SeekerMainActivity.class);
-        startActivity(back);
     }
 }

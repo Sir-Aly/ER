@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MessageReplyActivity"
+    android:orientation="vertical"
+    android:background="@drawable/background2">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/layoutToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/toolbarBackground"
+        android:backgroundTint="@color/MainColor"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/backButtonContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start">
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/backAnimationView"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                app:lottie_rawRes="@raw/back"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="false"
+                app:lottie_speed="1"
+                app:lottie_repeatMode="restart" />
+
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/JobsViewerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message Reply"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="center" />
+
+    </androidx.appcompat.widget.Toolbar>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Old Message"
+        android:textSize="19sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:id="@+id/senderMailTv"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Old Message"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="18dp"
+        />
+    <TextView
+        android:id="@+id/oldMsgTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="14dp"
+        android:background="@drawable/border"
+        android:padding="10dp"
+        android:text="Bachelor's degree in Computer Science or related field
+At least 3 years of experience with e-commerce website development
+Proficiency in web development frameworks such as React or Vue.js
+Experience with e-commerce platforms such as Shopify or Magento
+Strong problem-solving and analytical skills "/>
+    <TextView
+        android:id="@+id/oldMsgTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Old Message"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="18dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Write your response"
+        android:textSize="19sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        />
+    <EditText
+        android:id="@+id/replyMessage"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:paddingHorizontal="15dp"
+        android:paddingBottom="@dimen/_5dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:hint="Message..."
+        android:textColor="@color/black"
+        android:background="@drawable/border"
+        />
+    <Button
+        android:id="@+id/sendMsgBtn"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/MainColor"
+        android:text="SEND"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        />
+
+
+</LinearLayout>

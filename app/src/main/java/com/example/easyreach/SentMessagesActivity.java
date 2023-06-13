@@ -1,6 +1,5 @@
 package com.example.easyreach;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.Timestamp;
@@ -43,10 +43,13 @@ public class SentMessagesActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         currentUserId = auth.getCurrentUser().getUid();
-        backBtn = findViewById(R.id.backbtn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+
+                backAnimationView.playAnimation();
                 onBackPressed();
             }
         });
@@ -143,7 +146,5 @@ public class SentMessagesActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(SentMessagesActivity.this, MainActivity.class);
-        startActivity(back);
     }
 }

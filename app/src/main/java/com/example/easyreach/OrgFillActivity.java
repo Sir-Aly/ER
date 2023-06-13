@@ -2,8 +2,12 @@ package com.example.easyreach;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,7 +39,10 @@ import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.yalantis.ucrop.UCrop;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +50,8 @@ public class OrgFillActivity extends AppCompatActivity {
 
     TextView orgField;
     String skills;
-
+    private Uri selectedImageUri;
+    private Uri croppedImageUri;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Button btnUpload;
     private Button selectImageButton;
@@ -54,7 +63,7 @@ public class OrgFillActivity extends AppCompatActivity {
     FirebaseFirestore db;
 private FirebaseAuth mAuth;
 
-    String[] item = {"Web Developer", "AI Developer", "Data Scientist", "Accountant"};
+    String[] item = {"Web Developer", "AI Developer", "Data Scientist", "Accountant", "Graphic Designer"};
 
     AutoCompleteTextView autoCompleteTextView;
 
@@ -66,6 +75,15 @@ private FirebaseAuth mAuth;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_org_fill);
 
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle back button click
+                onBackPressed();
+            }
+        });
 
 
         autoCompleteTextView = findViewById(R.id.auto_complete_textview);
@@ -83,12 +101,40 @@ private FirebaseAuth mAuth;
                 skills = orgField.getText().toString();
             }
         });
+        AutoCompleteTextView citySpinner = findViewById(R.id.cityAutoCompleteTextView);
 
+        // Retrieve the list of Egyptian cities from resources
+        String[] egyptianCities = getResources().getStringArray(R.array.egyptian_cities);
+
+        // Create an ArrayAdapter with the Egyptian cities
+        final ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(this, R.layout.list_item, egyptianCities);
+
+        // Set the ArrayAdapter as the adapter for the AutoCompleteTextView
+        citySpinner.setAdapter(cityAdapter);
+
+        // Set a TextWatcher to filter the city list as the user types
+        citySpinner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not needed in this case
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Filter the city list based on the user's input
+                String filter = s.toString().toLowerCase();
+                cityAdapter.getFilter().filter(filter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not needed in this case
+            }
+        });
         db = FirebaseFirestore.getInstance();
         firstName = findViewById(R.id.firstName);
         foundation = findViewById(R.id.pFoundationYear);
         description = findViewById(R.id.pDescription);
-        location = findViewById(R.id.pLocation);
         RegisterBtn = findViewById(R.id.btnRegister);
         mAuth = FirebaseAuth.getInstance();
 
@@ -96,7 +142,7 @@ private FirebaseAuth mAuth;
         imagePreview = findViewById(R.id.provider_image_preview);
         btnUpload = findViewById(R.id.seeker_btn_Upload);
 
-
+        String Address = citySpinner.getText().toString();
 
 
         RegisterBtn.setOnClickListener(new View.OnClickListener() {
@@ -139,8 +185,8 @@ private FirebaseAuth mAuth;
                             } else {
                                 updatedData.put("pDescription", existingDescription); // Keep the existing value
                             }
-                            if (!location.getText().toString().isEmpty()) {
-                                updatedData.put("pLocation", location.getText().toString());
+                            if (!citySpinner.getText().toString().isEmpty()) {
+                                updatedData.put("pLocation", citySpinner.getText().toString());
                             } else {
                                 updatedData.put("pLocation", existingLocation); // Keep the existing value
                             }
@@ -174,9 +220,7 @@ private FirebaseAuth mAuth;
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, PICK_IMAGE_REQUEST);
+                openGallery();
             }
         });
 
@@ -197,9 +241,11 @@ private FirebaseAuth mAuth;
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData();
-            imagePreview.setImageURI(imageUri);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            selectedImageUri = data.getData();
+            startCropActivity(selectedImageUri);
+        } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+            handleCropResult(data);
         }
     }
     private void uploadImage() {
@@ -208,7 +254,7 @@ private FirebaseAuth mAuth;
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         StorageReference imagesRef = storageRef.child( userId + "/profile_picture");
 
-        imagesRef.putFile(imageUri)
+        imagesRef.putFile(croppedImageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -269,12 +315,43 @@ private FirebaseAuth mAuth;
             }
         });
     }
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+    private void startCropActivity(Uri sourceUri) {
+        String destinationFileName = "cropped_image.jpg";
+        UCrop uCrop = UCrop.of(sourceUri, Uri.fromFile(new File(getCacheDir(), destinationFileName)))
+                .withAspectRatio(1, 1)
+                .withMaxResultSize(500, 500);
+
+        UCrop.Options options = new UCrop.Options();
+        options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
+        options.setCompressionQuality(90);
+
+        uCrop.withOptions(options);
+
+        uCrop.start(OrgFillActivity.this);
+    }
+
+    private void handleCropResult(Intent data) {
+        final Uri resultUri = UCrop.getOutput(data);
+
+        if (resultUri != null) {
+            croppedImageUri = resultUri;
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), croppedImageUri);
+                imagePreview.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(this, "Failed to crop image", Toast.LENGTH_SHORT).show();
+        }
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent btnClick = new Intent(OrgFillActivity.this, MainActivity.class);
-        startActivity(btnClick);
-        super.onBackPressed();
-        finish();
+
     }
 }

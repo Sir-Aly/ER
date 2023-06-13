@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
@@ -37,6 +38,17 @@ public class SeekerMessageActivity extends AppCompatActivity {
         String USERID = view_id.getText().toString();
         view_id2 =findViewById(R.id.testo);
 
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+        LottieAnimationView messageAnimationView = findViewById(R.id.messageAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
         Intent intent = getIntent();
         String new_id = intent.getStringExtra(myadapter_jobs.EXTRA_NAME);
         String receiverEmail = intent.getStringExtra(myadapter_jobs.EXTRA_EMAIL);
@@ -62,30 +74,35 @@ public class SeekerMessageActivity extends AppCompatActivity {
                 message.setRecipientEmail(recipientEmail);
                 message.setSenderEmail(senderEmail);
                 message.setAccepted(false);
+if (!content.equals("")){
+    long currentTimeMillis = System.currentTimeMillis();
+    Timestamp timestamp = new Timestamp(currentTimeMillis / 1000, (int) (currentTimeMillis % 1000) * 1000000);
+    message.setTimestamp(timestamp);
+    CollectionReference messagesRef = db.collection("Messages");
 
+    // Save the message to Firestore
+    messagesRef.add(message)
+            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    // Message sent successfully
+                    Toast.makeText(SeekerMessageActivity.this, "Message sent", Toast.LENGTH_SHORT).show();
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // Error sending message
+                    Toast.makeText(SeekerMessageActivity.this, "Failed to send message", Toast.LENGTH_SHORT).show();
+                }
+            });
+    messageEditText.setText("");
+    messageAnimationView.playAnimation();
+}else {
+    Toast.makeText(SeekerMessageActivity.this, "Please type your message", Toast.LENGTH_SHORT).show();
+}
                 // Get the current timestamp
-                long currentTimeMillis = System.currentTimeMillis();
-                Timestamp timestamp = new Timestamp(currentTimeMillis / 1000, (int) (currentTimeMillis % 1000) * 1000000);
-                message.setTimestamp(timestamp);
-                CollectionReference messagesRef = db.collection("Messages");
 
-                // Save the message to Firestore
-                messagesRef.add(message)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                // Message sent successfully
-                                Toast.makeText(SeekerMessageActivity.this, "Message sent", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Error sending message
-                                Toast.makeText(SeekerMessageActivity.this, "Failed to send message", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                messageEditText.setText("");
 
             }
         });
@@ -95,8 +112,6 @@ public class SeekerMessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(SeekerMessageActivity.this, SeekerMainActivity.class);
-        startActivity(i);
 
     }
 }

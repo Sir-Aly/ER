@@ -8,6 +8,8 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class SeekerAboutUsActivity extends AppCompatActivity {
 
     @Override
@@ -17,12 +19,21 @@ public class SeekerAboutUsActivity extends AppCompatActivity {
         ImageButton facebookButton = findViewById(R.id.facebook_text);
         ImageButton instagramButton = findViewById(R.id.instagram_text);
         ImageButton twitterButton = findViewById(R.id.twitter_text);
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+            }
+        });
 
         facebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Open the Facebook page in a browser
-                String facebookUrl = "https://www.facebook.com/aliabdelrahmanjr";
+                String facebookUrl = "https://twitter.com/easyreachDev";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(facebookUrl));
                 startActivity(intent);
@@ -53,8 +64,5 @@ public class SeekerAboutUsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent b = new Intent(this, SeekerMainActivity.class);
-        startActivity(b);
-        finish();
     }
 }

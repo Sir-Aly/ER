@@ -1,12 +1,14 @@
 package com.example.easyreach;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -34,9 +36,22 @@ public class interested_list extends AppCompatActivity {
         recview=(RecyclerView)findViewById(R.id.recview);
         recview.setLayoutManager(new LinearLayoutManager(this));
         datalist=new ArrayList<>();
-        adapter=new myadapter(datalist);
+        adapter=new myadapter(this,datalist);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter, this));
+        itemTouchHelper.attachToRecyclerView(recview);
         recview.setAdapter(adapter);
         //collections
+
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle back button click
+                onBackPressed();
+            }
+        });
+
 
         db=FirebaseFirestore.getInstance();
         CollectionReference users = db.collection("user");
@@ -59,54 +74,5 @@ public class interested_list extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(interested_list.this, MainActivity.class);
-        startActivity(i);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    public void loadNote(View v) {
-//        Likes.document("1IPH1gf15GddrBImlub2").get()
-//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//
-//                        if (documentSnapshot.exists()) {
-//                            String title = documentSnapshot.getString(KEY_TITLE);
-//                            String description = documentSnapshot.getString(KEY_DESCRIPTION);
-//                            TextView text1 = findViewById(R.id.text1);
-//                            text1.setText("Title: " + title + "\n" + "Description: " + description);
-//                        }
-//                    }
-//                });
-//    }
-//}
-

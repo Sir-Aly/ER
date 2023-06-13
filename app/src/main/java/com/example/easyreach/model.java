@@ -2,12 +2,13 @@ package com.example.easyreach;
 
 public class model
 {
-    String sName, sEmail, sAge, sField, sImageUrl,sLocation ,UID, sYoE;
+    String sName, sEmail, sAge, sField, sImageUrl,sLocation ,UID, sYoE, documentId;
 
     public model() {
     }
 
-    public model(String sName, String sEmail,String sAge, String sField, String sImageUrl,String sLocation, String UID, String sYoE) {
+    public model(String documentId, String sName, String sEmail,String sAge, String sField, String sImageUrl,String sLocation, String UID, String sYoE) {
+        this.documentId = documentId;
         this.sName = sName;
         this.sEmail = sEmail;
         this.sAge = sAge;
@@ -18,6 +19,13 @@ public class model
         this.UID = UID;
     }
 
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
     public String getsName() {
         return sName;
     }

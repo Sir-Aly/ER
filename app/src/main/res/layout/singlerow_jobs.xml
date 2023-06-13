@@ -13,15 +13,13 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:cardCornerRadius="7dp"
         app:cardBackgroundColor="#6DFFEAD0"
-
-        android:elevation="30dp"
         app:cardUseCompatPadding="true"
-        app:cardElevation="5dp">
+        app:cardElevation="2dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="0dp">
+            android:padding="3dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,6 +42,7 @@
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_gravity="center"
                     >
             <TextView
                 android:layout_width="match_parent"
@@ -51,7 +50,6 @@
                 android:layout_marginLeft="10dp"
                 android:id="@+id/title"
                 android:text="Name"
-                android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:textSize="25dp"
                 android:textColor="@color/blue_500"/>
@@ -61,6 +59,7 @@
                         android:text="3/4/2000"
                         android:layout_marginLeft="10dp"
                         android:textSize="20dp"
+                        android:visibility="gone"
                         android:textColor="@color/black"
                         />
                 </LinearLayout>
@@ -70,7 +69,7 @@
                     android:id="@+id/add_to_interest"
                     android:src="@drawable/favourite"
                     android:backgroundTint="#00F49F1C"
-                    android:layout_gravity="end"/>
+                    android:layout_gravity="center"/>
             </LinearLayout>
 
             <TextView
@@ -83,6 +82,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:id="@+id/j_description"
                 android:text="j_description"
                 android:paddingLeft="7dp"
@@ -103,9 +104,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:paddingTop="5dp"
+                    android:textColor="@color/black"
                     android:drawableLeft="@drawable/baseline_location_on_24"
                     android:drawableTint="@color/black"
                     android:drawablePadding="10dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
                     android:text="j_location"
                     android:textSize="18dp" />
 
@@ -119,7 +123,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:id="@+id/j_salary"
+                    android:textColor="@color/black"
                     android:paddingTop="5dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:drawableLeft="@drawable/salary"
                     android:drawablePadding="10dp"
                     android:text="Salary" />
@@ -133,6 +140,9 @@
                 android:drawableTint="@color/black"
                 android:drawablePadding="10dp"
                 android:paddingTop="5dp"
+                android:textColor="@color/black"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/j_requirment"
                 android:text="j_requirment"

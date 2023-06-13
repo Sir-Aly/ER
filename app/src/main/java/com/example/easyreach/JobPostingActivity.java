@@ -1,8 +1,9 @@
 package com.example.easyreach;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -49,7 +51,48 @@ public class JobPostingActivity extends AppCompatActivity {
         adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, item);
 
         autoCompleteTextView.setAdapter(adapterItems);
-        backBtn = findViewById(R.id.backbtn);
+
+        AutoCompleteTextView citySpinner = findViewById(R.id.cityAutoCompleteTextView);
+
+        // Retrieve the list of Egyptian cities from resources
+        String[] egyptianCities = getResources().getStringArray(R.array.egyptian_cities);
+
+        // Create an ArrayAdapter with the Egyptian cities
+        final ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(this, R.layout.list_item, egyptianCities);
+
+        // Set the ArrayAdapter as the adapter for the AutoCompleteTextView
+        citySpinner.setAdapter(cityAdapter);
+
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+            }
+        });
+
+
+        citySpinner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not needed in this case
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Filter the city list based on the user's input
+                String filter = s.toString().toLowerCase();
+                cityAdapter.getFilter().filter(filter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not needed in this case
+            }
+        });
+
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,14 +108,8 @@ public class JobPostingActivity extends AppCompatActivity {
         jDesc = findViewById(R.id.job_description_edit_text);
         jReq = findViewById(R.id.job_requirements_edit_text);
         jSalary = findViewById(R.id.job_salary_edit_text);
-        jLoc = findViewById(R.id.job_location_edit_text);
         postJobBtn = findViewById(R.id.post_job_button);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -88,11 +125,12 @@ public class JobPostingActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
+                String Address = citySpinner.getText().toString();
                 String jTitleValue = jTitle.getText().toString();
                 String jDescValue = jDesc.getText().toString();
                 String jReqValue = jReq.getText().toString();
                 String jSalaryValue = jSalary.getText().toString();
-                String jLocValue = jLoc.getText().toString();
+                String jLocValue = citySpinner.getText().toString();
 
                 // Check if any of the mandatory fields are empty
                 if (TextUtils.isEmpty(jTitleValue) || TextUtils.isEmpty(jDescValue) ||
@@ -116,7 +154,7 @@ public class JobPostingActivity extends AppCompatActivity {
                             String Title = jTitle.getText().toString();
                             String Description = jDesc.getText().toString();
                             String Requirements = jReq.getText().toString();
-                            String Location = jLoc.getText().toString();
+                            String Location = citySpinner.getText().toString();
                             String pEmail = mAuth.getCurrentUser().getEmail();
                             String ImageUrl = "https://firebasestorage.googleapis.com/v0/b/easyreach-1.appspot.com/o/jobsbg.jpg?alt=media&token=90f0f4b5-d7c0-451f-9a19-75b98da26c9c";
                             String Salary = jSalary.getText().toString();
@@ -138,7 +176,7 @@ public class JobPostingActivity extends AppCompatActivity {
                             jDesc.setText("");
                             jReq.setText("");
                             jSalary.setText("");
-                            jLoc.setText("");
+                            citySpinner.setText("");
                         }
                     }
                 });
@@ -152,7 +190,5 @@ public class JobPostingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(JobPostingActivity.this, MainActivity.class);
-        startActivity(back);
     }
 }

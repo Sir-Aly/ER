@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     style="?android:attr/spinnerDropDownItemStyle"
@@ -9,4 +9,5 @@
     android:layout_height="wrap_content"
     android:backgroundTint="@color/black"
     android:padding="10dp"
-    android:ellipsize="marquee"/>
+    app:layout_anchor="@color/black"
+    android:ellipsize="marquee" />

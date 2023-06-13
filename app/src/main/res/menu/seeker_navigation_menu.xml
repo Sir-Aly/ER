@@ -5,11 +5,17 @@
         android:id="@+id/menuSeekerProfile"
         android:icon="@drawable/baseline_person_24"
         android:title="@string/profile"
+        android:visible="false"
         />
     <item
         android:id="@+id/menuCV"
         android:icon="@drawable/cv"
         android:title="@string/cv"
+        />
+    <item
+        android:id="@+id/sentMsgs"
+        android:icon="@drawable/sen32pxmail"
+        android:title="@string/sent_messages"
         />
 
     <item
@@ -21,6 +27,7 @@
         android:id="@+id/menuSeekerSettings"
         android:icon="@drawable/baseline_settings_24"
         android:title="@string/Settings"
+        android:visible="false"
         />
 
     <item

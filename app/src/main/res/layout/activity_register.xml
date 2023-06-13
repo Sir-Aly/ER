@@ -33,11 +33,24 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="218dp"
-                        android:layout_height="208dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/logo_transparent"/>
+                    <FrameLayout
+                        android:id="@+id/backButtonContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/backAnimationView"
+                            android:layout_width="208dp"
+                            android:layout_height="180dp"
+                            app:lottie_rawRes="@raw/login"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="false"
+                            app:lottie_speed="1.5"
+                            app:lottie_repeatMode="restart" />
+
+                    </FrameLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -49,7 +62,6 @@
                         android:textStyle="bold"
                         android:layout_gravity="center_horizontal"
                         />
-
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
@@ -100,18 +112,74 @@
                         android:layout_marginBottom="5dp"
                         android:gravity="bottom">
 
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/password"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/enter_you_password"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/darkgrey"
+                                android:inputType="textPassword"
+                                android:padding="20dp"
+                                android:drawableStart="@drawable/baseline_lock_24"
+                                android:drawablePadding="10sp"
+                                android:background="@drawable/border" />
+
+                            <ImageButton
+                                android:id="@+id/passwordVisibilityToggle"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="#00000000"
+                                android:src="@drawable/baseline_visibility_off_24"
+                                android:contentDescription="Password Visibility Toggle"
+                                android:layout_alignBottom="@id/password"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="10dp" />
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="bottom">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
                         <EditText
-                            android:id="@+id/password"
+                            android:id="@+id/confirmPassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
-                            android:hint="@string/enter_you_password"
+                            android:hint="@string/confirm_your_password"
                             android:textColor="@color/black"
                             android:inputType="textPassword"
                             android:padding="20dp"
+                            android:textColorHint="@color/darkgrey"
                             android:drawableStart="@drawable/baseline_lock_24"
                             android:drawablePadding="10sp"
                             android:background="@drawable/border"/>
+                            <ImageButton
+                                android:id="@+id/passwordConfirmVisibilityToggle"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="#00000000"
+                                android:src="@drawable/baseline_visibility_off_24"
+                                android:contentDescription="Password Visibility Toggle"
+                                android:layout_alignBottom="@id/confirmPassword"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="10dp" />
+                        </RelativeLayout>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,7 +201,6 @@
                             android:drawableStart="@drawable/baseline_phone_android_24"
                             android:drawablePadding="10sp"
                             android:background="@drawable/border"/>
-
                     </com.google.android.material.textfield.TextInputLayout>
                     <RadioGroup
                         android:id="@+id/userTypeRadioGroup"
@@ -143,17 +210,14 @@
                         android:padding="7dp"
                         android:orientation="horizontal"
                         android:background="@drawable/border">
-
                         <RadioButton
                             android:id="@+id/jobSeekerRadioButton"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-
                             android:text="Job Seeker"
                             android:textColor="@color/black"
                             android:checked="true"
                             />
-
                         <RadioButton
                             android:id="@+id/jobProviderRadioButton"
                             android:layout_width="wrap_content"
@@ -166,7 +230,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-
                         <CheckBox
                             android:id="@+id/checkbox1"
                             android:layout_width="match_parent"
@@ -174,7 +237,6 @@
                             android:textColor="@color/black"
                             android:text="@string/tc"
                             />
-
                         <TextView
                             android:id="@+id/TextView2"
                             android:layout_width="wrap_content"
@@ -183,7 +245,6 @@
                             android:textColor="@color/black"
                             android:text="@string/read_terms_and_conditions_here"
                             android:clickable="true"/>
-
                     </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -198,8 +259,6 @@
                         android:text="@string/register"
                         android:textColor="@color/white"
                         />
-
-
                     <TextView
                         android:id="@+id/existing"
                         android:layout_width="wrap_content"
@@ -212,8 +271,6 @@
                         android:layout_gravity="center_horizontal"
                         />
                 </LinearLayout>
-
-
 
             </LinearLayout>
 

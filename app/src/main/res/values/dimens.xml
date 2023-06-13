@@ -10,5 +10,6 @@
         <dimen name="_5dp">5dp</dimen>
         <dimen name="_1dp">1dp</dimen>
         <dimen name="_10dp">10dp</dimen>
+        <dimen name="delete_icon_margin">16dp</dimen>
 
 </resources>

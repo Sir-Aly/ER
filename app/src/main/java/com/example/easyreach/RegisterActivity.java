@@ -3,11 +3,13 @@ package com.example.easyreach;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.InputType;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -34,11 +36,16 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
 
     private Button mRegister;
-    private EditText mEmail, mPassword, mName, mBudget;
+    private EditText mEmail, mPassword, mName, mConfirmPassword;
     RadioGroup userTypeRadioGroup;
     private FirebaseAuth mAuth;
     private RadioButton mJobSeekerRadioButton, mJobProviderRadioButton;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
+    private ImageView passwordVisibilityToggle, passwordConfirmVisibilityToggle;
+
+
+    private boolean passwordVisible = false;
+    private boolean confirmPasswordVisible = false;
     final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
@@ -51,6 +58,23 @@ public class RegisterActivity extends AppCompatActivity {
 
         TextView existing = (TextView) findViewById(R.id.existing);
         mAuth = FirebaseAuth.getInstance();
+
+        passwordVisibilityToggle = findViewById(R.id.passwordVisibilityToggle);
+
+        passwordVisibilityToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility();
+            }
+        });
+        passwordConfirmVisibilityToggle = findViewById(R.id.passwordConfirmVisibilityToggle);
+
+        passwordConfirmVisibilityToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleConfirmPasswordVisibility();
+            }
+        });
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -97,6 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
         mRegister = (Button) findViewById(R.id.register);
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
+        mConfirmPassword = (EditText) findViewById(R.id.confirmPassword);
         mName = (EditText) findViewById(R.id.name);
         final CheckBox checkBox = (CheckBox) findViewById(R.id.checkbox1);
         TextView textView = (TextView) findViewById(R.id.TextView2);
@@ -114,7 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
                 final String name = mName.getText().toString();
                 final Boolean tnc = checkBox.isChecked();
 
-                if ( checkInputs(pEmail, name, password, tnc)){
+                if ( checkInputs(pEmail, name, password, tnc)&& validatePasswords()){
 
                     mAuth.createUserWithEmailAndPassword(pEmail, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -170,11 +195,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     });
-
                 }
-
-
-
             }
         });
 
@@ -212,7 +233,57 @@ public class RegisterActivity extends AppCompatActivity {
         int checkedRadioButtonId = userTypeRadioGroup.getCheckedRadioButtonId();
         return checkedRadioButtonId == R.id.jobProviderRadioButton;
     }
+    private void togglePasswordVisibility() {
+        if (passwordVisible) {
+            // Hide password
+            mPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            passwordVisibilityToggle.setImageResource(R.drawable.baseline_visibility_off_24);
+        } else {
+            // Show password
+            mPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            passwordVisibilityToggle.setImageResource(R.drawable.baseline_visibility_24);
+        }
 
+        passwordVisible = !passwordVisible;
+
+        // Move cursor to the end of the password field
+        mPassword.setSelection(mPassword.getText().length());
+    }
+
+    private void toggleConfirmPasswordVisibility() {
+        if (confirmPasswordVisible) {
+            // Hide password
+            mConfirmPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            passwordConfirmVisibilityToggle.setImageResource(R.drawable.baseline_visibility_off_24);
+        } else {
+            // Show password
+            mConfirmPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            passwordConfirmVisibilityToggle.setImageResource(R.drawable.baseline_visibility_24);
+        }
+
+        confirmPasswordVisible = !confirmPasswordVisible;
+
+        // Move cursor to the end of the password field
+        mConfirmPassword.setSelection(mConfirmPassword.getText().length());
+    }
+
+    private boolean validatePasswords() {
+        String password = mPassword.getText().toString();
+        String confirmPassword = mConfirmPassword.getText().toString();
+
+        if (password.isEmpty() || confirmPassword.isEmpty()) {
+            Toast.makeText(this, "Password fields are empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            Toast.makeText(this, "Passwords Doesn't match", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Passwords are valid
+        return true;
+    }
     @Override
     public void onBackPressed() {
         Intent i = new Intent(RegisterActivity.this, Choose_Login_And_Reg.class);

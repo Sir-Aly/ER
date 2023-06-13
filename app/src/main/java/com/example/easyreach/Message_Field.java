@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
@@ -43,6 +44,19 @@ public class Message_Field extends AppCompatActivity {
         view_id.setText(new_id);
         messageEditText = findViewById(R.id.message);
 
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        LottieAnimationView messageAnimationView = findViewById(R.id.messageAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
+
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -62,7 +76,7 @@ sendMsg.setOnClickListener(new View.OnClickListener() {
         message.setSenderEmail(senderEmail);
         message.setAccepted(false);
 
-
+        if (!content.equals("")){
         long currentTimeMillis = System.currentTimeMillis();
         Timestamp timestamp = new Timestamp(currentTimeMillis / 1000, (int) (currentTimeMillis % 1000) * 1000000);
         message.setTimestamp(timestamp);
@@ -81,6 +95,10 @@ sendMsg.setOnClickListener(new View.OnClickListener() {
                     }
                 });
         messageEditText.setText("");
+        messageAnimationView.playAnimation();
+    }else {
+        Toast.makeText(Message_Field.this, "Please type your message", Toast.LENGTH_SHORT).show();
+    }
     }
 });
 
@@ -89,8 +107,5 @@ sendMsg.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-    Intent i = new Intent(Message_Field.this, MainActivity.class);
-    startActivity(i);
-
     }
 }

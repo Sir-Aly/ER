@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -54,13 +55,19 @@ public class ProfilePage extends AppCompatActivity {
         ageTv= (TextView) findViewById(R.id.age);
         fieldTv= (TextView) findViewById(R.id.field);
         emailTv= (TextView) findViewById(R.id.email);
-        backBtn = findViewById(R.id.backbtn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
+
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+
+                backAnimationView.playAnimation();
                 onBackPressed();
             }
         });
+
+
 //        mForgetPassword = (Button) findViewById(R.id.forgetPasswordButton);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String currentid = user.getUid();
@@ -119,20 +126,16 @@ public class ProfilePage extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
-                    // Get the image URL from the document
                     String imageUrl = documentSnapshot.getString("profileUrl");
                     Context context = getApplicationContext();
 
                     if (imageUrl != null) {
-                        // Here's an example of how to use Glide:
                         Glide.with(context)
                                 .load(imageUrl)
                                 .into(profilePictureImageView);
                     } else {
-                        // Handle the case where the image URL is null
                     }
                 } else {
-                    // Handle the case where the document does not exist
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -141,22 +144,12 @@ public class ProfilePage extends AppCompatActivity {
 
             }
         });
-//        mForgetPassword.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                Intent i = new Intent(ProfilePage.this, ForgetPasswordActivity.class  );
-//                startActivity(i);
-//                finish();
-//            }
-//        });
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent btnClick = new Intent(ProfilePage.this, MainActivity.class);
-        startActivity(btnClick);
-        super.onBackPressed();
-        finish();
     }
 
 }

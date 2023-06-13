@@ -22,8 +22,11 @@
         <color name="ALI">#000000</color>
         <color name="status_bar_color">#00000000</color>
         <color name="transparentPink">#99FF4081</color>
+        <color name="swipeDeleteBackground">#FF0000</color>
+        <color name="user_message_background_color">#00B0FF</color>
 
         <color name="grey">#bfbfbf</color>
+        <color name="darkgrey">#5E5D58</color>
         <color name="white">#ffffff</color>
         <color name="black">#000000</color>
         <color name="link_blue">#1781DB</color>
@@ -36,6 +39,15 @@
         <color name="lightgrey">#d1d1d1</color>
         <color name="pink">#EA2164</color>
         <color name="text">#545454</color>
+        <!-- Toolbar background color -->
+        <color name="toolbarBackground">#FF4081</color>
+
+        <!-- Back button color -->
+        <color name="backButtonColor">#FFFFFF</color>
+
+        <!-- Title text color -->
+        <color name="titleTextColor">#000000</color>
+
 
         <color name="progress_background">#B6B6B6</color>
         <color name="color_salty">#83d3d0</color>

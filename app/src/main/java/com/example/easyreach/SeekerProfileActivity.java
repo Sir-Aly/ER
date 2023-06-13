@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -51,27 +52,18 @@ public class SeekerProfileActivity extends AppCompatActivity {
         fieldTv= (TextView) findViewById(R.id.field);
         emailTv= (TextView) findViewById(R.id.email);
         YoETv = (TextView) findViewById(R.id.sYoE);
-//        cvImage = (ImageButton) findViewById(R.id.profileCV);
-//        mForgetPassword = (Button) findViewById(R.id.forgetPasswordButton);
-//        cvImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Get the CV URL from the ImageButton's tag
-//                String cvUrl = (String) cvImage.getTag();
-//
-//                // Open the CV using an appropriate PDF viewer application
-//                Intent intent = new Intent(Intent.ACTION_VIEW);
-//                intent.setDataAndType(Uri.parse(cvUrl), "application/pdf");
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//
-//                try {
-//                    view.getContext().startActivity(intent);
-//                } catch (ActivityNotFoundException e) {
-//                    // Handle the case where a PDF viewer application is not available
-//                    Toast.makeText(view.getContext(), "No PDF viewer found", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                backAnimationView.playAnimation();
+                onBackPressed();
+            }
+        });
+
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,32 +150,13 @@ public class SeekerProfileActivity extends AppCompatActivity {
 
             }
         });
-//        mForgetPassword.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                Intent i = new Intent(SeekerProfileActivity.this, ForgetPasswordActivity.class  );
-//                startActivity(i);
-//                finish();
-//            }
-//        });
+
 
     }
 
-    //    Context context = getApplicationContext();
-//    // Get the image URL from the document
-//    String imageUrl = document.get("profileImageUrl").toString();
-//
-//
-//
-//                        Glide.with(context)
-//            .load(imageUrl)
-//                                .into(profilePictureImageView);
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent btnClick = new Intent(SeekerProfileActivity.this, SeekerMainActivity.class);
-        startActivity(btnClick);
-        super.onBackPressed();
-        finish();
     }
 
 }

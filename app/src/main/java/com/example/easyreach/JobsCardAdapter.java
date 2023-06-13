@@ -1,4 +1,7 @@
 package com.example.easyreach;
+
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +24,11 @@ import java.util.List;
 
 public class JobsCardAdapter extends CardStackView.Adapter<JobsCardAdapter.ViewHolder> {
     private List<JobOffer> jobOffers;
+    private Context context;
 
-    public JobsCardAdapter(List<JobOffer> jobOffers) {
+    public JobsCardAdapter(List<JobOffer> jobOffers,  Context context) {
         this.jobOffers = jobOffers;
+        this.context = context;
     }
 
     @Override
@@ -72,6 +77,19 @@ public class JobsCardAdapter extends CardStackView.Adapter<JobsCardAdapter.ViewH
                                 }
                             });
                 }
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the jobId
+                long jobId = jobOffer.getJob_id();
+                String jobID = String.valueOf(jobId);
+
+                // Start the activity to show the detailed view of the job
+                Intent intent = new Intent(context, JobDetailActivity.class);
+                intent.putExtra("jobID", jobID);
+                context.startActivity(intent);
             }
         });
     }

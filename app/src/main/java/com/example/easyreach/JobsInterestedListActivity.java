@@ -1,12 +1,14 @@
 package com.example.easyreach;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -34,8 +36,22 @@ public class JobsInterestedListActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         JobsRecyclerView=(RecyclerView)findViewById(R.id.recycleView);
         JobsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle back button click
+                onBackPressed();
+            }
+        });
+
+
         JobsDataList=new ArrayList<>();
-        jobAdapter=new myadapter_jobs(JobsDataList);
+        jobAdapter=new myadapter_jobs(this,JobsDataList);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(jobAdapter, this));
+        itemTouchHelper.attachToRecyclerView(JobsRecyclerView);
         JobsRecyclerView.setAdapter(jobAdapter);
 
         db=FirebaseFirestore.getInstance();
@@ -59,7 +75,5 @@ public class JobsInterestedListActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(JobsInterestedListActivity.this, SeekerMainActivity.class);
-        startActivity(i);
     }
 }

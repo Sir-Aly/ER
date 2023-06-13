@@ -7,6 +7,7 @@
         android:id="@+id/menuProfile"
         android:icon="@drawable/baseline_person_24"
         android:title="@string/profile"
+        android:visible="false"
      />
 
     <item
@@ -24,6 +25,7 @@
         android:id="@+id/menuSettings"
         android:icon="@drawable/baseline_settings_24"
         android:title="@string/Settings"
+        android:visible="false"
         />
     <item
         android:id="@+id/jobAdding"
@@ -39,6 +41,12 @@
         android:id="@+id/menuAboutUs"
         android:icon="@drawable/baseline_info_24"
         android:title="@string/about_us"
+        />
+    <item
+        android:id="@+id/menuAdmin"
+        android:icon="@drawable/baseline_info_24"
+        android:visible="false"
+        android:title="Admin"
         />
 
     <item

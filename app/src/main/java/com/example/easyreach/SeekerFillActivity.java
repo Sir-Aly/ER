@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -81,6 +82,7 @@ public class SeekerFillActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_seeker_fill);
         autoCompleteTextView = findViewById(R.id.auto_complete_textview);
+
         cvStorageRef = FirebaseStorage.getInstance().getReference().child("cv");
 
 // Initialize Firestore document reference for the current user
@@ -94,10 +96,21 @@ public class SeekerFillActivity extends AppCompatActivity {
         String[] egyptianCities = getResources().getStringArray(R.array.egyptian_cities);
 
         // Create an ArrayAdapter with the Egyptian cities
-        final ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, egyptianCities);
+        final ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(this, R.layout.list_item, egyptianCities);
 
         // Set the ArrayAdapter as the adapter for the AutoCompleteTextView
         citySpinner.setAdapter(cityAdapter);
+
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle back button click
+                onBackPressed();
+            }
+        });
+
 
         // Set a TextWatcher to filter the city list as the user types
         citySpinner.addTextChangedListener(new TextWatcher() {
@@ -466,9 +479,6 @@ public class SeekerFillActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent btnClick = new Intent(SeekerFillActivity.this, SeekerMainActivity.class);
-        startActivity(btnClick);
-        super.onBackPressed();
-        finish();
+
     }
 }

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -54,6 +55,17 @@ public class jobs_viewer extends AppCompatActivity {
 //       message_size.setText(getItemCounttt());
 
 
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                backAnimationView.playAnimation();
+                onBackPressed();
+            }
+        });
+
         btnInterest = findViewById(R.id.seeker_interest_list);
         btnInterest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +78,7 @@ public class jobs_viewer extends AppCompatActivity {
         recview=(RecyclerView)findViewById(R.id.recview);
         recview.setLayoutManager(new LinearLayoutManager(this));
         datalist_jobs=new ArrayList<>();
-        myadapter_jobs =new JobsAdapter(datalist_jobs);
+        myadapter_jobs =new JobsAdapter(datalist_jobs, this);
         recview.setAdapter(myadapter_jobs);
 
         btnMain = findViewById(R.id.btnMain);
@@ -74,16 +86,7 @@ public class jobs_viewer extends AppCompatActivity {
         btnInterestedList = findViewById(R.id.btnListedJobs);
 
 
-        backBtn = findViewById(R.id.backbtn);
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent backs = new Intent(jobs_viewer.this, SeekerMainActivity.class);
-                startActivity(backs);
-                CustomIntent.customType(jobs_viewer.this,"right-to-left");
-            }
-        });
 
 
         btnMain.setOnClickListener(new View.OnClickListener() {
@@ -131,8 +134,6 @@ public class jobs_viewer extends AppCompatActivity {
                     }
                 });
 
-//        message_size.setText(datalist_jobs.size() +" "+"NEW MESSAGES");
-//        message_size.setText(myadapter_jobs.getItemCount() +" "+"NEW MESSAGES");
     }
 
     public void clear(View view){
@@ -156,7 +157,5 @@ public class jobs_viewer extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(jobs_viewer.this, SeekerMainActivity.class);
-        startActivity(i);
     }
 }

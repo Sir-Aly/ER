@@ -49,7 +49,7 @@ public class SeekerMainActivity extends AppCompatActivity implements AdapterView
     private NavigationView navigationView;
     String text;
     private String cvUrl;
-
+    private boolean doubleBackToExitPressedOnce = false;
     private static final String TAG = "SeekerMainActivity";
     private CardStackView cardStackView;
     private JobsCardAdapter jAdapter;
@@ -190,29 +190,28 @@ public class SeekerMainActivity extends AppCompatActivity implements AdapterView
                         startActivity(i);
                         finish();
                         return false;
-                    case R.id.menuSeekerProfile:
-                        Intent r = new Intent(SeekerMainActivity.this, SeekerProfileActivity.class);
-                        startActivity(r);
-                        finish();
-                        return false;
 
+                    case R.id.sentMsgs:
+                        Intent sent = new Intent(SeekerMainActivity.this, SentMessagesActivity.class);
+                        startActivity(sent);
+                        return false;
 
                     case R.id.menuSeekerInbox:
                         Intent inbox = new Intent(SeekerMainActivity.this , InboxActivity.class);
                         startActivity(inbox);
-                        finish();
                         return false;
                     case R.id.menuSeekerSettings:
                         Intent s = new Intent(SeekerMainActivity.this, SeekerFillActivity.class);
                         startActivity(s);
-                        finish();
                         return false;
                     case R.id.menuSeekerAboutUs:
                         Intent a = new Intent(SeekerMainActivity.this, SeekerAboutUsActivity.class);
                         startActivity(a);
-                        finish();
                         return false;
-                    case R.id.menuCV:
+                    case R.id.menuSeekerSupport:
+                        Intent c = new Intent(SeekerMainActivity.this, MessagingActivity.class);
+                        startActivity(c);
+                        return false;
 
                 }
 
@@ -278,8 +277,9 @@ public class SeekerMainActivity extends AppCompatActivity implements AdapterView
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        jobOffers.clear();
-                        // Iterate through the documents and add each job seeker to the jobSeekers list
+                        jobOffers.clear(); // Clear the existing job offers
+
+                        // Iterate through the documents and add each matching job offer to the jobOffers list
                         for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             if (documentSnapshot.exists()) {
                                 JobOffer jobOffer = documentSnapshot.toObject(JobOffer.class);
@@ -288,7 +288,8 @@ public class SeekerMainActivity extends AppCompatActivity implements AdapterView
                                 }
                             }
                         }
-                        // Call the method to set up the CardStackView with the job seekers list
+
+                        // Call the method to set up the CardStackView with the job offers list
                         setupCardStackView();
                     }
                 })
@@ -300,15 +301,16 @@ public class SeekerMainActivity extends AppCompatActivity implements AdapterView
                 });
     }
 
+
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
     private void setupCardStackView() {
         // Create a CardStackView instance
         cardStackView = findViewById(R.id.cardStackView);
-        jAdapter = new JobsCardAdapter(jobOffers);
+        jAdapter = new JobsCardAdapter(jobOffers, this);
         // Set the adapter on the CardStackView
         cardStackView.setAdapter(jAdapter);
+        jAdapter.notifyDataSetChanged();
     }
-
 }

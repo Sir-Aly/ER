@@ -29,17 +29,30 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="300dp"
+                    <FrameLayout
+                        android:id="@+id/backButtonContainer"
+                        android:layout_width="wrap_content"
                         android:layout_height="300dp"
-                        android:layout_gravity="center_horizontal"
-                        android:tintMode="multiply"
-                        android:foregroundTint="#00FFFFFF"
-                        android:background="@drawable/logo_transparent"/>
+                        android:layout_gravity="center">
+
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/backAnimationView"
+                            android:layout_width="300dp"
+                            android:layout_height="300dp"
+                            app:lottie_rawRes="@raw/logindvdvd"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="false"
+                            app:lottie_speed="2"
+                            app:lottie_repeatMode="restart" />
+
+                    </FrameLayout>
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="Login"
                         android:textColor="@color/black"
                         android:fontFamily="@font/open_sans_semibold"
@@ -50,7 +63,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="40dp"
                         android:layout_marginBottom="5dp"
 
                         android:gravity="bottom">
@@ -83,6 +96,9 @@
 
                         android:gravity="bottom">
 
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
                         <EditText
                             android:id="@+id/password"
                             android:layout_width="match_parent"
@@ -90,12 +106,24 @@
                             android:textColor="@color/black"
                             android:background="@drawable/custom_edittext"
                             android:hint="Enter you Password"
+                            android:textColorHint="@color/darkgrey"
                             android:inputType="textPassword"
                             android:padding="20dp"
                             android:drawableLeft="@drawable/baseline_lock_24"
                             android:drawablePadding="10dp"
                             />
-
+                            <ImageButton
+                                android:id="@+id/passwordVisibilityToggle"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="#00000000"
+                                android:src="@drawable/baseline_visibility_off_24"
+                                android:contentDescription="Password Visibility Toggle"
+                                android:layout_alignBottom="@id/password"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="10dp" />
+                        </RelativeLayout>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <androidx.appcompat.widget.AppCompatButton

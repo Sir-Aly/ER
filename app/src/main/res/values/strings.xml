@@ -102,7 +102,7 @@
         <item>Web Developer</item>
     </string-array>
     <string name="enter_you_number">Enter you Number</string>
-    <string name="enter_you_password">Enter you Password</string>
+    <string name="enter_you_password">Enter your Password</string>
     <string name="enter_you_name">Enter you Name</string>
     <string name="enter_you_email">Enter you Email</string>
     <string name="tc">TC</string>
@@ -127,4 +127,15 @@
     <string name="no_messages">No Messages</string>
     <string name="sent_messages">Sent Messages</string>
     <string name="cv">CV</string>
+    <string name="confirm_your_password">Confirm your Password</string>
+    <string name="write_your_message">Write your Message</string>
+    <string name="title_activity_login2">LoginActivity2</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

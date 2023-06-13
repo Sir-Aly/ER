@@ -2,9 +2,11 @@ package com.example.easyreach;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,10 @@ public class LoginActivity extends AppCompatActivity {
     private Button mLogin;
     private EditText mEmail, mPassword;
     private TextView mForgetPassword, newUser;
+    private ImageView passwordVisibilityToggle;
+
+    private boolean passwordVisible = false;
+
     private boolean loginBtnClicked;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
@@ -43,6 +49,15 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = (EditText) findViewById(R.id.password);
         mForgetPassword = (TextView) findViewById(R.id.forgetPasswordButton);
         newUser = (TextView) findViewById(R.id.new_user);
+
+        passwordVisibilityToggle = findViewById(R.id.passwordVisibilityToggle);
+
+        passwordVisibilityToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility();
+            }
+        });
 
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,6 +199,22 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void togglePasswordVisibility() {
+        if (passwordVisible) {
+            // Hide password
+            mPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            passwordVisibilityToggle.setImageResource(R.drawable.baseline_visibility_off_24);
+        } else {
+            // Show password
+            mPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            passwordVisibilityToggle.setImageResource(R.drawable.baseline_visibility_24);
+        }
+
+        passwordVisible = !passwordVisible;
+
+        // Move cursor to the end of the password field
+        mPassword.setSelection(mPassword.getText().length());
+    }
 
     public void go(View view){
         Intent intent = new Intent(this,Choose_Login_And_Reg.class);

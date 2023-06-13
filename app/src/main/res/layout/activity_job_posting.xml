@@ -1,53 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background2"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background2">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+
     >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/layoutToolBar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/MainColor"
+        android:background="@color/toolbarBackground"
         android:backgroundTint="@color/MainColor"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/backbtn"
-            android:layout_width="35dp"
-            android:layout_height="40dp"
-            android:contentDescription="@string/app_name"
-            android:layout_gravity="start"
-            android:src="@drawable/backb"
-            app:tint="@color/black"
-            />
+        <FrameLayout
+            android:id="@+id/backButtonContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start">
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/backAnimationView"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                app:lottie_rawRes="@raw/back"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="false"
+                app:lottie_speed="1"
+                app:lottie_repeatMode="restart" />
+
+        </FrameLayout>
+
 
         <TextView
             android:id="@+id/JobsViewerTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Job posting"
-            android:textSize="24dp"
+            android:text="Job Posting"
+            android:textSize="24sp"
+            android:fontFamily="@font/montserrat_medium"
             android:textStyle="bold"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:layout_gravity="center"
             />
 
-
     </androidx.appcompat.widget.Toolbar>
-    <TextView
+    <FrameLayout
+        android:id="@+id/hireContainer"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Job Information"
-        android:layout_marginTop="20dp"
-        android:textSize="35dp"
-        android:layout_marginHorizontal="16dp"
-        />
+        android:layout_height="200dp"
+        android:layout_gravity="center">
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/hireAnimationView"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            app:lottie_rawRes="@raw/hiring"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_speed="1"
+            app:lottie_repeatMode="restart" />
+
+    </FrameLayout>
 
 
     <!-- Job Title -->
@@ -56,7 +86,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+
         android:layout_marginHorizontal="16dp"
         android:hint="Job Title">
 
@@ -70,7 +100,6 @@
             android:textColor="@color/black"
             android:inputType="text"
             android:maxLines="1"
-            android:layout_marginTop="30dp"
             android:background="@drawable/border"
             />
 
@@ -169,28 +198,39 @@
     </com.google.android.material.textfield.TextInputLayout>
     <!--    Job Location-->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/job_location_text_input"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/locationLayout"
         android:layout_width="match_parent"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
-        android:layout_below="@id/fieldlayout"
-        android:layout_marginHorizontal="16dp"
+        android:layout_below="@+id/fieldlayout"
         android:layout_marginTop="15dp"
-        android:hint="Job Location">
+        android:hint="Location Field">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/job_location_edit_text"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/location_droplist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:inputType="textMultiLine"
-            android:gravity="top"
-            android:scrollbars="vertical"
-            android:maxLines="5"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/border"
-            />
-
+            android:layout_below="@+id/fieldlayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/cityAutoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:hint="Enter city name"
+                android:background="@drawable/border"
+                android:completionThreshold="1" />
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                android:text="Test"
+                android:textSize="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.textfield.TextInputLayout>
     <!-- Job Salary -->
     <com.google.android.material.textfield.TextInputLayout
@@ -198,7 +238,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/job_location_text_input"
+        android:layout_below="@id/location_droplist"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="15dp"
         android:hint="Job Salary">
@@ -212,8 +252,6 @@
             android:maxLines="1"
             android:layout_marginTop="20dp"
             android:background="@drawable/border"
-
-
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -235,4 +273,6 @@
         app:backgroundTint="@color/MainColor"
         />
 
+</LinearLayout>
+</ScrollView>
 </LinearLayout>

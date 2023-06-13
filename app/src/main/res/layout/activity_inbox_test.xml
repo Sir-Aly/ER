@@ -3,15 +3,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/layoutToolBar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/MainColor"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        android:layout_height="?actionBarSize"
+        android:background="@color/toolbarBackground"
+        android:backgroundTint="@color/MainColor"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/backButtonContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start">
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/backAnimationView"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                app:lottie_rawRes="@raw/back"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="false"
+                app:lottie_speed="1"
+                app:lottie_repeatMode="restart" />
+
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/JobsViewerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inbox"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMessages"

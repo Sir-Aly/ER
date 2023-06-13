@@ -1,5 +1,7 @@
 package com.example.easyreach;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +26,11 @@ import java.util.ArrayList;
 public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.myviewholder>{
     public ImageButton addToInterestButton;
     ArrayList<JobOffer> jobOffers;
+    private Context context;
 
-    public JobsAdapter(ArrayList<JobOffer> jobOffers) {
+    public JobsAdapter(ArrayList<JobOffer> jobOffers, Context context) {
         this.jobOffers = jobOffers;
+        this.context = context;
     }
     @NonNull
     @Override
@@ -72,6 +76,19 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.myviewholder>{
                                 }
                             });
                 }
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the jobId
+                long jobId = jobOffer.getJob_id();
+                String jobID = String.valueOf(jobId);
+
+                // Start the activity to show the detailed view of the job
+                Intent intent = new Intent(context, JobDetailActivity.class);
+                intent.putExtra("jobID", jobID);
+                context.startActivity(intent);
             }
         });
 

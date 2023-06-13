@@ -2,6 +2,7 @@ package com.example.easyreach;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,6 +42,17 @@ public class inbox_viewer extends AppCompatActivity {
         recyclerView = findViewById(R.id.recview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        LottieAnimationView backAnimationView = findViewById(R.id.backAnimationView);
+
+        backAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle back button click
+                onBackPressed();
+            }
+        });
+
+
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -55,14 +68,14 @@ public class inbox_viewer extends AppCompatActivity {
         adapter = new MessagesAdapter(options);
 
         recyclerView.setAdapter(adapter);
-        // Set item click listener
-//        adapter.setOnItemClickListener(new MessagesAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(DocumentSnapshot snapshot) {
-//                // Handle item click, open message details activity
-//                showMessageDetails(snapshot);
-//            }
-//        });
+
+        adapter.setOnItemClickListener(new MessagesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot snapshot) {
+                // Handle item click, open message details activity
+                showMessageDetails(snapshot);
+            }
+        });
     }
 
     private Query getMessagesQuery() {
@@ -88,7 +101,7 @@ public class inbox_viewer extends AppCompatActivity {
         String messageId = snapshot.getId();
 
         // Create an intent to open the message details activity
-        Intent intent = new Intent(this, MessageDetailsActivity.class);
+        Intent intent = new Intent(this, MessageReplyActivity.class);
         intent.putExtra("messageId", messageId);
         startActivity(intent);
     }
@@ -136,7 +149,5 @@ getMessagesQuery();
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(inbox_viewer.this, MainActivity.class);
-        startActivity(back);
     }
 }

@@ -24,8 +24,6 @@
     import com.google.android.gms.tasks.OnSuccessListener;
     import com.google.android.material.navigation.NavigationView;
     import com.google.firebase.auth.FirebaseAuth;
-    import com.google.firebase.auth.FirebaseUser;
-    import com.google.firebase.firestore.CollectionReference;
     import com.google.firebase.firestore.DocumentReference;
     import com.google.firebase.firestore.DocumentSnapshot;
     import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,6 +34,7 @@
 
     import java.util.ArrayList;
     import java.util.List;
+    import java.util.Objects;
 
     import maes.tech.intentanim.CustomIntent;
 
@@ -84,6 +83,7 @@
             TextView nameTextView = headerView.findViewById(R.id.nameTextView);
             FirebaseFirestore firestore = FirebaseFirestore.getInstance();
             String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            String currentEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
             DocumentReference userRef = firestore.collection("Job Providers").document(currentUserId);
             userRef.get().addOnSuccessListener(documentSnapshot -> {
@@ -126,13 +126,7 @@
                 }
             });
 
-//            btnAddJob.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent addJob = new Intent(MainActivity.this, JobPostingActivity.class);
-//                    startActivity(addJob);
-//                }
-//            });
+
 
             btnInterestedList.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -154,9 +148,6 @@
 
             mAuth = FirebaseAuth.getInstance();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            CollectionReference jobSeekersRef = db.collection("JS").document("Field").collection("AI Developer");
-            CollectionReference Usersref = db.collection("user");
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
 
@@ -169,37 +160,38 @@
                             mAuth.signOut();
                             Intent i = new Intent(MainActivity.this, Choose_Login_And_Reg.class);
                             startActivity(i);
-                            finish();
                             return false;
                         case R.id.menuProfile:
                             Intent r = new Intent(MainActivity.this, ProfilePage.class);
                             startActivity(r);
-                            finish();
                             return false;
                         case R.id.menuInbox:
                             Intent inbox = new Intent(MainActivity.this, inbox_viewer.class);
                             startActivity(inbox);
-                            finish();
                             return false;
                         case R.id.menuSettings:
                             Intent s = new Intent(MainActivity.this, OrgFillActivity.class);
                             startActivity(s);
-                            finish();
                             return false;
                         case R.id.menuAboutUs:
                             Intent a = new Intent(MainActivity.this, AboutUsActivity.class);
                             startActivity(a);
-                            finish();
                             return false;
                         case R.id.jobAdding:
                             Intent add = new Intent(MainActivity.this, JobPostingActivity.class);
                             startActivity(add);
-                            finish();
                             return false;
                         case R.id.sentMsgs:
                             Intent sent = new Intent(MainActivity.this, SentMessagesActivity.class);
                             startActivity(sent);
-                            finish();
+                            return false;
+                        case R.id.menuSupport:
+                            Intent support = new Intent(MainActivity.this, MessagingActivity.class);
+                            startActivity(support);
+                            return false;
+                        case R.id.menuAdmin:
+                            Intent live = new Intent(MainActivity.this, ChatRoomsActivity.class);
+                            startActivity(live);
                             return false;
                     }
 
@@ -213,17 +205,18 @@
                     drawerLayout.openDrawer(GravityCompat.START);
                 }
             });
+            if (Objects.equals(currentEmail, "abokhdraali75@gmail.com")) {
+                MenuItem adminMenuItem = navigationView.getMenu().findItem(R.id.menuAdmin);
+                adminMenuItem.setVisible(true);
+            }
+
 
             NavigationView navigationView = findViewById(R.id.navigationView);
             navigationView.setItemIconTintList(null);
 
+
+
         }
-//        public void floating_method(View view){
-//            Intent intent = new Intent(this,JobPostingActivity.class);
-//            startActivity(intent);
-//            CustomIntent.customType(MainActivity.this,"bottom-to-up");
-//        }
-//
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -259,12 +252,15 @@
         public void onNothingSelected(AdapterView<?> parent) {
         }
 
+
+
         private void setupCardStackView() {
     // Create a CardStackView instance
             cardStackView = findViewById(R.id.cardStackView);
             sAdapter = new JobSeekerCardAdapter(jobSeekers);
             // Set the adapter on the CardStackView
             cardStackView.setAdapter(sAdapter);
+            sAdapter.notifyDataSetChanged();
         }
 
 

@@ -3,23 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/border"
+    android:layout_margin="3dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:cardCornerRadius="7dp"
-        app:cardBackgroundColor="@color/white"
-
-        android:elevation="30dp"
+        app:cardBackgroundColor="#6DFFEAD0"
         app:cardUseCompatPadding="true"
-        app:cardElevation="5dp">
+        app:cardElevation="2dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="0dp">
+            android:padding="3dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,9 +39,10 @@
                     />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_gravity="center"
                     >
                     <TextView
                         android:layout_width="match_parent"
@@ -49,8 +50,8 @@
                         android:layout_marginLeft="10dp"
                         android:id="@+id/title"
                         android:text="Name"
-                        android:layout_marginTop="10dp"
                         android:textStyle="bold"
+
                         android:textSize="25dp"
                         android:textColor="@color/blue_500"/>
                     <TextView
@@ -59,10 +60,19 @@
                         android:text="3/4/2000"
                         android:layout_marginLeft="10dp"
                         android:textSize="20dp"
+                        android:visibility="gone"
                         android:textColor="@color/black"
                         />
                 </LinearLayout>
-
+            <ImageButton
+                android:id="@+id/sendMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/email32px"
+                android:layout_gravity="center"
+                android:background="#00000000"
+                android:layout_marginStart="14dp"
+                />
             </LinearLayout>
 
             <TextView
@@ -76,6 +86,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:id="@+id/j_description"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:text="j_description"
                 android:paddingLeft="7dp"
                 android:textSize="20dp"
@@ -95,10 +107,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:paddingTop="5dp"
+                    android:textColor="@color/black"
                     android:drawableLeft="@drawable/baseline_location_on_24"
                     android:drawableTint="@color/black"
                     android:drawablePadding="10dp"
                     android:text="j_location"
+                    android:maxLines="2"
+                    android:ellipsize="end"
                     android:textSize="18dp" />
 
                 <View
@@ -111,8 +126,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:id="@+id/j_salary"
+                    android:textColor="@color/black"
                     android:paddingTop="5dp"
                     android:drawableLeft="@drawable/salary"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:drawablePadding="10dp"
                     android:text="Salary" />
 
@@ -125,12 +143,20 @@
                 android:drawableTint="@color/black"
                 android:drawablePadding="10dp"
                 android:paddingTop="5dp"
+                android:textColor="@color/black"
                 android:layout_centerHorizontal="true"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:id="@+id/j_requirment"
                 android:text="j_requirment"
                 android:textSize="18dp"
                 android:layout_below="@+id/loc"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/jobId"
+                android:visibility="gone"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
